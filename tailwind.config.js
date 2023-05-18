@@ -1,0 +1,112 @@
+/** @type {import('tailwindcss').Config} */
+
+module.exports = {
+  mode: 'jit',
+  theme: {
+    extend: {
+      colors: {
+        'gray-1': '#333333',
+        'gray-2': '#373F41',
+        'gray-3': '#545454',
+        'gray-4': '#575757',
+        // 'gray-4': '#767676',
+        'gray-5': '#BABAC0',
+        'gray-6': '#C1C1C1',
+        'gray-7': '#D5D8DF',
+        'gray-8': '#E5E5E7',
+        'gray-9': '#EBEDF3',
+        'gray-10': '#ECECEC',
+        'gray-11': '#F7F7F7',
+        'gray-12': '#eff3f6',
+        'gray-13': '#eeeeee',
+        // --------------------------
+        'blue-1': '#336FEE',
+        // --------------------------
+        'gold-1': '#FBC100',
+        'gold-2': '#FFE8A4',
+        'gold-3': '#FEF3CC',
+        'gold-4': '#FFF6CC',
+        'gold-5': '#FFF9E6',
+        // --------------------------
+        'green-1': '#16C67A',
+        'green-2': '#D0F4E4',
+        'green-3': '#E8FAF2',
+
+        // --------------------------
+        'red-1': '#FF1616',
+        'red-2': '#FF4D4D',
+        'red-3': '#FB5252',
+        'red-4': '#FFD1D1',
+        'red-5': '#FFEEEE',
+        'red-6': '#E84529',
+
+        // -----------------------------
+        'warning-1': '#FF7A00',
+      },
+
+      borderRadius: {
+        none: '0',
+        DEFAULT: '8px',
+        10: '10px',
+        12: '12px',
+      },
+      boxShadow: {
+        header: '0 4px 6px rgb(0 0 0 / 2%)',
+        card: '0px 6px 8px -6px rgba(24, 39, 75, 0.12), 0px 8px 16px -6px rgba(24, 39, 75, 0.08)',
+        'card-product': '0px 4px 20px rgba(0, 0, 0, 0.12)',
+        top: '0px 4px 6px rgba(0, 0, 0, 0.05)',
+        'button-gold': '0px 2px 0px #D5A401',
+        'gray-border-1': '0 0 0 1px #D5D8DF',
+        'gold-border-2': '0 0 0 2px #fbc100',
+      },
+
+      screens: {
+        360: '360px',
+        400: '400px',
+        420: '420px',
+        450: '450px',
+        480: '480px',
+        500: '500px',
+        520: '520px',
+        575: '575px',
+        640: '640px',
+        768: '768px',
+        1000: '1000px',
+        1024: '1024px',
+        1200: '1200px',
+        1240: '1240px',
+        1250: '1250px',
+        1300: '1300px',
+        1400: '1400px',
+      },
+    },
+  },
+  plugins: [],
+  content: [
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+  ],
+  // content: ['./public/**/*.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
+  safelist: [
+    'text-sm',
+    'text-xs',
+    'text-base',
+    'text-lg',
+    'text-xl',
+    'text-2xl',
+    'text-3xl',
+    'bg-gray-12',
+    'bg-gold-1',
+    'w-full',
+    'h-full',
+    'w-3/4',
+    'h-3/4',
+    'w-2/4',
+    'h-2/4',
+    'w-1/4',
+    'h-1/4',
+  ],
+}
