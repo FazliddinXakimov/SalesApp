@@ -1,43 +1,96 @@
 <template>
-  <nav class="bg-gray-300 fixed w-full  top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-3">
-      <a href="https://flowbite.com/" class="flex items-center">
-        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Brand</span>
-      </a>
-
+  <nav
+    class="bg-gray-300 fixed w-full top-8 left-0 border-b border-gray-200"
+  >
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+      <div class="768:flex hidden">
+        <a href="https://flowbite.com/" class="flex items-center">
+          <span class="self-center text-2xl font-semibold whitespace-nowrap"
+            >Brand</span
+          >
+        </a>
+      </div>
 
       <div class="flex justify-start align-items-center">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-2">
-          Katalog
+        <button
+          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border-none rounded mr-2"
+          @click="isOpenCatalog = !isOpenCatalog"
+        >
+          <fa :icon="['fas', `${getCatalogIcon}`]" />
+          <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
         </button>
-        <div class=" rounded-lg">
-          <div class="w-full ">
+        <div class="rounded-lg">
+          <div class="w-full">
+            <div class="relative search__input">
+              <fa
+                :icon="['fas', 'magnifying-glass']"
+                class="absolute fa fa-search text-gray-400 top-4 left-4"
+              />
 
-            <div class="relative">
-              <fa :icon="['fas', 'magnifying-glass']" class="absolute fa fa-search text-gray-400 top-4 left-4" />
-              <input type="text" class="bg-white h-12 w-full px-24 rounded-lg focus:outline-none hover:cursor-pointer"
-                name="">
+              <!-- <img
+                src="@/assets/img/search.svg"
+                class="absolute fa fa-search text-gray-400 top-2 left-2"
+              /> -->
+              <input
+                type="text"
+                class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
+                name=""
+              />
               <span class="absolute top-3 right-5 border-l pl-4">
-                <fa :icon="['fas', 'microphone']"
-                  class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer" />
+                <!-- <img
+                  src="@/assets/img/microphone.svg"
+                  class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer h-6 w-6"
+                /> -->
+                <fa
+                  :icon="['fas', 'microphone']"
+                  class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
+                />
               </span>
             </div>
           </div>
         </div>
-
       </div>
-      <div class="flex item-center justify-between">
+      <div class="768:flex item-center justify-between hidden">
         <button class="mr-10">
-          <fa :icon="['far', 'heart']" size="xl" />
+          <img src="@/assets/img/love.svg" class="h-8 w-8" />
         </button>
 
         <button class="mr-10">
-          <fa :icon="['far', 'user']" size="xl" />
+          <img src="@/assets/img/user.svg" class="h-8 w-8" />
         </button>
         <button>
-          <img src="~/assets/img/cart.svg" />
+          <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
         </button>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      isOpenCatalog: false,
+    }
+  },
+
+  computed: {
+    getCatalogIcon() {
+      return this.isOpenCatalog ? 'xmark' : 'bars'
+    },
+  },
+}
+</script>
+
+<style scoped>
+@media (min-width: 1024px) {
+  .search__input {
+    min-width: 500px;
+  }
+}
+@media (min-width: 768px) {
+  .search__input {
+    min-width: 400px;
+  }
+}
+</style>
