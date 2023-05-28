@@ -1,33 +1,58 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  publicRuntimeConfig: {
+    baseURL: process.env.baseURL,
+    axios: {
+      browserBaseURL: process.env.baseURL,
+    },
+  },
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.baseURL,
+    },
+  },
+
   head: {
     title: 'SalesApp',
     htmlAttrs: {
       lang: 'en',
     },
-    meta: [{
-        charset: 'utf-8'
+    meta: [
+      {
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
+        content: 'width=device-width, initial-scale=1',
       },
       {
         hid: 'description',
         name: 'description',
-        content: ''
+        content: '',
       },
       {
         name: 'format-detection',
-        content: 'telephone=no'
+        content: 'telephone=no',
       },
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+    ],
   },
+  css: ['swiper/css/swiper.css'],
+  plugins: [
+    {
+      src: '@/plugins/swiper.js',
+    },
+    {
+      src: '@/plugins/v-mask.js',
+      ssr: true,
+    },
+  ],
 
   // Global CSS: https://go.nuxtjs.dev/config-css
 
@@ -40,7 +65,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/fontawesome'
+    '@nuxtjs/fontawesome',
   ],
   fontawesome: {
     component: 'Fa',
@@ -48,7 +73,7 @@ export default {
     icons: {
       solid: true,
       brands: true,
-      regular: true
+      regular: true,
     },
   },
 
@@ -56,7 +81,38 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
+
+  auth: {
+    redirect: {
+      login: '/',
+    },
+    strategies: {
+      local: {
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          maxAge: 1800,
+          global: true,
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: {
+          property: 'user',
+        },
+        enpoints: {
+          login: { url: 'users/login', method: 'post' },
+          register: { url: 'users/register', method: 'post' },
+          refresh: { url: 'users/refresh' },
+          logout: false,
+        },
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

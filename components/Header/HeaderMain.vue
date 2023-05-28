@@ -1,7 +1,5 @@
 <template>
-  <nav
-    class="bg-gray-300 fixed w-full top-8 left-0 border-b border-gray-200"
-  >
+  <nav class="bg-gray-300 fixed w-full top-8 left-0 border-b border-gray-200">
     <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
       <div class="768:flex hidden">
         <a href="https://flowbite.com/" class="flex items-center">
@@ -55,19 +53,25 @@
           <img src="@/assets/img/love.svg" class="h-8 w-8" />
         </button>
 
-        <button class="mr-10">
+        <button class="mr-10" @click="openLoginModal">
           <img src="@/assets/img/user.svg" class="h-8 w-8" />
         </button>
-        <button>
+        <button @click="openCartModal">
           <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
         </button>
       </div>
     </div>
+    <LoginModal />
+    <CartModal />
   </nav>
 </template>
 
 <script>
 export default {
+  components: {
+    LoginModal: () => import('@/components/Modal/LoginModal.vue'),
+    CartModal: () => import('@/components/Modal/CartModal.vue'),
+  },
   data() {
     return {
       isOpenCatalog: false,
@@ -77,6 +81,14 @@ export default {
   computed: {
     getCatalogIcon() {
       return this.isOpenCatalog ? 'xmark' : 'bars'
+    },
+  },
+  methods: {
+    openLoginModal() {
+      this.$store.commit('modal/changeLoginModal', true)
+    },
+    openCartModal() {
+      this.$store.commit('modal/changeCartModal', true)
     },
   },
 }
