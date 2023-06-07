@@ -43,11 +43,15 @@ export default {
       },
     ],
   },
-  css: ['swiper/css/swiper.css'],
+  css: ['swiper/css/swiper.css', '@/assets/css/main.css'],
   plugins: [
     {
       src: '@/plugins/swiper.js',
     },
+    {
+      src: '@/plugins/vuelidate.js',
+    },
+
     {
       src: '@/plugins/v-mask.js',
       ssr: true,
@@ -81,38 +85,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
+    'bootstrap-vue/nuxt',
   ],
-
-  auth: {
-    redirect: {
-      login: '/',
-    },
-    strategies: {
-      local: {
-        scheme: 'refresh',
-        token: {
-          property: 'access_token',
-          maxAge: 1800,
-          global: true,
-        },
-        refreshToken: {
-          property: 'refresh_token',
-          data: 'refresh_token',
-          maxAge: 60 * 60 * 24 * 30,
-        },
-        user: {
-          property: 'user',
-        },
-        enpoints: {
-          login: { url: 'users/login', method: 'post' },
-          register: { url: 'users/register', method: 'post' },
-          refresh: { url: 'users/refresh' },
-          logout: false,
-        },
-      },
-    },
-  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -121,5 +95,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ['defu'],
+  },
 }

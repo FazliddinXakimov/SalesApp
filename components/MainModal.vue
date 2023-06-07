@@ -1,9 +1,13 @@
 <template>
   <transition name="fade">
     <div v-if="value">
-      <div class="modal-backdrop" @click.self="handleClose"></div>
-      <div :id="id" class="modal-content2" @click.self="handleClose">
-        <div class="modal-dialog" @click.self="handleClose">
+      <div class="modal-backdrop" @click.self="handleBackdropClose"></div>
+      <div
+        :id="id"
+        class="modal-content2 z-40"
+        @click.self="handleBackdropClose"
+      >
+        <div class="modal-dialog" @click.self="handleBackdropClose">
           <div class="modal-site-inner">
             <button
               v-if="closable"
@@ -24,6 +28,10 @@
 export default {
   name: 'MainModal',
   props: {
+    backdropClosable: {
+      type: Boolean,
+      default: true,
+    },
     value: {
       type: Boolean,
       default: false,
@@ -32,6 +40,7 @@ export default {
       type: Boolean,
       default: true,
     },
+
     persistent: {
       type: Boolean,
       default: false,
@@ -45,6 +54,9 @@ export default {
   methods: {
     handleClose() {
       this.$emit('input', false)
+    },
+    handleBackdropClose() {
+      if (this.backdropClosable) this.$emit('input', false)
     },
   },
 }

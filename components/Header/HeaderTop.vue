@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-slate-700 py-1 fixed w-full">
+  <nav class="bg-slate-700 py-1 fixed w-full sticky top-0 z-40">
     <div
       class="flex items-center justify-between mx-auto max-w-screen-xl px-4 text-white"
     >

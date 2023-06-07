@@ -1,5 +1,7 @@
 <template>
-  <nav class="bg-gray-300 fixed w-full top-8 left-0 border-b border-gray-200">
+  <nav
+    class="bg-gray-300 w-full top-8 left-0 border-b border-gray-200 sticky top-0 z-40"
+  >
     <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
       <div class="768:flex hidden">
         <a href="https://flowbite.com/" class="flex items-center">
@@ -9,7 +11,7 @@
         </a>
       </div>
 
-      <div class="flex justify-start align-items-center">
+      <div class="flex justify-start items-center">
         <button
           class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border-none rounded mr-2"
           @click="isOpenCatalog = !isOpenCatalog"
@@ -62,6 +64,10 @@
       </div>
     </div>
     <LoginModal />
+    <Catalog
+      :category="isOpenCatalog"
+      @openCatalog="isOpenCatalog = !isOpenCatalog"
+    />
     <CartModal />
   </nav>
 </template>
@@ -69,6 +75,7 @@
 <script>
 export default {
   components: {
+    Catalog: () => import('@/components/Catalog/Catalog.vue'),
     LoginModal: () => import('@/components/Modal/LoginModal.vue'),
     CartModal: () => import('@/components/Modal/CartModal.vue'),
   },

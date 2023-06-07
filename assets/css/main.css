@@ -1,0 +1,15 @@
+.error_field input {
+  box-shadow: 0 0 0 1px #fb5252;
+}
+
+.error_field textarea {
+  box-shadow: 0 0 0 1px #fb5252;
+}
+.error__text {
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fb5252;
+}

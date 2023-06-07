@@ -1,53 +1,45 @@
-export default function ({ $axios, store, app, error, redirect }) {
-  $axios.onError((error) => {
-    store.commit('changeLoading', false)
-    if (error.response && error.response.status === 400) {
-      console.log(error.response.data.data[0])
-      return
+export default function ({ $axios, store, redirect }) {
+  $axios.interceptors.request.use((config) => {
+    const token = store.state.auth?.accessToken
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    } else {
+      config.headers.Authorization = ''
     }
-    if (error.response && error.response.status === 401) {
-      store.$auth.logout()
-      redirect('/')
-      return error
-    }
-    if (error.response && error.response.status === 403) {
-      console.log("Not Authorized: Sorry, you can't access this!")
-      return
-    }
-    if (error.response && error.response.status === 404) {
-      console.log(
-        "Not Found: We couldn't find what you're looking for. Please refresh and try again, or contact the support team."
-      )
-
-      error({ statusCode: 404, message: 'Post not found' })
-      console.log('error.response', error.response)
-      redirect('/not-found')
-
-      return
-    }
-    if (error.response && error.response.status === 422) {
-      console.log('Validation Error')
-      return
-    }
-    if (error.response && error.response.status === 500) {
-      console.log('Server Error: Please contact the support team.')
-      return
-    }
-    if (error.message === 'Network Error') {
-      console.log('Network Error: Check your network')
-    }
-    // err({ statusCode: 404, message: 'Post not found' })
-
-    // error({ statusCode: 404, message: 'Post not found' })
+    return config
   })
+  $axios.interceptors.response.use(
+    (config) => {
+      return config
+    },
+    async (error) => {
+      const originalRequest = error.config
+      if (
+        error.response.status === 401 &&
+        error.config &&
+        !error.config._isRetry &&
+        !error.config.login
+      ) {
+        originalRequest._isRetry = true
+        try {
+          const response = await fetch($axios.baseURL, {
+            withCredentials: true,
+          })
 
-  $axios.onRequest((req) => {
-    // const lang = app.store.$i18n.locale
-    // $axios.setHeader('Accept-Language', lang)
-    // $axios.setHeader('Accept-Region', regionId)
-    // req.paramsSerializer = function (params) {
-    //   return qs.stringify(params, { encodeValuesOnly: true })
-    // }
-    // return req
-  })
+          if (response.status === 200) {
+            const data = await response.json()
+
+            store.commit('auth/setToken', data.data?.accessToken)
+            store.commit('auth/setUserData', data.data?.user || {})
+
+            return $axios.request(originalRequest)
+          }
+        } catch (err) {
+          store.commit('auth/logout')
+          return $axios.request(originalRequest)
+        }
+      }
+      throw error
+    }
+  )
 }
