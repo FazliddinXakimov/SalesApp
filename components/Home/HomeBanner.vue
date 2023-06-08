@@ -16,7 +16,12 @@
 
 <script>
 export default {
-  name: 'IndexBanner',
+  props: {
+    banners: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       swiperOptions1: {
@@ -27,40 +32,15 @@ export default {
           prevEl: '.swiper-button-prev',
         },
       },
-      banners: [
-        {
-          id: 1,
-          image: require('@/assets/img/cars.jpg'),
-        },
-        {
-          id: 2,
-          image: require('@/assets/img/default.jpg'),
-        },
-      ],
     }
   },
-  computed: {
-    // ...mapGetters('knowledgeBase', ['GET_BANNER']),
-    // getFiltered() {
-    //   return this.GET_BANNER.filter((item) => item.type_banner === 'header')
-    // },
-  },
-  mounted() {
-    // this.FETCH_BANNER()
-  },
-  methods: {
-    // ...mapActions('knowledgeBase', ['FETCH_BANNER', 'UPDATE_BANNER']),
 
-    viewBanner({ id, is_viewed: isViewed }) {
-      //   this.UPDATE_BANNER({
-      //     id,
-      //     is_viewed: isViewed + 1,
-      //   })
-    },
+  methods: {
+    viewBanner({ id, is_viewed: isViewed }) {},
   },
 }
 </script>
-<style>
+<style scoped>
 .img__slide {
   height: 359px;
   width: 100%;

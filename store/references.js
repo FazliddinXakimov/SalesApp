@@ -12,6 +12,7 @@ export const mutations = {
   [SET_ROOT_CATEGORIES]: (state, data) => {
     state.root_categories = data
   },
+
 }
 
 export const actions = {
@@ -21,11 +22,12 @@ export const actions = {
         .get('/references/categories/get_root_categories/', { params: payload })
         .then((response) => {
           commit(SET_ROOT_CATEGORIES, response.data)
-          resolve(this.exampleSamplePage)
+          resolve(state.root_categories)
         })
         .catch((error) => {
           reject(error)
         })
     })
   },
+ 
 }

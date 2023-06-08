@@ -2,11 +2,7 @@
   <transition name="fade">
     <div v-if="value">
       <div class="modal-backdrop" @click.self="handleBackdropClose"></div>
-      <div
-        :id="id"
-        class="modal-content2 z-40"
-        @click.self="handleBackdropClose"
-      >
+      <div :id="id" class="modal-content2" @click.self="handleBackdropClose">
         <div class="modal-dialog" @click.self="handleBackdropClose">
           <div class="modal-site-inner">
             <button
@@ -79,9 +75,9 @@ export default {
   position: relative;
   z-index: 1050;
   width: 100%;
-  align-items: flex-start;
+  align-items: center;
   margin: 0;
-  height: 100%;
+  /* height: 100%; */
 }
 .modal-site-inner {
   position: relative;
@@ -121,7 +117,11 @@ export default {
   position: fixed;
   top: 0;
   right: 0;
+
   bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   left: 0;
   background-color: rgba(#000000, 0);
   transition: 0.2s linear transform;

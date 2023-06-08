@@ -22,7 +22,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #cart-modal .modal-dialog {
   height: auto;
   margin: auto;

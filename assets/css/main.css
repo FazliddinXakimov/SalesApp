@@ -13,3 +13,11 @@
   line-height: 16px;
   color: #fb5252;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}

@@ -46,6 +46,9 @@ export default {
   css: ['swiper/css/swiper.css', '@/assets/css/main.css'],
   plugins: [
     {
+      src: '@/plugins/main.js',
+    },
+    {
       src: '@/plugins/swiper.js',
     },
     {

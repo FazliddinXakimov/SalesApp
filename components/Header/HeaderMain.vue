@@ -4,11 +4,9 @@
   >
     <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
       <div class="768:flex hidden">
-        <a href="https://flowbite.com/" class="flex items-center">
-          <span class="self-center text-2xl font-semibold whitespace-nowrap"
-            >Brand</span
-          >
-        </a>
+        <router-link to="/" class="flex items-center no-underline">
+          <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
+        </router-link>
       </div>
 
       <div class="flex justify-start items-center">
@@ -47,19 +45,23 @@
           <img src="@/assets/img/love.svg" class="h-8 w-8" />
         </button>
 
-        <button class="mr-10" @click="openLoginModal">
+        <button class="mr-10 dropdown__action" @click="openLoginModal">
           <img src="@/assets/img/user.svg" class="h-8 w-8" />
+          <div class="dropdown__list">
+            <nuxt-link class="dropdown__item" to="/profile">Profile</nuxt-link>
+            <button class="dropdown__item" @click="() => {}">Logout</button>
+          </div>
         </button>
         <button @click="openCartModal">
           <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
         </button>
       </div>
     </div>
-    <LoginModal />
     <Catalog
       :category="isOpenCatalog"
       @openCatalog="isOpenCatalog = !isOpenCatalog"
     />
+    <LoginModal />
     <CartModal />
   </nav>
 </template>
@@ -92,6 +94,8 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" src="@/assets/scss/DropDown.scss"></style>
 
 <style scoped>
 @media (min-width: 1024px) {
