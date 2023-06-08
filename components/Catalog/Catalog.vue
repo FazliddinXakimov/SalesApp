@@ -5,12 +5,13 @@
         <b-container class="p-0">
           <div class="float-right mt-2 mr-1" @click="$emit('openCatalog')">
             <i class="fa-solid fa-xmark" />
+            <!-- <fa icon="['fas', `xmark`]" /> -->
           </div>
           <b-row>
             <b-card class="w-100 border-0" no-body>
               <b-tabs pills card vertical>
                 <b-tab
-                  v-for="(item, indexMenu) in GET_MEGA_MENU"
+                  v-for="(item, indexMenu) in GET_ROOT_CATEGORIES"
                   :key="indexMenu"
                   :title="item.title ? item.title[$i18n.locale] : ''"
                 >
@@ -87,7 +88,7 @@
 </template>
 
 <script>
-import '../../assets/css/megaMenuCategory.css'
+import '@/assets/css/megaMenuCategory.css'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -105,13 +106,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('knowledgeBase', ['GET_MEGA_MENU']),
+    ...mapGetters('references', ['GET_ROOT_CATEGORIES']),
   },
   async mounted() {
-    await this.FETCH_MEGA_MENU()
+    await this.FETCH_ROOT_CATEGORIES()
   },
   methods: {
-    ...mapActions('knowledgeBase', ['FETCH_MEGA_MENU']),
+    ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
     subGet(value) {
       this.mainSub = value.title[this.$i18n.locale]
@@ -130,7 +131,7 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .fa-xmark {
   width: 32px;
   height: 32px;

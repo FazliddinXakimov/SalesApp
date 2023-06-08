@@ -49,6 +49,9 @@ export default {
       src: '@/plugins/swiper.js',
     },
     {
+      src: '@/plugins/vue-awesome-swiper.js',
+    },
+    {
       src: '@/plugins/vuelidate.js',
     },
 
@@ -80,12 +83,32 @@ export default {
       regular: true,
     },
   },
+  i18n: {
+    locales: [
+      {
+        code: 'uz',
+        file: 'uz.js',
+        shortname: "O'Z",
+      },
+      {
+        code: 'ru',
+        file: 'ru.js',
+        shortname: 'РУ',
+      },
+    ],
+    lazy: false,
+    defaultLocale: 'uz',
+    langDir: 'lang/',
+    detectBrowserLanguage: false,
+    strategy: 'prefix_except_default',
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'bootstrap-vue/nuxt',
+    '@nuxtjs/i18n',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

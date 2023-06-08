@@ -8,12 +8,13 @@
       <!-- <ProductCard /> -->
       <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
         <h1 class="text-2xl mb-4">
-          {{ data.title.ru }}
+          {{ data.title[$i18n.locale] }}
         </h1>
         <div class="flex justify-start items-center">
           <ProductCard
             v-for="(product, ind) in data.products"
             :key="ind"
+            class="w-1/4"
             :product="product"
           />
         </div>

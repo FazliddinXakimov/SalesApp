@@ -16,7 +16,7 @@
           class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 border-none rounded mr-2"
           @click="isOpenCatalog = !isOpenCatalog"
         >
-          <fa :icon="['fas', `${getCatalogIcon}`]" />
+          <fa :icon="['fas', `${getSelection}`]" />
           <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
         </button>
         <div class="rounded-lg">
@@ -27,20 +27,12 @@
                 class="absolute fa fa-search text-gray-400 top-4 left-4"
               />
 
-              <!-- <img
-                src="@/assets/img/search.svg"
-                class="absolute fa fa-search text-gray-400 top-2 left-2"
-              /> -->
               <input
                 type="text"
                 class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
                 name=""
               />
               <span class="absolute top-3 right-5 border-l pl-4">
-                <!-- <img
-                  src="@/assets/img/microphone.svg"
-                  class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer h-6 w-6"
-                /> -->
                 <fa
                   :icon="['fas', 'microphone']"
                   class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
@@ -86,7 +78,7 @@ export default {
   },
 
   computed: {
-    getCatalogIcon() {
+    getSelection() {
       return this.isOpenCatalog ? 'xmark' : 'bars'
     },
   },

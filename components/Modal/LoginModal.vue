@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #login-modal .modal-dialog {
   height: auto;
   margin: auto;
