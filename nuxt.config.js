@@ -49,6 +49,10 @@ export default {
       src: '@/plugins/main.js',
     },
     {
+      src: '@/plugins/persistedState.js',
+      ssr: false,
+    },
+    {
       src: '@/plugins/swiper.js',
     },
     {

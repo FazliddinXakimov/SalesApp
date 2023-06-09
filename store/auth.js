@@ -1,6 +1,4 @@
-const ACCESS_KEY = 'shopyAccess'
-const REFRESH_KEY = 'shopyRefresh'
-const shopyUserData = 'shopyUserData'
+import { USER_DATA, ACCESS_TOKEN, REFRESH_TOKEN } from '@/jwt/authStorageKeys'
 const SET_AUTH_TYPE = 'SET_AUTH_TYPE'
 // const SET_REFRESH_TOKEN = 'SET_REFRESH_TOKEN'
 // const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN'
@@ -19,12 +17,12 @@ export const mutations = {
   setToken(state, data) {
     state.isAuthenticated = true
     console.log('data', data)
-    localStorage.setItem(ACCESS_KEY, data?.access)
-    localStorage.setItem(REFRESH_KEY, data?.refresh)
+    localStorage.setItem(ACCESS_TOKEN, data?.access)
+    localStorage.setItem(REFRESH_TOKEN, data?.refresh)
   },
   setUserData(state, data) {
     state.userData = data
-    localStorage.setItem(shopyUserData, JSON.stringify(data))
+    localStorage.setItem(USER_DATA, JSON.stringify(data))
   },
   setStateToken(state, data) {
     if (data) {
@@ -35,9 +33,9 @@ export const mutations = {
   logout(state) {
     state.isAuthenticated = false
     state.accessToken = null
-    localStorage.removeItem(ACCESS_KEY)
-    localStorage.removeItem(REFRESH_KEY)
-    localStorage.removeItem(shopyUserData)
+    localStorage.removeItem(ACCESS_TOKEN)
+    localStorage.removeItem(REFRESH_TOKEN)
+    localStorage.removeItem(USER_DATA)
   },
   isAuthenticated(state, data) {
     state.isAuthenticated = data
@@ -85,7 +83,7 @@ export const getters = {
     return state.isAuthenticated
   },
   getUserData: () => {
-    return JSON.parse(localStorage.getItem(shopyUserData))
+    return JSON.parse(localStorage.getItem(USER_DATA))
   },
   getCurrentAuthType: (state) => state.currentAuthType,
 }

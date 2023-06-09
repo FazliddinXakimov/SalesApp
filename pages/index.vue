@@ -80,7 +80,9 @@ export default {
 
   async mounted() {
     this.$store.commit('SET_MAIN_LOADING', true)
+
     await Promise.allSettled([
+      this.$store.dispatch('header/FETCH_REGIONS_LIST'),
       this.$store.dispatch('home/fetchMainProducts'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
     ])
