@@ -1,86 +1,99 @@
 <template>
-  <nav
-    class="bg-gray-300 w-full top-8 left-0 border-b border-gray-200 sticky top-8 z-20"
-  >
-    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-3">
-      <div class="768:flex hidden">
-        <router-link to="/" class="flex items-center no-underline">
-          <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
-        </router-link>
-      </div>
+  <div>
+    <nav
+      class="bg-gray-300 w-full top-8 left-0 border-b border-gray-200 z-10 sticky"
+    >
+      <div
+        class="max-w-screen-xl flex items-center justify-between mx-auto p-3"
+      >
+        <div class="768:flex hidden">
+          <router-link to="/" class="flex items-center no-underline">
+            <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
+          </router-link>
+        </div>
 
-      <div class="flex justify-start items-center">
-        <button
-          class="bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded mr-2"
-          @click="isOpenCatalog = !isOpenCatalog"
-        >
-          <fa :icon="['fas', `${getSelection}`]" />
-          <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
-        </button>
-        <div class="rounded-lg">
-          <div class="w-full">
-            <div class="relative search__input">
-              <fa
-                :icon="['fas', 'magnifying-glass']"
-                class="absolute fa fa-search text-gray-400 top-4 left-4"
-              />
-
-              <input
-                type="text"
-                class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
-                name=""
-              />
-              <span class="absolute top-3 right-5 border-l pl-4">
+        <div class="flex justify-start items-center">
+          <button
+            class="bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded mr-2"
+            @click="catalogModal = true"
+          >
+            <fa :icon="['fas', `${getSelection}`]" />
+            <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
+          </button>
+          <div class="rounded-lg">
+            <div class="w-full">
+              <div class="relative search__input">
                 <fa
-                  :icon="['fas', 'microphone']"
-                  class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
+                  :icon="['fas', 'magnifying-glass']"
+                  class="absolute fa fa-search text-gray-400 top-4 left-4"
                 />
-              </span>
+
+                <input
+                  type="text"
+                  class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
+                  name=""
+                />
+                <span class="absolute top-3 right-5 border-l pl-4">
+                  <fa
+                    :icon="['fas', 'microphone']"
+                    class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
+                  />
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="768:flex item-center justify-between hidden">
-        <button class="mr-10">
-          <div class="flex flex-column justify-center items-center">
-            <img src="@/assets/img/love.svg" class="h-8 w-8" />
-            <span class="text-sm">Избранное </span>
-          </div>
-        </button>
+        <div class="768:flex item-center justify-between hidden">
+          <button class="mr-10">
+            <div class="flex flex-column justify-center items-center">
+              <img src="@/assets/img/love.svg" class="h-8 w-8" />
+              <span class="text-sm">Избранное </span>
+            </div>
+          </button>
 
-        <button class="mr-10 dropdown__action">
-          <div class="flex flex-column justify-center items-center">
-            <img
-              src="@/assets/img/user.svg"
-              class="h-8 w-8"
-              @click="openLoginModal"
-            />
-            <span v-if="!userIsLoggedIn" class="text-sm"> Войти </span>
-          </div>
-          <div class="dropdown__list">
-            <nuxt-link class="dropdown__item" to="/profile">Profile</nuxt-link>
-            <button class="dropdown__item" @click="() => {}">Logout</button>
-          </div>
-        </button>
-        <button @click="openCartModal">
-          <div class="flex flex-column justify-center items-center">
-            <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
-            <span class="text-sm"> Корзина </span>
-          </div>
-        </button>
+          <button class="mr-10 dropdown__action">
+            <div
+              v-if="userIsLoggedIn"
+              class="flex flex-column justify-center items-center"
+            >
+              <img src="@/assets/img/user.svg" class="h-8 w-8" />
+              <span class="text-sm">Khakimov</span>
+            </div>
+            <div v-else class="flex flex-column justify-center items-center">
+              <img
+                src="@/assets/img/user.svg"
+                class="h-8 w-8"
+                @click="openLoginModal"
+              />
+              <span class="text-sm"> Войти </span>
+            </div>
+            <div v-if="userIsLoggedIn" class="dropdown__list">
+              <nuxt-link class="dropdown__item" to="/profile"
+                >Profile</nuxt-link
+              >
+              <button class="dropdown__item" @click="logout">Logout</button>
+            </div>
+          </button>
+          <button @click="openCartModal">
+            <div class="flex flex-column justify-center items-center">
+              <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
+              <span class="text-sm"> Корзина </span>
+            </div>
+          </button>
+        </div>
       </div>
-    </div>
+    </nav>
     <Catalog
       :category="isOpenCatalog"
       @openCatalog="isOpenCatalog = !isOpenCatalog"
     />
     <LoginModal />
     <CartModal />
-  </nav>
+  </div>
 </template>
 
 <script>
-import { isLoggedIn } from '@/jwt/userData'
+import { userLogout } from '@/jwt/userData'
 
 export default {
   components: {
@@ -91,7 +104,6 @@ export default {
   data() {
     return {
       isOpenCatalog: false,
-      userIsLoggedIn: false,
     }
   },
 
@@ -99,11 +111,19 @@ export default {
     getSelection() {
       return this.isOpenCatalog ? 'xmark' : 'bars'
     },
+    catalogModal: {
+      set(val) {
+        return this.$store.commit('modal/changeCatalogModal', val)
+      },
+      get() {
+        return this.$store.state.modal.catalogModal
+      },
+    },
+    userIsLoggedIn() {
+      return this.$store.getters['auth/getUserIsLoggedIn']
+    },
   },
-  mounted() {
-    this.userIsLoggedIn = isLoggedIn()
-    console.log('this.UserIsLoggedIn', this.userIsLoggedIn)
-  },
+  mounted() {},
 
   methods: {
     openLoginModal() {
@@ -111,6 +131,20 @@ export default {
     },
     openCartModal() {
       this.$store.commit('modal/changeCartModal', true)
+    },
+    checkStatus() {
+      this.$axios.patch(
+        'http://8.219.111.206:8080/api/v1/references/brands/2/',
+        {
+          title: 'Samsung',
+          icon: 'iconsumsung',
+        }
+      )
+    },
+    logout() {
+      userLogout()
+      this.$store.commit('auth/SET_LOGOUT')
+      this.$router.push(this.localePath('/'))
     },
   },
 }

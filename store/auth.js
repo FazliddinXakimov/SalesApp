@@ -1,5 +1,6 @@
 import { USER_DATA, ACCESS_TOKEN, REFRESH_TOKEN } from '@/jwt/authStorageKeys'
 const SET_AUTH_TYPE = 'SET_AUTH_TYPE'
+const SET_LOGOUT = 'SET_LOGOUT'
 // const SET_REFRESH_TOKEN = 'SET_REFRESH_TOKEN'
 // const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN'
 
@@ -13,6 +14,11 @@ export const state = () => ({
 export const mutations = {
   [SET_AUTH_TYPE]: (state, data) => {
     state.currentAuthType = data
+  },
+  [SET_LOGOUT]: (state) => {
+    state.userData = {}
+    state.accessToken = ''
+    state.isAuthenticated = false
   },
   setToken(state, data) {
     state.isAuthenticated = true
@@ -82,6 +88,8 @@ export const getters = {
   isAuthenticated(state) {
     return state.isAuthenticated
   },
+  getUserIsLoggedIn: (state) => state.userData?.user_data,
+
   getUserData: () => {
     return JSON.parse(localStorage.getItem(USER_DATA))
   },

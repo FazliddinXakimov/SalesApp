@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-slate-700 py-1 fixed w-full sticky top-0 z-40">
+  <nav class="bg-slate-700 py-1 fixed w-full sticky top-0 z-20">
     <div
       class="flex items-center justify-between mx-auto max-w-screen-xl px-4 text-white"
     >
@@ -16,7 +16,7 @@
 
           <div class="dropdown__list block z-40">
             <button
-              v-for="(region, index) in regions_list"
+              v-for="(region, index) in getDropdownRegions"
               :key="index"
               class="dropdown__item"
               @click="handleSelectRegion(region.id)"
@@ -69,6 +69,10 @@ export default {
       selectedRegion: 'header/GET_SELECTED_REGION',
       regions_list: 'header/GET_REGIONS_LIST',
     }),
+
+    getDropdownRegions() {
+      return this.regions_list.filter((r) => r.id !== this.selectedRegion.id)
+    },
   },
 
   methods: {

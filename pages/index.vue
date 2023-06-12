@@ -82,12 +82,14 @@ export default {
     this.$store.commit('SET_MAIN_LOADING', true)
 
     await Promise.allSettled([
+      this.$store.dispatch('references/FETCH_ROOT_CATEGORIES'),
       this.$store.dispatch('header/FETCH_REGIONS_LIST'),
       this.$store.dispatch('home/fetchMainProducts'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
     ])
     this.$store.commit('SET_MAIN_LOADING', false)
   },
+  methods: {},
 }
 </script>
 
