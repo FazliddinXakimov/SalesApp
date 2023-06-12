@@ -13,17 +13,23 @@
         </span>
       </div>
     </div>
-    <div class="p-4 flex flex-col items-center">
-      <h1 class="text-gray-800 text-center mt-1 cut-text">
-        {{ product.title[$i18n.locale] }}
-      </h1>
-      <p class="text-center text-gray-800 mt-1">
-        {{ product.price | numberFilter }} sum
-      </p>
+    <div class="p-4 flex flex-col">
+      <div class="content-center">
+        <h1 class="flext justify-center text-gray-800 mt-1 cut-text">
+          {{ product.title[$i18n.locale] }}
+        </h1>
+        <p class="flext justify-center stext-gray-800 mt-1">
+          {{ product.price | numberFilter }} sum
+        </p>
+      </div>
       <div class="inline-flex items-center mt-2"></div>
       <div class="flex justify-between items-center mt-4">
         <button
-          class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 active:bg-blue-700 disabled:opacity-50 flex items-center justify-center"
+          class="bg-slate-50 hover:bg-blue-400 text-blue-dark font-semibold py-2 px-4 border border-blue hover:bg-blue-400 rounded"
+          :class="{
+            'bg-blue-600': isCart,
+          }"
+          @click="addProductToCart"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +45,6 @@
               d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
             />
           </svg>
-          В Корзину
         </button>
         <button class="flex items-center justify-center">
           <img src="@/assets/img/love.svg" class="h-8 w-8" />
@@ -50,14 +55,31 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     product: {
       type: Object,
+      default: () => {},
     },
   },
   data() {
     return {}
+  },
+  computed: {
+    ...mapGetters({
+      productIds: 'cart/getProductIds',
+    }),
+    isCart() {
+      return this.productIds.includes(this.product.id)
+    },
+  },
+  methods: {
+    addProductToCart() {
+      console.log('this.products', this.product)
+      this.$store.commit('cart/ADD_PRODUCT', this.product)
+    },
   },
 }
 </script>
@@ -71,18 +93,3 @@ export default {
   white-space: nowrap;
 }
 </style>
-
-<!-- {
-        "id": 1,
-        "title": {
-          "ru": "Samsung s3",
-          "uz": "Samsung s3"
-        },
-        "price": 10000,
-        "sale_price": 9000,
-        "discount": 1000,
-        "rating": 0,
-        "on_sale": true,
-        "slug": "samsung-s3",
-        "image": "http://8.219.111.206:8080/media/product/images/phones3.jpeg"
-      }, -->

@@ -80,7 +80,9 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
+    '@nuxtjs/svg',
   ],
+
   fontawesome: {
     component: 'Fa',
     suffix: false,

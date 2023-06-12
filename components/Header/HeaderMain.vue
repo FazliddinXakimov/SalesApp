@@ -74,9 +74,14 @@
               <button class="dropdown__item" @click="logout">Logout</button>
             </div>
           </button>
-          <button @click="openCartModal">
+          <button @click="$router.push(localePath(`/cart`))">
             <div class="flex flex-column justify-center items-center">
-              <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
+              <span class="relative">
+                <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
+                <span class="badge badge-pill badge-success absolute -top-2">{{
+                  totalCount
+                }}</span>
+              </span>
               <span class="text-sm"> Корзина </span>
             </div>
           </button>
@@ -93,6 +98,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { userLogout } from '@/jwt/userData'
 
 export default {
@@ -108,9 +114,15 @@ export default {
   },
 
   computed: {
+    ...mapGetters({
+      totalCount: 'cart/getTotalProductsCount',
+      userIsLoggedIn: 'auth/getUserIsLoggedIn',
+    }),
+
     getSelection() {
       return this.isOpenCatalog ? 'xmark' : 'bars'
     },
+
     catalogModal: {
       set(val) {
         return this.$store.commit('modal/changeCatalogModal', val)
@@ -118,9 +130,6 @@ export default {
       get() {
         return this.$store.state.modal.catalogModal
       },
-    },
-    userIsLoggedIn() {
-      return this.$store.getters['auth/getUserIsLoggedIn']
     },
   },
   mounted() {},

@@ -1,6 +1,8 @@
 <template>
   <!--Footer container-->
-  <footer class="bg-neutral-900 text-center text-white mt-10">
+  <footer
+    class="bg-neutral-900 text-center text-white mt-10 fixed bottom-0 w-full"
+  >
     <div class="container px-6 pt-6">
       <div class="mb-6 flex justify-center">
         <a

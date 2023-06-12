@@ -1,0 +1,26 @@
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  pointer-events: unset !important;
+}
+
+.swipe__buttons .swiper-button-next {
+  margin-right: -40px;
+  margin-top: -20px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  right: 10px;
+  padding: 17px;
+  color: var(--black-color) !important;
+  fill: black !important;
+  stroke: black !important;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 15px;
+}

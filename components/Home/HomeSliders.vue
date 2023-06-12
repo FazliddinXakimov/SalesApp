@@ -72,6 +72,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style src="@/assets/css/HomeSlider.scss" lang="scss"></style>

@@ -1,31 +1,29 @@
 <template>
+  <!-- <HomeSliders :sliders="sliders" /> -->
   <div>
-    <!-- <HomeSliders :sliders="sliders" /> -->
-    <div class="max-w-screen-xl mx-auto">
-      <Banner :banners="banners" />
+    <Banner :banners="banners" />
 
-      <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
-        <h1 class="text-2xl mb-4">
-          {{ data.title[$i18n.locale] }}
-        </h1>
+    <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
+      <h1 class="text-2xl mb-4">
+        {{ data.title[$i18n.locale] }}
+      </h1>
 
-        <div class="swiper-products">
-          <div class="swiper">
-            <swiper class="swiper-wrapper" :options="swiperOptions">
-              <swiper-slide
-                v-for="(product, index) in data.products"
-                :key="index"
-                class="swiper-slide product-card-item"
-              >
-                <ProductCard :product="product" />
-              </swiper-slide>
-            </swiper>
-          </div>
-          <!-- v-if="products.length > 6" -->
-          <div>
-            <div :class="`swiper-button-prev button-prev`"></div>
-            <div :class="`swiper-button-next button-next`"></div>
-          </div>
+      <div class="swiper-products">
+        <div class="swiper">
+          <swiper class="swiper-wrapper" :options="swiperOptions">
+            <swiper-slide
+              v-for="(product, index) in data.products"
+              :key="index"
+              class="swiper-slide product-card-item"
+            >
+              <ProductCard :product="product" />
+            </swiper-slide>
+          </swiper>
+        </div>
+        <!-- v-if="products.length > 6" -->
+        <div>
+          <div :class="`swiper-button-prev button-prev`"></div>
+          <div :class="`swiper-button-next button-next`"></div>
         </div>
       </div>
     </div>

@@ -1,15 +1,22 @@
 <template>
   <MainModal id="cart-modal" v-model="cartModal">
-    <div class="cart-modal__inner">Cart Basket Modal</div>
+    <div class="cart-modal__inner">
+      {{ products }}
+    </div>
   </MainModal>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {}
   },
   computed: {
+    ...mapGetters({
+      products: 'cart/getProducts',
+    }),
     cartModal: {
       set(val) {
         this.$store.commit('modal/changeCartModal', val)
