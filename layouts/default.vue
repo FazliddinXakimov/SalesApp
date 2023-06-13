@@ -1,5 +1,5 @@
 <template>
-  <div class="default__layout">
+  <div>
     <MainLoading />
     <HeaderTop />
     <HeaderMain />
@@ -25,9 +25,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.default__layout {
-  background-color: #f6f9fc;
-}
-</style>

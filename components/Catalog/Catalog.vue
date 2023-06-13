@@ -5,18 +5,16 @@
   >
     <div class="flex h-full w-full animate-slide-in z-50">
       <div
-        class="flex flex h-full w-80 flex-col border-r border-secondary-light bg-white py-8 text-primary"
+        class="flex flex h-full w-80 flex-col border-r border-secondary-light bg-white py-8 text-primary overflow-auto"
       >
         <div
-          v-for="(catalog, index) in GET_ROOT_CATEGORIES"
+          v-for="(catalog, index) in categories"
           :key="index"
           class="flex cursor-pointer items-center gap-3 py-3 px-4"
           :class="
-            catalog.id == selectedCategory?.id
-              ? 'bg-primary-blue text-white:'
-              : ''
+            catalog.id == currentCategory?.id ? 'bg-blue-600 text-white' : ''
           "
-          @click="handleSelectCategory(catalog)"
+          @mouseover="handleSelectCategory(catalog)"
         >
           <div>{{ catalog.title[$i18n.locale] }}</div>
         </div>
@@ -25,20 +23,18 @@
         class="flex h-full w-[540px] justify-between overflow-auto bg-white py-8 text-primary"
       >
         <div class="flex flex-col gap-8">
-          <div v-if="selectedCategory" class="px-6 last:pb-12">
+          <div v-if="currentCategory" class="px-6 last:pb-12">
             <div
               class="mb-2 cursor-pointer text-lg font-semibold leading-6 text-primary"
             >
-              {{ selectedCategory.title[$i18n.locale] }}
+              {{ currentCategory.title[$i18n.locale] }}
             </div>
             <ul class="flex flex-col gap-1.5">
               <li
-                v-for="(child, index) in selectedCategory.children"
+                v-for="(child, index) in currentCategory.children"
                 :key="index"
               >
-                <div
-                  class="cursor-pointer text-base text-secondary hover:text-primary-blue"
-                >
+                <div class="cursor-pointer text-slate-500 hover:text-blue-600">
                   {{ child.title[$i18n.locale] }}
                 </div>
               </li>
@@ -81,11 +77,12 @@ export default {
   data() {
     return {
       mainSub: '',
-      selectedCategory: null,
     }
   },
   computed: {
-    ...mapGetters('references', ['GET_ROOT_CATEGORIES']),
+    ...mapGetters({
+      categories: 'references/GET_ROOT_CATEGORIES',
+    }),
     catalogModal: {
       set(val) {
         return this.$store.commit('modal/changeCatalogModal', val)
@@ -94,11 +91,16 @@ export default {
         return this.$store.state.modal.catalogModal
       },
     },
+    currentCategory: {
+      set(val) {
+        this.$store.commit('references/SET_CATEGORY', val)
+      },
+      get() {
+        return this.$store.getters['references/GET_CURRENT_CATEGORY']
+      },
+    },
   },
-  mounted() {
-    if (this.GET_ROOT_CATEGORIES.length > 0)
-      this.selectedCategory = this.GET_ROOT_CATEGORIES[0]
-  },
+
   methods: {
     ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
@@ -107,8 +109,7 @@ export default {
     },
 
     handleSelectCategory(category) {
-      this.selectedCategory = category
-      console.log('selcted', this.selectedCategory)
+      this.currentCategory = category
     },
 
     onSubmit(slug, sub) {
@@ -135,5 +136,25 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 100;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
 </style>

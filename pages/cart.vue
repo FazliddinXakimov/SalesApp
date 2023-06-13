@@ -56,7 +56,7 @@
               class="w-8 flex items-center justify-center"
               @click="handleDecrementProduct(product.id)"
             >
-              -
+              <img src="@/assets/img/minus.svg" class="w-4 h-4" />
             </button>
             <div class="w-8 font-bold flex items-center justify-center">
               {{ product.count }}
@@ -65,7 +65,7 @@
               class="w-8 flex items-center justify-center"
               @click="hanleIncrementProduct(product.id)"
             >
-              +
+              <img src="@/assets/img/plus.svg" class="w-4 h-4" />
             </button>
           </div>
           <div

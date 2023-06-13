@@ -85,7 +85,9 @@ export default {
       this.$store.dispatch('home/fetchMainProducts'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
     ])
+    
     this.$store.commit('SET_MAIN_LOADING', false)
+    
   },
   methods: {},
 }

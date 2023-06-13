@@ -15,39 +15,59 @@
     </div>
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <h1 class="flext justify-center text-gray-800 mt-1 cut-text">
+        <h1 class="text-center text-gray-800 mt-1 cut-text">
           {{ product.title[$i18n.locale] }}
         </h1>
-        <p class="flext justify-center stext-gray-800 mt-1">
+        <p class="text-center text-gray-800 mt-1">
+          {{ product.sale_price | numberFilter }} sum
+        </p>
+        <p
+          class="text-center text-red-500 line-through italic text-gray-800 mt-1"
+        >
           {{ product.price | numberFilter }} sum
         </p>
       </div>
       <div class="inline-flex items-center mt-2"></div>
       <div class="flex justify-between items-center mt-4">
-        <button
-          class="bg-slate-50 hover:bg-blue-400 text-blue-dark font-semibold py-2 px-4 border border-blue hover:bg-blue-400 rounded"
-          :class="{
-            'bg-blue-600': isCart,
-          }"
-          @click="addProductToCart"
+        <div class="cursor-pointer" @click="addProductToCart">
+          <img
+            v-if="isCart"
+            src="@/assets/img/cart_minus.svg"
+            class="w-9 h-9"
+          />
+          <img v-else src="@/assets/img/cart_plus.svg" class="w-9 h-9" />
+        </div>
+        <div
+          v-if="isCart"
+          class="flex items-center justify-between bg-gray-11 rounded-lg h-8 w-[94px] border"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 ml-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          <button
+            class="w-8 flex items-center justify-center"
+            @click="handleDecrementProduct"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-            />
-          </svg>
-        </button>
-        <button class="flex items-center justify-center">
-          <img src="@/assets/img/love.svg" class="h-8 w-8" />
+            <img src="@/assets/img/minus.svg" class="w-4 h-4" />
+          </button>
+          <div class="w-8 font-bold flex items-center justify-center">
+            {{ getProductCount }}
+          </div>
+          <button
+            class="w-8 flex items-center justify-center"
+            @click="hanleIncrementProduct"
+          >
+            <img src="@/assets/img/plus.svg" class="w-4 h-4" />
+          </button>
+        </div>
+
+        <button
+          class="flex items-center justify-center"
+          @click="handleToggleFavorite"
+        >
+          <img
+            v-if="isHaveFavorite"
+            src="@/assets/img/black_heart.svg"
+            class="h-9 w-9"
+          />
+          <img v-else src="@/assets/img/white_heart.svg" class="h-9 w-9" />
         </button>
       </div>
     </div>
@@ -71,14 +91,33 @@ export default {
     ...mapGetters({
       productIds: 'cart/getProductIds',
     }),
+    isHaveFavorite() {
+      return this.$store.getters['favorities/isHaveFavorite'](this.product.id)
+    },
     isCart() {
       return this.productIds.includes(this.product.id)
+    },
+    getProductCount() {
+      return this.$store.getters['cart/getProductCount'](this.product.id)
     },
   },
   methods: {
     addProductToCart() {
-      console.log('this.products', this.product)
-      this.$store.commit('cart/ADD_PRODUCT', this.product)
+      if (this.isCart) {
+        this.$store.commit('cart/REMOVE_PRODUCT', this.product.id)
+      } else {
+        this.$store.commit('cart/ADD_PRODUCT', this.product)
+      }
+    },
+
+    hanleIncrementProduct() {
+      this.$store.commit('cart/INCREMENT_PRODUCT_COUNT', this.product.id)
+    },
+    handleDecrementProduct() {
+      this.$store.commit('cart/DECREMENT_PRODUCT_COUNT', this.product.id)
+    },
+    handleToggleFavorite() {
+      this.$store.commit('favorities/TOGGLE_FAVORITE', this.product)
     },
   },
 }
@@ -88,7 +127,7 @@ export default {
 .cut-text {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 160px;
+  /* width: 160px; */
   height: 1.2em;
   white-space: nowrap;
 }

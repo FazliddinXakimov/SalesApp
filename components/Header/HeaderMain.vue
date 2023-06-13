@@ -4,10 +4,13 @@
       class="bg-gray-300 w-full top-8 left-0 border-b border-gray-200 z-10 sticky"
     >
       <div
-        class="max-w-screen-xl flex items-center justify-between mx-auto p-3"
+        class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
       >
         <div class="768:flex hidden">
-          <router-link to="/" class="flex items-center no-underline">
+          <router-link
+            :to="{ path: localePath('/') }"
+            class="flex items-center no-underline"
+          >
             <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
           </router-link>
         </div>
@@ -44,9 +47,19 @@
           </div>
         </div>
         <div class="768:flex item-center justify-between hidden">
-          <button class="mr-10">
+          <button
+            class="mr-10"
+            @click="$router.push(localePath(`/favorities`))"
+          >
             <div class="flex flex-column justify-center items-center">
-              <img src="@/assets/img/love.svg" class="h-8 w-8" />
+              <span class="relative">
+                <img src="@/assets/img/love.svg" class="h-8 w-8" />
+                <span
+                  class="badge badge-pill badge-success absolute -top-2 -right-3"
+                  >{{ totalFavoritiesCount }}</span
+                >
+              </span>
+
               <span class="text-sm">Избранное </span>
             </div>
           </button>
@@ -78,9 +91,10 @@
             <div class="flex flex-column justify-center items-center">
               <span class="relative">
                 <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
-                <span class="badge badge-pill badge-success absolute -top-2">{{
-                  totalCount
-                }}</span>
+                <span
+                  class="badge badge-pill badge-success absolute -top-2 -right-3"
+                  >{{ totalCartProductsCount }}</span
+                >
               </span>
               <span class="text-sm"> Корзина </span>
             </div>
@@ -115,7 +129,8 @@ export default {
 
   computed: {
     ...mapGetters({
-      totalCount: 'cart/getTotalProductsCount',
+      totalCartProductsCount: 'cart/getTotalProductsCount',
+      totalFavoritiesCount: 'favorities/getTotalCount',
       userIsLoggedIn: 'auth/getUserIsLoggedIn',
     }),
 

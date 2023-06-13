@@ -1,3 +1,7 @@
+body {
+  background-color: #f6f9fc;
+}
+
 .error_field input {
   box-shadow: 0 0 0 1px #fb5252;
 }

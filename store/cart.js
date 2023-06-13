@@ -17,6 +17,9 @@ export const getters = {
     state.products.reduce((total, product) => (total += product.count), 0),
   isAllProductsSelected: (state) =>
     state.products.every((prod) => prod.selected),
+
+  getProductCount: (state) => (id) =>
+    state.products.find((product) => product.id === id)?.count,
 }
 
 export const mutations = {
