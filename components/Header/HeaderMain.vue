@@ -1,8 +1,6 @@
 <template>
   <div>
-    <nav
-      class="bg-gray-300 w-full top-8 left-0 border-b border-gray-200 z-10 sticky"
-    >
+    <nav class="bg-gray-300 w-full top-8 left-0 border-b z-10">
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
       >
@@ -103,6 +101,7 @@
       </div>
     </nav>
     <Catalog
+      v-if="catalogModal"
       :category="isOpenCatalog"
       @openCatalog="isOpenCatalog = !isOpenCatalog"
     />

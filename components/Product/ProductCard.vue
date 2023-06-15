@@ -1,22 +1,26 @@
 <template>
   <div class="bg-white border rounded mx-2">
-    <div
-      class="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
-      :style="`background-image: url(${product.image})`"
-    >
-      <div>
-        <span
-          v-if="product.on_sale"
-          class="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none"
-        >
-          available
-        </span>
+    <router-link :to="`/product/detail/${product.id}`">
+      <div
+        class="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
+        :style="`background-image: url(${product.image})`"
+      >
+        <div>
+          <span
+            v-if="product.on_sale"
+            class="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none"
+          >
+            available
+          </span>
+        </div>
       </div>
-    </div>
+    </router-link>
     <div class="p-4 flex flex-col">
       <div class="content-center">
         <h1 class="text-center text-gray-800 mt-1 cut-text">
-          {{ product.title[$i18n.locale] }}
+          <router-link :to="`/product/detail/${product.id}`">
+            {{ product.title[$i18n.locale] }}</router-link
+          >
         </h1>
         <p class="text-center text-gray-800 mt-1">
           {{ product.sale_price | numberFilter }} sum

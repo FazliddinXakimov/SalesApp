@@ -1,14 +1,20 @@
 const SET_MAIN_PAGE_PRODUCTS = 'SET_MAIN_PAGE_PRODUCTS'
 const SET_BANNERS_LIST = 'SET_BANNERS_LIST'
+const SET_BRANDS = 'SET_BRANDS'
 
 export const state = () => ({
   products: [],
   banners_list: [],
+  brands: {
+    count: 0,
+    results: [],
+  },
 })
 
 export const getters = {
   getMainPageProducts: (state) => state.products,
   GET_BANNERS_LIST: (state) => state.banners_list,
+  GET_BRANDS: (state) => state.brands,
 }
 
 export const mutations = {
@@ -18,10 +24,13 @@ export const mutations = {
   [SET_BANNERS_LIST]: (state, data) => {
     state.banners_list = data
   },
+  [SET_BRANDS]: (state, data) => {
+    state.brands = data
+  },
 }
 
 export const actions = {
-  async fetchMainProducts(ctx, payload) {
+  async fetchMainProducts(ctx) {
     const response = await this.$axios.get('products/main_page')
     ctx.commit(SET_MAIN_PAGE_PRODUCTS, response.data)
   },
@@ -32,6 +41,19 @@ export const actions = {
         .then((response) => {
           commit(SET_BANNERS_LIST, response.data)
           resolve(state.banners_list)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  FETCH_BRANDS({ commit }, params) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .get('/references/brands/', params)
+        .then((response) => {
+          commit(SET_BRANDS, response.data)
+          resolve(state.brands)
         })
         .catch((error) => {
           reject(error)

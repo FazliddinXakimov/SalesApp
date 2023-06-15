@@ -1,12 +1,14 @@
 <template>
-  <!-- <HomeSliders :sliders="sliders" /> -->
   <div>
     <Banner :banners="banners" />
 
     <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
-      <h1 class="text-2xl mb-4">
-        {{ data.title[$i18n.locale] }}
-      </h1>
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl mb-4">
+          {{ data.title[$i18n.locale] }}
+        </h1>
+        <span class="text-blue-400">View more ></span>
+      </div>
 
       <div class="swiper-products">
         <div class="swiper">
@@ -20,13 +22,19 @@
             </swiper-slide>
           </swiper>
         </div>
-        <!-- v-if="products.length > 6" -->
+
         <div>
           <div :class="`swiper-button-prev button-prev`"></div>
           <div :class="`swiper-button-next button-next`"></div>
         </div>
       </div>
     </div>
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl mt-10 mb-4">Brands</h1>
+      <span class="text-blue-400">View more ></span>
+    </div>
+    <HomeBrands />
+    <div class="mb-20"></div>
   </div>
 </template>
 
@@ -35,11 +43,12 @@ import { mapGetters } from 'vuex'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import Banner from '@/components/Home/HomeBanner.vue'
 import ProductCard from '@/components/Product/ProductCard.vue'
+import HomeBrands from '@/components/Home/HomeBrands.vue'
 import 'swiper/css/swiper.css'
 
 export default {
   name: 'IndexPage',
-  components: { Banner, ProductCard, Swiper, SwiperSlide },
+  components: { Banner, ProductCard, Swiper, SwiperSlide, HomeBrands },
   data() {
     return {
       swiperOptions: {
@@ -80,14 +89,15 @@ export default {
     this.$store.commit('SET_MAIN_LOADING', true)
 
     await Promise.allSettled([
+      this.$store.dispatch('references/FETCH_TOP_CATEGORIES'),
       this.$store.dispatch('references/FETCH_ROOT_CATEGORIES'),
       this.$store.dispatch('header/FETCH_REGIONS_LIST'),
       this.$store.dispatch('home/fetchMainProducts'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
+      this.$store.dispatch('home/FETCH_BRANDS'),
     ])
-    
+
     this.$store.commit('SET_MAIN_LOADING', false)
-    
   },
   methods: {},
 }

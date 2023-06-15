@@ -3,6 +3,7 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 const INCREMENT_PRODUCT_COUNT = 'INCREMENT_PRODUCT_COUNT'
 const DECREMENT_PRODUCT_COUNT = 'DECREMENT_PRODUCT_COUNT'
 const TOGGLE_PRODUCT_SELECTION = 'TOGGLE_PRODUCT_SELECTION'
+const SET_EMPTY_CART = 'SET_EMPTY_CART'
 const TOGGLE_ALL_PRODUCTS_SELECTION = 'TOGGLE_ALL_PRODUCTS_SELECTION'
 
 export const state = () => ({
@@ -48,6 +49,10 @@ export const mutations = {
   [TOGGLE_ALL_PRODUCTS_SELECTION]: (state) => {
     const isAllSelected = state.products.every((prod) => prod.selected)
     state.products.forEach((product) => (product.selected = !isAllSelected))
+  },
+  [SET_EMPTY_CART]: (state) => {
+    state.products = []
+    state.product_ids = []
   },
 }
 

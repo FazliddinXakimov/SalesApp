@@ -1,7 +1,7 @@
 <template>
   <!--Footer container-->
   <footer
-    class="bg-neutral-900 text-center text-white mt-10 absolute bottom-0 w-full"
+    class="footer bg-neutral-900 text-center text-white mt-10 bottom-0 w-full"
   >
     <div class="container px-6 pt-6">
       <div class="mb-6 flex justify-center">

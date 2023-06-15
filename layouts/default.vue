@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="defaultUI">
     <MainLoading />
     <HeaderTop />
     <HeaderMain />
+    <TopCategories />
     <div class="max-w-screen-xl mx-auto">
       <Nuxt />
     </div>
@@ -12,16 +13,17 @@
 </template>
 
 <script>
+import TopCategories from '@/components/Header/TopCategories.vue'
 import MainLoading from '@/components/MainLoading.vue'
 import MobileBottomNavbar from '@/components/Header/MobileBottomNavbar.vue'
-// import MainFooter from '@/components/MainFooter.vue'
 export default {
   components: {
     HeaderMain: () => import('@/components/Header/HeaderMain.vue'),
     HeaderTop: () => import('@/components/Header/HeaderTop.vue'),
+    // MainFooter: () => import('@/components/MainFooter.vue'),
     MobileBottomNavbar,
-    // MainFooter,
     MainLoading,
+    TopCategories,
   },
 }
 </script>

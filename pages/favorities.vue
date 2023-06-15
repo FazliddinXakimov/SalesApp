@@ -1,7 +1,8 @@
 <template>
   <div class="mt-10">
-    <h1 class="text-2xl mb-4">Favorite Products</h1>
+    <BreadCrumb :bread-crumb="breadCrumb" />
     <div v-if="products.length > 0" class="swiper-products">
+      <h1 class="text-2xl mb-4">Favorite Products</h1>
       <div class="swiper">
         <swiper class="swiper-wrapper" :options="swiperOptions">
           <swiper-slide
@@ -19,7 +20,16 @@
         <div :class="`swiper-button-next button-next`"></div>
       </div>
     </div>
-    <div v-else class="text-center">You haven't favorite products</div>
+    <div v-else class="flex items-center flex-col justify-center my-20">
+      <img src="@/assets/img/heart_cart.svg" class="w-20 h-20" />
+      <div class="mt-3">Cart is Empty</div>
+      <button
+        class="mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+        @click="$router.push(localePath('/'))"
+      >
+        Go To Home
+      </button>
+    </div>
   </div>
 </template>
 
@@ -33,6 +43,12 @@ export default {
 
   data() {
     return {
+      breadCrumb: [
+        {
+          title: 'Favorities',
+          // link: '/cart',
+        },
+      ],
       swiperOptions: {
         loop: false,
         // spaceBetween: 16,
