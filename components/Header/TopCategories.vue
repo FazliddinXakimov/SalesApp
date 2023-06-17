@@ -5,7 +5,7 @@
         <a
           v-for="(topItem, index) in categories"
           :key="index"
-          class="-mb-px border-b p-2 hover:text-cyan-500"
+          class="-mb-px border-b p-2 hover:text-cyan-500 cursor-pointer"
           :class="
             activeCategoryId == topItem.id
               ? 'border-current'
