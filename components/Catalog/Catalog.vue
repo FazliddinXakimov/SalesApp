@@ -32,10 +32,23 @@
                   v-for="(child, index) in currentCategory.children"
                   :key="index"
                 >
-                  <div
-                    class="cursor-pointer text-slate-500 hover:text-blue-600"
-                  >
-                    {{ child.title[$i18n.locale] }}
+                  <div>
+                    <div
+                      class="cursor-pointer text-slate-500 hover:text-blue-600"
+                    >
+                      {{ child.title[$i18n.locale] }}
+                    </div>
+
+                    <ul>
+                      <li v-for="(item, index) in child.children" :key="index">
+                        <span
+                          class="cursor-pointer text-slate-500 hover:text-blue-600"
+                        >
+                          {{ index }}
+                          {{ item.title[$i18n.locale] || item.title }}
+                        </span>
+                      </li>
+                    </ul>
                   </div>
                 </li>
               </ul>

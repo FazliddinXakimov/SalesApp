@@ -1,45 +1,51 @@
-export default function ({ $axios, store, redirect }) {
-  $axios.interceptors.request.use((config) => {
-    const token = store.state.auth?.accessToken
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`
-    } else {
-      config.headers.Authorization = ''
+/* eslint-disable no-console */
+import qs from 'qs'
+export default function ({ $axios, store, app, error, redirect }) {
+  const lang = app.store.$i18n.locale
+
+  $axios.setHeader('Accept-Language', lang)
+
+  $axios.onError((errorResponse) => {
+    store.commit('changeLoading', false)
+    if (errorResponse.response && errorResponse.response.status === 400) {
+      console.log(errorResponse.response.data.data[0])
+      return
     }
-    return config
+    if (errorResponse.response && errorResponse.response.status === 401) {
+      store.$auth.logout()
+      redirect('/')
+      return errorResponse
+    }
+    if (errorResponse.response && errorResponse.response.status === 403) {
+      return
+    }
+    if (errorResponse.response && errorResponse.response.status === 404) {
+      return
+    }
+    if (errorResponse.response && errorResponse.response.status === 422) {
+      error({ statusCode: 404, message: 'Post not found' })
+    }
+    // if (errorResponse.response && error.response.status === 500) {
+    //   return;
+    // }
+    // if (errorResponse.message === 'Network Error') {
+    // }
   })
-  $axios.interceptors.response.use(
-    (config) => {
-      return config
-    },
-    async (error) => {
-      const originalRequest = error.config
-      if (
-        error.response.status === 401 &&
-        error.config &&
-        !error.config._isRetry &&
-        !error.config.login
-      ) {
-        originalRequest._isRetry = true
-        try {
-          const response = await fetch($axios.baseURL, {
-            withCredentials: true,
-          })
 
-          if (response.status === 200) {
-            const data = await response.json()
-
-            store.commit('auth/setToken', data.data?.accessToken)
-            store.commit('auth/setUserData', data.data?.user || {})
-
-            return $axios.request(originalRequest)
-          }
-        } catch (err) {
-          store.commit('auth/logout')
-          return $axios.request(originalRequest)
-        }
-      }
-      throw error
+  $axios.onRequest((req) => {
+    const lang = app.store.$i18n.locale
+    $axios.setHeader('Accept-Language', lang)
+    // const regionId = store.state.header?.selectedRegion?.id ?? 2
+    // $axios.setHeader('Accept-Region', regionId)
+    req.paramsSerializer = function (params) {
+      return qs.stringify(params, { encodeValuesOnly: true })
     }
-  )
+    return req
+  })
+
+  // const methods = Object.keys(allMethods)
+  // methods.forEach((method) => {
+  //   console.log('m', method)
+  //   inject(method, allMethods[method])
+  // })
 }
