@@ -1,10 +1,6 @@
 /* eslint-disable no-console */
-import qs from 'qs'
+// import qs from 'qs'
 export default function ({ $axios, store, app, error, redirect }) {
-  const lang = app.store.$i18n.locale
-
-  $axios.setHeader('Accept-Language', lang)
-
   $axios.onError((errorResponse) => {
     store.commit('changeLoading', false)
     if (errorResponse.response && errorResponse.response.status === 400) {
@@ -35,10 +31,9 @@ export default function ({ $axios, store, app, error, redirect }) {
   $axios.onRequest((req) => {
     const lang = app.store.$i18n.locale
     $axios.setHeader('Accept-Language', lang)
-    // const regionId = store.state.header?.selectedRegion?.id ?? 2
-    // $axios.setHeader('Accept-Region', regionId)
+
     req.paramsSerializer = function (params) {
-      return qs.stringify(params, { encodeValuesOnly: true })
+      // return qs.stringify(params, { encodeValuesOnly: true })
     }
     return req
   })

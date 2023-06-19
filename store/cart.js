@@ -21,6 +21,8 @@ export const getters = {
 
   getProductCount: (state) => (id) =>
     state.products.find((product) => product.id === id)?.count,
+  getTotalPrice: (state) =>
+    state.products.reduce((total, product) => (total += product.sale_price), 0),
 }
 
 export const mutations = {
@@ -56,4 +58,17 @@ export const mutations = {
   },
 }
 
-export const actions = {}
+export const actions = {
+  CHECK_COUPON({ commit }, data) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post(`/orders/coupon_check/`, data)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+}

@@ -31,7 +31,7 @@ export const mutations = {
 
 export const actions = {
   async fetchMainProducts(ctx) {
-    const response = await this.$axios.get('products/main_page')
+    const response = await this.$axios.get('products/main_page/')
     ctx.commit(SET_MAIN_PAGE_PRODUCTS, response.data)
   },
   FETCH_BANNERS_LIST({ commit }) {

@@ -14,7 +14,7 @@
             "
             @mouseover="handleSelectCategory(catalog)"
           >
-            <div>{{ catalog.title[$i18n.locale] }}</div>
+            <div>{{ catalog.title }}</div>
           </div>
         </div>
         <div
@@ -23,9 +23,9 @@
           <div class="flex flex-col gap-8">
             <div v-if="currentCategory" class="px-6 last:pb-12">
               <div
-                class="mb-2 cursor-pointer text-lg font-semibold leading-6 text-primary"
+                class="mb-2 cursor-pointer text-lg font-semibold leading-6 text-black"
               >
-                {{ currentCategory.title[$i18n.locale] }}
+                {{ currentCategory.title }}
               </div>
               <ul class="flex flex-col gap-1.5">
                 <li
@@ -34,18 +34,17 @@
                 >
                   <div>
                     <div
-                      class="cursor-pointer text-slate-500 hover:text-blue-600"
+                      class="cursor-pointer text-slate-500 hover:text-blue-600 text-xl mt-3"
                     >
-                      {{ child.title[$i18n.locale] }}
+                      {{ child.title }}
                     </div>
 
                     <ul>
-                      <li v-for="(item, index) in child.children" :key="index">
+                      <li v-for="(item, ind) in child.children" :key="ind">
                         <span
-                          class="cursor-pointer text-slate-500 hover:text-blue-600"
+                          class="ml-2 cursor-pointer text-slate-500 hover:text-blue-600 text-sm"
                         >
-                          {{ index }}
-                          {{ item.title[$i18n.locale] || item.title }}
+                          {{ item.title }}
                         </span>
                       </li>
                     </ul>
@@ -119,7 +118,7 @@ export default {
     ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
     subGet(value) {
-      this.mainSub = value.title[this.$i18n.locale]
+      this.mainSub = value.title
     },
 
     handleSelectCategory(category) {

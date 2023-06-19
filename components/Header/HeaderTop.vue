@@ -13,7 +13,7 @@
         <button class="dropdown__action flex items-center">
           <div class="flex justify-between items-center text-white">
             <img src="@/assets/img/header-location.svg" class="h-5 w-5" />
-            {{ selectedRegion?.name[$i18n.locale] }}
+            {{ selectedRegion?.name }}
           </div>
           <div class="dropdown__list block z-40">
             <button
@@ -22,7 +22,7 @@
               class="dropdown__item"
               @click="handleSelectRegion(region.id)"
             >
-              {{ region.name[$i18n.locale] }}
+              {{ region.name }}
             </button>
           </div>
         </button>
@@ -34,7 +34,7 @@
               src="@/assets/img/header-location.svg"
               class="h-5 w-5 inline-block"
             />
-            {{ selectedRegion?.name[$i18n.locale] }}
+            {{ selectedRegion?.name }}
           </div>
 
           <div class="dropdown__list block z-40">
@@ -44,7 +44,7 @@
               class="dropdown__item"
               @click="handleSelectRegion(region.id)"
             >
-              {{ region.name[$i18n.locale] }}
+              {{ region.name }}
             </button>
           </div>
         </button>

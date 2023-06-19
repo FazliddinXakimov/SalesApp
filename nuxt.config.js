@@ -45,9 +45,9 @@ export default {
   },
   css: ['swiper/css/swiper.css', '@/assets/css/main.css'],
   plugins: [
-    {
-      src: '@/plugins/axios.js',
-    },
+    // {
+    //   src: '@/plugins/axios.js',
+    // },
     {
       src: '@/plugins/main.js',
     },
@@ -113,6 +113,15 @@ export default {
     langDir: 'lang/',
     detectBrowserLanguage: false,
     strategy: 'prefix_except_default',
+  },
+  cache: {
+    useHostPrefix: false,
+    pages: ['/'],
+    store: {
+      type: 'memory',
+      max: 30,
+      ttl: 900,
+    },
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules

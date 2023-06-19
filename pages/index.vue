@@ -5,7 +5,7 @@
     <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
       <div class="flex justify-between items-center">
         <h1 class="text-2xl mb-4">
-          {{ data.title[$i18n.locale] }}
+          {{ data.title }}
         </h1>
         <span class="text-blue-400">View more ></span>
       </div>
@@ -41,10 +41,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import Banner from '@/components/Home/HomeBanner.vue'
-import ProductCard from '@/components/Product/ProductCard.vue'
-import HomeBrands from '@/components/Home/HomeBrands.vue'
 import 'swiper/css/swiper.css'
+import ProductCard from '@/components/Product/ProductCard.vue'
+import Banner from '@/components/Home/HomeBanner.vue'
+import HomeBrands from '@/components/Home/HomeBrands.vue'
 
 export default {
   name: 'IndexPage',

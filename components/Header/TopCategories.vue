@@ -13,7 +13,7 @@
           "
           @click="handleSelectTopCategory(topItem.id)"
         >
-          {{ topItem.title[$i18n.locale] }}
+          {{ topItem.title }}
         </a>
         <!-- <a
           href=""

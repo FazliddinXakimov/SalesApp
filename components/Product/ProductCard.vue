@@ -19,7 +19,7 @@
       <div class="content-center">
         <h1 class="text-center text-gray-800 mt-1 cut-text">
           <router-link :to="`/product/detail/${product.id}`">
-            {{ product.title[$i18n.locale] }}</router-link
+            {{ product.title }}</router-link
           >
         </h1>
         <p class="text-center text-gray-800 mt-1">

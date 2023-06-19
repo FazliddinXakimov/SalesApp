@@ -25,5 +25,6 @@ export default {
     MainLoading,
     TopCategories,
   },
+  middleware: 'cache-control',
 }
 </script>
