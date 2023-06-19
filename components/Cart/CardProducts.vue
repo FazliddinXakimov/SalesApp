@@ -1,5 +1,5 @@
 <template>
-  <div class="768:basis-2/3 bg-white">
+  <div class="768:basis-2/3">
     <div
       class="border-b border-secondary-light py-3 flex justify-between align-items-center"
     >

@@ -23,6 +23,16 @@
           Пременить
         </button>
       </div>
+      <h1 class="pt-2 pb-5 flex justify-between items-center">
+        <span> DeliveryPrice: </span>
+        <span>{{ discount | numberFilter }} sum</span>
+      </h1>
+      <button
+        class="flex justify-center items-center w-full my-1 mr-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 border border-green-500 hover:text-green-600 rounded"
+      >
+        <img src="@/assets/img/cart.svg" class="w-5 h-5 mr-1 text-white" />
+        Оформить заказ
+      </button>
     </div>
   </div>
 </template>
@@ -38,14 +48,17 @@ export default {
   data() {
     return {
       coupon_code: '',
+      discount: 0,
     }
   },
 
   methods: {
-    handleCheckCoupon() {
-      this.$store.dispatch('cart/CHECK_COUPON', {
+    async handleCheckCoupon() {
+      const response = await this.$store.dispatch('cart/CHECK_COUPON', {
         coupon_code: this.coupon_code,
       })
+      if (response.data.status === 200) this.discount = response.data.discount
+      else this.discount = 0
     },
   },
 }

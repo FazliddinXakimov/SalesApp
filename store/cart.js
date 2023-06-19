@@ -5,10 +5,12 @@ const DECREMENT_PRODUCT_COUNT = 'DECREMENT_PRODUCT_COUNT'
 const TOGGLE_PRODUCT_SELECTION = 'TOGGLE_PRODUCT_SELECTION'
 const SET_EMPTY_CART = 'SET_EMPTY_CART'
 const TOGGLE_ALL_PRODUCTS_SELECTION = 'TOGGLE_ALL_PRODUCTS_SELECTION'
+const SET_DISCOUNT = 'SET_DISCOUNT'
 
 export const state = () => ({
   products: [],
   product_ids: [],
+  discount: 0,
 })
 
 export const getters = {
@@ -23,9 +25,13 @@ export const getters = {
     state.products.find((product) => product.id === id)?.count,
   getTotalPrice: (state) =>
     state.products.reduce((total, product) => (total += product.sale_price), 0),
+  getDiscount: (state) => state.discount,
 }
 
 export const mutations = {
+  [SET_DISCOUNT]: (state, payload) => {
+    state.discount = payload
+  },
   [ADD_PRODUCT]: (state, payload) => {
     state.product_ids.push(payload.id)
     state.products.push({ count: 1, ...payload, selected: true })
@@ -59,16 +65,7 @@ export const mutations = {
 }
 
 export const actions = {
-  CHECK_COUPON({ commit }, data) {
-    return new Promise((resolve, reject) => {
-      this.$axios
-        .post(`/orders/coupon_check/`, data)
-        .then((response) => {
-          resolve(response)
-        })
-        .catch((error) => {
-          reject(error)
-        })
-    })
+  CHECK_COUPON(_, data) {
+    return this.$axios.post(`/orders/coupon_check/`, data)
   },
 }
