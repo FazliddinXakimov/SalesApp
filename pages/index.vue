@@ -14,8 +14,8 @@
         <div class="swiper">
           <swiper class="swiper-wrapper" :options="swiperOptions">
             <swiper-slide
-              v-for="(product, index) in data.products"
-              :key="index"
+              v-for="(product, ind) in data.products"
+              :key="ind"
               class="swiper-slide product-card-item"
             >
               <ProductCard :product="product" />
@@ -67,11 +67,11 @@ export default {
             freeMode: true,
           },
           1200: {
-            slidesPerView: 4,
+            slidesPerView: 5,
             freeMode: false,
           },
           1300: {
-            slidesPerView: 4,
+            slidesPerView: 5,
             freeMode: false,
           },
         },

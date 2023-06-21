@@ -6,6 +6,8 @@ export const state = () => ({
 
 export const mutations = {
   [SET_MAIN_LOADING]: (state, data) => {
+    console.log("data", data)
+    console.log('state.isMainLoading', state.isMainLoading)
     state.isMainLoading = data
   },
 }

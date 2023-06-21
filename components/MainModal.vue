@@ -86,7 +86,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   pointer-events: auto;
-  border-radius: 0px;
+  border-radius: 10px;
   height: 100%;
 }
 @media (min-width: 576px) {

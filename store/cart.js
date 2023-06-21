@@ -24,7 +24,10 @@ export const getters = {
   getProductCount: (state) => (id) =>
     state.products.find((product) => product.id === id)?.count,
   getTotalPrice: (state) =>
-    state.products.reduce((total, product) => (total += product.sale_price), 0),
+    state.products.reduce(
+      (total, product) => (total += product.sale_price * product.count),
+      0
+    ),
   getDiscount: (state) => state.discount,
 }
 
@@ -67,5 +70,9 @@ export const mutations = {
 export const actions = {
   CHECK_COUPON(_, data) {
     return this.$axios.post(`/orders/coupon_check/`, data)
+  },
+
+  CREATE_ORDER({ commit }, data) {
+    return this.$axios.post('/orders/create/', data)
   },
 }

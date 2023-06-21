@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-gray-300 w-full top-8 left-0 border-b z-10">
+    <nav id="header" class="bg-gray-300 w-full top-8 left-0 border-b z-20">
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
       >
@@ -100,6 +100,7 @@
         </div>
       </div>
     </nav>
+    <div class="header-height-copy"></div>
     <Catalog
       v-if="catalogModal"
       :category="isOpenCatalog"
@@ -146,7 +147,28 @@ export default {
       },
     },
   },
-  mounted() {},
+  mounted() {
+    // const h = document.querySelector('.header-height-copy')
+    window.addEventListener('scroll', function (e) {
+      const y = window.scrollY
+      const header = document.getElementById('header')
+      // console.log('header', header)
+
+      if (header) {
+        // console.log('console is identify')
+        if (y > 160) {
+          // h.style.display = 'block'
+          header.classList.add('fixed')
+          header.classList.remove('top-8')
+          header.classList.add('top-0')
+        } else {
+          // h.style.display = 'none'
+          header.classList.remove('fixed')
+          header.classList.remove('top-0')
+        }
+      }
+    })
+  },
 
   methods: {
     openLoginModal() {

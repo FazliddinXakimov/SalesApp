@@ -4,14 +4,14 @@
       class="border-b border-secondary-light py-3 flex justify-between align-items-center"
     >
       <div class="flex items-start gap-8">
-        <div @click="handleToggleAllProductSelection">
+        <!-- <div @click="handleToggleAllProductSelection">
           <input
             type="checkbox"
             :checked="isAllSelected"
             class="checkbox checkbox-secondary checkbox-lg w-5 h-5"
           />
-        </div>
-        <span class="text-lg">Select All</span>
+        </div> -->
+        <!-- <span class="text-lg">Select All</span> -->
       </div>
       <div class="cursor-pointer hover:text-red-500" @click="hanldeSetEmpty">
         Remove all
@@ -26,13 +26,13 @@
         class="flex items-center gap-8 max-tablet:items-start max-tablet:gap-4"
       >
         <div class="flex gap-3 items-center justify-center">
-          <div @click="handleToggleProductSelection(product.id)">
+          <!-- <div @click="handleToggleProductSelection(product.id)">
             <input
               :checked="product.selected"
               type="checkbox"
               class="checkbox checkbox-secondary checkbox-lg w-5 h-5"
             />
-          </div>
+          </div> -->
           <div
             class="flex h-[88px] w-[88px] items-center justify-center max-tablet:h-[110px] max-tablet:w-[110px]"
           >

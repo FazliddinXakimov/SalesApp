@@ -7,7 +7,7 @@
     <div class="max-w-screen-xl mx-auto">
       <Nuxt />
     </div>
-    <!-- <MainFooter /> -->
+    <MainFooter />
     <MobileBottomNavbar />
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   components: {
     HeaderMain: () => import('@/components/Header/HeaderMain.vue'),
     HeaderTop: () => import('@/components/Header/HeaderTop.vue'),
-    // MainFooter: () => import('@/components/MainFooter.vue'),
+    MainFooter: () => import('@/components/MainFooter.vue'),
     MobileBottomNavbar,
     MainLoading,
     TopCategories,
