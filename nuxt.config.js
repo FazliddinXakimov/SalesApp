@@ -11,7 +11,12 @@ export default {
       baseURL: process.env.baseURL,
     },
   },
-
+  server: {
+    port: 8000,
+    host: '0.0.0.0',
+  },
+  target: 'server',
+  ssr: true,
   head: {
     title: 'SalesApp',
     htmlAttrs: {
@@ -45,9 +50,9 @@ export default {
   },
   css: ['swiper/css/swiper.css', '@/assets/css/main.css'],
   plugins: [
-    // {
-    //   src: '@/plugins/axios.js',
-    // },
+    {
+      src: '@/plugins/axios.js',
+    },
     {
       src: '@/plugins/main.js',
     },
@@ -123,7 +128,10 @@ export default {
       ttl: 900,
     },
   },
-
+  axios: {
+    baseURL: process.env.baseURL,
+    // debug: process.env.NODE_ENV !== 'production',
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
@@ -133,10 +141,6 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
