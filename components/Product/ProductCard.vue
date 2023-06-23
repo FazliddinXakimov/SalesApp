@@ -35,7 +35,7 @@
       <div class="flex justify-between items-center mt-4">
         <div v-if="!isCart" class="cursor-pointer" @click="addProductToCart">
           <img src="@/assets/img/shopping-cart.svg" class="w-9 h-9" />
-          <!-- <img v-else src="@/assets/img/cart_plus.svg" class="w-9 h-9" /> -->
+  
         </div>
         <div
           v-else

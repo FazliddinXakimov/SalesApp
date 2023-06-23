@@ -12,7 +12,7 @@
       </div>
     </div>
     <div v-else class="flex items-center flex-col justify-center">
-      <img src="@/assets/img/cart.svg" class="w-20 h-20" />
+      <img src="@/assets/img/shopping-cart.svg" class="w-20 h-20" />
       <div class="mt-3">Cart is Empty</div>
       <button
         class="mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded"

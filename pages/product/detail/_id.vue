@@ -47,7 +47,6 @@ export default {
   data() {
     return {
       videoController: '',
-      defaultImg: '@/assets/img/cart.svg',
       selectedMedia: null,
       activeTab: 1,
       breadCrumb: [

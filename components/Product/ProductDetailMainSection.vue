@@ -61,26 +61,23 @@
       <div class="flex justify-start items-center">
         <button
           v-if="isCart"
-          class="flex justify-center items-center my-1 mr-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 border border-green-500 hover:text-green-600 rounded"
+          class="my-1 mr-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 border border-green-500 hover:text-green-600 rounded"
           @click="$router.push(localePath('/cart'))"
         >
-          <img src="@/assets/img/cart.svg" class="w-5 h-5 mr-1 text-white" />
           Перейти в корзину
         </button>
         <button
           v-else
-          class="flex justify-center items-center my-1 mr-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 border border-green-500 hover:text-green-600 rounded"
+          class="my-1 mr-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 border border-green-500 hover:text-green-600 rounded"
           @click="addProductToCart"
         >
-          <img src="@/assets/img/cart.svg" class="w-5 h-5 mr-1 text-white" />
           Добавить в корзину
         </button>
 
         <button
-          class="flex justify-start items-center my-1 bg-white hover:bg-gray-50 text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded"
+          class="my-1 bg-white hover:bg-gray-50 text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded"
           @click="buyOneClickModal = true"
         >
-          <img src="@/assets/img/cart.svg" class="w-5 h-5 mr-1" />
           Купить в один клик
         </button>
       </div>
