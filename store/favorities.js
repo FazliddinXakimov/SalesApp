@@ -10,6 +10,7 @@ export const getters = {
   getFavoriteProductsIds: (state) => state.productIds,
   isHaveFavorite: (state) => (id) => state.productIds.includes(id),
   getTotalCount: (state) => state.products.length,
+  
 }
 
 export const mutations = {

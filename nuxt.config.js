@@ -136,7 +136,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'bootstrap-vue/nuxt',
+
     '@nuxtjs/i18n',
   ],
 

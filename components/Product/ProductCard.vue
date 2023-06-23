@@ -33,16 +33,12 @@
       </div>
       <div class="inline-flex items-center mt-2"></div>
       <div class="flex justify-between items-center mt-4">
-        <div class="cursor-pointer" @click="addProductToCart">
-          <img
-            v-if="isCart"
-            src="@/assets/img/cart_minus.svg"
-            class="w-9 h-9"
-          />
-          <img v-else src="@/assets/img/cart_plus.svg" class="w-9 h-9" />
+        <div v-if="!isCart" class="cursor-pointer" @click="addProductToCart">
+          <img src="@/assets/img/shopping-cart.svg" class="w-9 h-9" />
+          <!-- <img v-else src="@/assets/img/cart_plus.svg" class="w-9 h-9" /> -->
         </div>
         <div
-          v-if="isCart"
+          v-else
           class="flex items-center justify-between bg-gray-11 rounded-lg h-8 w-[94px] border"
         >
           <button
@@ -68,10 +64,10 @@
         >
           <img
             v-if="isHaveFavorite"
-            src="@/assets/img/black_heart.svg"
+            src="@/assets/img/favorite_active.svg"
             class="h-9 w-9"
           />
-          <img v-else src="@/assets/img/white_heart.svg" class="h-9 w-9" />
+          <img v-else src="@/assets/img/favorite.svg" class="h-9 w-9" />
         </button>
       </div>
     </div>

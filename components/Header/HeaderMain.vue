@@ -49,13 +49,13 @@
             class="mr-10"
             @click="$router.push(localePath(`/favorities`))"
           >
-            <div class="flex flex-column justify-center items-center">
+            <div class="flex flex-col justify-center items-center">
               <span class="relative">
-                <img src="@/assets/img/love.svg" class="h-8 w-8" />
-                <span
-                  class="badge badge-pill badge-success absolute -top-2 -right-3"
-                  >{{ totalFavoritiesCount }}</span
-                >
+                <img src="@/assets/img/favorite.svg" class="h-8 w-8" />
+
+                <BadgeComp class-name="bg-green-600 absolute -top-2 -right-2">
+                  {{ totalFavoritiesCount }}
+                </BadgeComp>
               </span>
 
               <span class="text-sm">Избранное </span>
@@ -65,12 +65,12 @@
           <button class="mr-10 dropdown__action">
             <div
               v-if="userIsLoggedIn"
-              class="flex flex-column justify-center items-center"
+              class="flex flex-col justify-center items-center"
             >
               <img src="@/assets/img/user.svg" class="h-8 w-8" />
               <span class="text-sm">Khakimov</span>
             </div>
-            <div v-else class="flex flex-column justify-center items-center">
+            <div v-else class="flex flex-col justify-center items-center">
               <img
                 src="@/assets/img/user.svg"
                 class="h-8 w-8"
@@ -86,13 +86,13 @@
             </div>
           </button>
           <button @click="$router.push(localePath(`/cart`))">
-            <div class="flex flex-column justify-center items-center">
+            <div class="flex flex-col justify-center items-center">
               <span class="relative">
                 <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
-                <span
-                  class="badge badge-pill badge-success absolute -top-2 -right-3"
-                  >{{ totalCartProductsCount }}</span
-                >
+
+                <BadgeComp class-name="bg-green-600 absolute -top-2 -right-3">
+                  {{ totalCartProductsCount }}
+                </BadgeComp>
               </span>
               <span class="text-sm"> Корзина </span>
             </div>

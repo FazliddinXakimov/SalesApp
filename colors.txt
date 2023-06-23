@@ -1,0 +1,1 @@
+activeIcons: "#71717a"

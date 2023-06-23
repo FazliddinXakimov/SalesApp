@@ -46,7 +46,7 @@ export default {
   align-items: center;
 }
 
-#login-modal .modal-dialog .modal-site-inner {
+#login-modal .modal-site-inner {
   max-width: 480px;
   border-radius: 12px;
 }
