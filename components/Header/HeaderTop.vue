@@ -27,13 +27,13 @@
         <button class="mr-2 dropdown__action hidden 768:inline-block">
           <div class="flex justify-between items-center text-white">
             <img src="@/assets/img/header-location.svg" class="h-5 w-5 inline-block" />
-            rewqr
-            {{ selectedRegion }}
+      
             {{ selectedRegion?.name }}
           </div>
 
           <div class="dropdown__list block z-40">
-            <button v-for="(region, index) in dropdownRegions" :key="index" class="dropdown__item"
+            <button
+v-for="(region, index) in dropdownRegions" :key="index" class="dropdown__item"
               @click="handleSelectRegion(region.id)">
               {{ region.name }}
             </button>

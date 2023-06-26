@@ -54,6 +54,10 @@ export default {
       src: '@/plugins/axios.js',
     },
     {
+      src: '@/plugins/range-slider.js',
+      ssr: false
+    },
+    {
       src: '@/plugins/main.js',
     },
     {
