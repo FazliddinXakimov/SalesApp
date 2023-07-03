@@ -3,7 +3,7 @@
     <div class="ml-5 border p-4 rounded">
       <h1 class="text-xl pt-2 pb-5 border-b flex justify-between items-center">
         <span> TotalPrice: </span>
-        <span>{{ totalPrice | numberFilter }} sum</span>
+        <span>{{ calculateTotalPrice | numberFilter }} sum</span>
       </h1>
 
       <div class="relative mb-3 flex justify-start items-stretch mt-2">
@@ -21,6 +21,14 @@
         </button>
       </div>
       <div v-if="!isCouponExist" class="text-red-600">Coupon is not valid</div>
+      <h1 class="pt-2 pb-5 flex justify-between items-center">
+        <span> Products Price </span>
+        <span>{{ totalPrice | numberFilter }} sum</span>
+      </h1>
+      <h1 class="pt-2 pb-5 flex justify-between items-center">
+        <span> Delivery Price: </span>
+        <span>{{ deliveryPrice | numberFilter }} sum</span>
+      </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> Discount: </span>
         <span>{{ discount | numberFilter }} sum</span>
@@ -55,6 +63,7 @@ export default {
       coupon_code: '',
       discount: 0,
       isCouponExist: true,
+      deliveryPrice: 0,
     }
   },
   computed: {
@@ -66,7 +75,22 @@ export default {
         return this.$store.state.modal.orderModal
       },
     },
+    productIds() {
+      return this.$store.getters['cart/getProductIds']
+    },
+    calculateTotalPrice() {
+      return this.totalPrice + this.deliveryPrice - this.discount
+    },
   },
+  watch: {
+    productIds: {
+      handler: 'calculateDeliveryPrice',
+      immediate: true,
+    },
+  },
+  // mounted() {
+  //   this.calculateDeliveryPrice()
+  // },
 
   methods: {
     async handleCheckCoupon() {
@@ -80,6 +104,19 @@ export default {
         this.isCouponExist = false
         setTimeout(() => (this.isCouponExist = true), 3000)
       }
+    },
+
+    async calculateDeliveryPrice() {
+      const queryParams = new URLSearchParams()
+      for (const key of this.productIds) {
+        queryParams.append('product_ids', key)
+      }
+
+      const response = await this.$store.dispatch(
+        'cart/CALCULATE_DELIVERY_PRICE',
+        queryParams.toString()
+      )
+      this.deliveryPrice = response.delivery_price
     },
   },
 }

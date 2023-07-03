@@ -9,7 +9,10 @@ export const state = () => ({
 export const getters = {
   GET_REGIONS_LIST: (state) => state.regions_list,
   GET_SELECTED_REGION: (state) =>
-    state.regions_list.find((r) => r.id === state.selectedRegion),
+    state.regions_list?.find((r) => r?.id === state?.selectedRegion),
+
+  GET_DROPDOWN_REGIONS: (state) =>
+    state.regions_list?.filter((r) => r.id !== state.selectedRegion),
 }
 
 export const mutations = {

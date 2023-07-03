@@ -1,26 +1,12 @@
 <template>
   <div class="768:basis-2/3">
     <div
-      class="border-b border-secondary-light py-3 flex justify-between align-items-center"
-    >
-      <div class="flex items-start gap-8">
-        <!-- <div @click="handleToggleAllProductSelection">
-          <input
-            type="checkbox"
-            :checked="isAllSelected"
-            class="checkbox checkbox-secondary checkbox-lg w-5 h-5"
-          />
-        </div> -->
-        <!-- <span class="text-lg">Select All</span> -->
-      </div>
-      <div class="cursor-pointer hover:text-red-500" @click="hanldeSetEmpty">
-        Remove all
-      </div>
-    </div>
-    <div
       v-for="(product, index) in products"
       :key="index"
       class="border-b border-secondary-light py-4 max-tablet:py-2"
+      :class="{
+        'border-t border-secondary-light': index === 0,
+      }"
     >
       <div
         class="flex items-center gap-8 max-tablet:items-start max-tablet:gap-4"
@@ -144,9 +130,7 @@ export default {
     handleToggleAllProductSelection() {
       this.$store.commit('cart/TOGGLE_ALL_PRODUCTS_SELECTION')
     },
-    hanldeSetEmpty() {
-      this.$store.commit('cart/SET_EMPTY_CART')
-    },
+
     handleToggleFavorite(product) {
       this.$store.commit('favorities/TOGGLE_FAVORITE', product)
     },

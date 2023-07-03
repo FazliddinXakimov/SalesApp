@@ -75,4 +75,8 @@ export const actions = {
   CREATE_ORDER({ commit }, data) {
     return this.$axios.post('/orders/create/', data)
   },
+
+  CALCULATE_DELIVERY_PRICE(_, queryParams) {
+    return this.$axios.$get(`/orders/orders/calculate_delivery_price/?${queryParams}`)
+  },
 }

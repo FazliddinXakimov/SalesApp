@@ -1,45 +1,14 @@
 <template>
   <div class="flex justify-between">
-    <div class="768:basis-1/12 firstCol">
-      <div v-for="(media, indexPro) in product.images" :key="indexPro">
-        <img
-          v-if="identifyImage(media)"
-          :src="media"
-          :alt="media"
-          :class="{
-            activeImageList: selectedMedia === media,
-          }"
-          @click="handleSelectMedia(media)"
-        />
-        <img
-          v-else
-          src="@/assets/img/default_video.png"
-          :alt="media"
-          :class="{
-            activeImageList: selectedMedia === media,
-          }"
-          @click="handleSelectMedia(media)"
-        />
-      </div>
+    <div class="768:basis-5/12">
+      <ProductImages
+        :type="1"
+        :images-top="product.images"
+        :images-thumb="product.images"
+        :name="product.title"
+      />
     </div>
-    <div class="w-full 768:basis-1/3 text-center mainProductDiv">
-      <div class="pro__card position-relative">
-        <div style="margin-top: 80px" class="setterImg">
-          <img
-            v-if="identifyImage(selectedMedia)"
-            class="w-100 manImgProduct"
-            :src="selectedMedia"
-            zoom-type="hover"
-            :fullscreen-on-mobile="true"
-            :zoom-scale="0.7"
-            :zoom-preload="true"
-          />
-          <video v-else-if="selectedMedia" width="450" controls>
-            <source :src="selectedMedia" type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
+
     <div class="768:basis-7/12 pl-4">
       <div class="text-xl mb-4">{{ product.title }}</div>
       <div class="text-lg mb-4">{{ product.brand.title }}</div>
@@ -54,6 +23,7 @@
         <span v-else> Free </span>
       </div>
 
+      <div class="text-lg mt-10 mb-5">Характеристики:</div>
       <div v-for="(item, index) in product.properties" :key="index">
         {{ item }}
       </div>
@@ -88,10 +58,12 @@
 
 <script>
 import BuyOneClickModal from '@/components/Product/BuyOneClickModal.vue'
+import ProductImages from '@/components/Product/ProductImages.vue'
 
 export default {
   components: {
     BuyOneClickModal,
+    ProductImages,
   },
 
   props: {

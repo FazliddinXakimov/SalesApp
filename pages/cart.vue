@@ -6,6 +6,16 @@
       <div class="flex justify-center">
         <h1 class="text-2xl mb-8">Product Cart</h1>
       </div>
+      <div class="py-3 flex justify-between align-items-center">
+        <div class="flex items-start gap-8"></div>
+        <button
+          class="flex cursor-pointer items-center text-secondary hover:text-primary-red"
+          @click="hanldeSetEmpty"
+        >
+          <img src="@/assets/img/trash.svg" class="h-6 w-6" />
+          Remove all
+        </button>
+      </div>
       <div class="flex justify-between items-start">
         <CardProducts :products="products" :is-all-selected="isAllSelected" />
         <CardProductsInfo :total-price="totalPrice" />
@@ -47,6 +57,11 @@ export default {
       isAllSelected: 'cart/isAllProductsSelected',
       totalPrice: 'cart/getTotalPrice',
     }),
+  },
+  methods: {
+    hanldeSetEmpty() {
+      this.$store.commit('cart/SET_EMPTY_CART')
+    },
   },
 }
 </script>

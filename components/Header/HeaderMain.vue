@@ -5,12 +5,12 @@
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
       >
         <div class="768:flex hidden">
-          <router-link
+          <nuxt-link
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
           >
             <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
-          </router-link>
+          </nuxt-link>
         </div>
 
         <div class="flex justify-start items-center">
@@ -156,7 +156,7 @@ export default {
 
       if (header) {
         // console.log('console is identify')
-        if (y > 160) {
+        if (y > 200) {
           // h.style.display = 'block'
           header.classList.add('fixed')
           header.classList.remove('top-8')

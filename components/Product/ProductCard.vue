@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white border rounded mx-2">
-    <router-link :to="`/product/detail/${product.id}`">
+    <nuxt-link :to="`/product/detail/${product.id}`">
       <div
         class="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
         :style="`background-image: url(${product.image})`"
@@ -14,12 +14,12 @@
           </span>
         </div>
       </div>
-    </router-link>
+    </nuxt-link>
     <div class="p-4 flex flex-col">
       <div class="content-center">
         <h1 class="text-center text-gray-800 mt-1 cut-text">
-          <router-link :to="`/product/detail/${product.id}`">
-            {{ product.title }}</router-link
+          <nuxt-link :to="`/product/detail/${product.id}`">
+            {{ product.title }}</nuxt-link
           >
         </h1>
         <p class="text-center text-gray-800 mt-1">
