@@ -36,7 +36,7 @@ export default {
   align-items: center;
 }
 
-#cart-modal .modal-dialog .modal-site-inner {
+#cart-modal  .modal-site-inner {
   max-width: 480px;
   border-radius: 12px;
 }

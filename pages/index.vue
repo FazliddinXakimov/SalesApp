@@ -92,7 +92,7 @@ export default {
       this.$store.dispatch('references/FETCH_TOP_CATEGORIES'),
       this.$store.dispatch('references/FETCH_ROOT_CATEGORIES'),
       this.$store.dispatch('header/FETCH_REGIONS_LIST'),
-      this.$store.dispatch('home/fetchMainProducts'),
+      this.$store.dispatch('home/FETCH_MAIN_PRODUCTS'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
       this.$store.dispatch('home/FETCH_BRANDS'),
     ])
@@ -103,15 +103,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.swiper-products {
-  position: relative;
-}
 
-.swiper-button-next {
-  right: -21px;
-}
-.swiper-button-prev {
-  left: -21px;
-}
-</style>

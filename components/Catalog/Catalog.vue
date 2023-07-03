@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import '@/assets/css/megaMenuCategory.css'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -139,35 +138,4 @@ export default {
   },
 }
 </script>
-<style scoped>
-.fa-xmark {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #ececec;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-
-/* custom scrollbar */
-::-webkit-scrollbar {
-  width: 20px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #d6dee1;
-  border-radius: 20px;
-  border: 6px solid transparent;
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #a8bbbf;
-}
-</style>
+<style src="@/assets/css/megaMenuCategory.css" scoped></style>

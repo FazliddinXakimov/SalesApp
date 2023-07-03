@@ -84,15 +84,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.swiper-products {
-  position: relative;
-}
 
-.swiper-button-next {
-  right: -21px;
-}
-.swiper-button-prev {
-  left: -21px;
-}
-</style>

@@ -52,12 +52,10 @@ export default {
       breadCrumb: [
         {
           title: 'Product',
-          // link: '/cart',
         },
       ],
       swiperOptions: {
         loop: false,
-        // spaceBetween: 16,
         lazyLoading: true,
         navigation: {
           nextEl: '.button-next',

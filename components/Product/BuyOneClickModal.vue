@@ -182,7 +182,7 @@ export default {
   align-items: center;
 }
 
-#buy-one-click .modal-dialog .modal-site-inner {
+#buy-one-click .modal-site-inner {
   max-width: 480px;
   border-radius: 12px;
 }

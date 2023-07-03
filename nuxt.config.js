@@ -1,5 +1,4 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
   publicRuntimeConfig: {
     baseURL: process.env.baseURL,
     axios: {
@@ -48,7 +47,11 @@ export default {
       },
     ],
   },
-  css: ['swiper/css/swiper.css', '@/assets/css/main.css'],
+  css: [
+    'swiper/css/swiper.css',
+    '@/assets/css/main.css',
+    '@/assets/css/swiper.css',
+  ],
   plugins: [
     {
       src: '@/plugins/axios.js',
@@ -76,16 +79,12 @@ export default {
     },
   ],
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/fontawesome',
     '@nuxtjs/svg',
@@ -119,30 +118,26 @@ export default {
     detectBrowserLanguage: false,
     strategy: 'prefix_except_default',
   },
-  cache: {
-    useHostPrefix: false,
-    pages: ['/'],
-    store: {
-      type: 'memory',
-      max: 30,
-      ttl: 900,
-    },
-  },
+  // cache: {
+  //   useHostPrefix: false,
+  //   pages: ['/'],
+  //   store: {
+  //     type: 'memory',
+  //     max: 30,
+  //     ttl: 900,
+  //   },
+  // },
   axios: {
     baseURL: process.env.baseURL,
     // debug: process.env.NODE_ENV !== 'production',
   },
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
 
+  modules: [
+    '@nuxtjs/axios',
     '@nuxtjs/i18n',
   ],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['defu'],
   },

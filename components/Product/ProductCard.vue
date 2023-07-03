@@ -34,8 +34,7 @@
       <div class="inline-flex items-center mt-2"></div>
       <div class="flex justify-between items-center mt-4">
         <div v-if="!isCart" class="cursor-pointer" @click="addProductToCart">
-          <img src="@/assets/img/shopping-cart.svg" class="w-9 h-9" />
-  
+          <img src="@/assets/img/shopping-cart.svg" class="w-7 h-7" />
         </div>
         <div
           v-else
@@ -65,9 +64,9 @@
           <img
             v-if="isHaveFavorite"
             src="@/assets/img/favorite_active.svg"
-            class="h-9 w-9"
+            class="h-7 w-7"
           />
-          <img v-else src="@/assets/img/favorite.svg" class="h-9 w-9" />
+          <img v-else src="@/assets/img/favorite.svg" class="h-7 w-7" />
         </button>
       </div>
     </div>
