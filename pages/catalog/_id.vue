@@ -4,47 +4,88 @@
       <div class="text-2xl">SmartPhones</div>
     </div>
     <div class="flex justify-end items-center">
-      <div class="form-select">
-        <select v-model="filter.type">
-          <option :value="$t('Gratitude')">
-            {{ $t('Gratitude') }}
-          </option>
-          <option :value="$t('Claim')">
-            {{ $t('Claim') }}
-          </option>
-          <option :value="$t('Question')">
-            {{ $t('Question') }}
-          </option>
-        </select>
-        <span class="label">{{ $t('Topic') }}</span>
-      </div>
+      <span>
+        <multiselect
+          v-model="filter.type"
+          :options="filterOptions"
+          label="title"
+          track-by="key"
+          :searchable="true"
+          :show-labels="false"
+          :allow-empty="false"
+          :close-on-select="true"
+          :placeholder="$t('Select')"
+        ></multiselect>
+      </span>
     </div>
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between">
       <div class="basis-1/4">
         <CatalogFilter />
       </div>
-      <div class="basis-3/4">Products</div>
+      <div class="basis-3/4">
+        <div class="grid grid-cols-4 gap-4">
+          <ProductCard
+            v-for="(product, index) in products.results"
+            :key="index"
+            :product="product"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
+
 export default {
+  name: 'CatalogDetails',
+  components: {
+    Multiselect,
+  },
   data() {
     return {
       filter: {
         type: '',
       },
+      filterOptions: [
+        {
+          title: 'Arzonroq',
+          key: 'price_asc',
+        },
+        {
+          title: 'Qimmatroq',
+          key: 'price_desc',
+        },
+        {
+          title: 'Reytingi yuqori',
+          key: 'rating_desc',
+        },
+        {
+          title: "Ko'p buyurtirilgan",
+          key: 'orders_number_desc',
+        },
+      ],
     }
   },
-  name: 'CatalogDetails',
+
+  computed: {
+    products() {
+      return this.$store.getters['catalog/GET_PRODUCTS']
+    },
+  },
 
   mounted() {
-    console.log('this.rotue', this.$route)
+    // console.log('this.rotue', this.$route)
+    this.$store.dispatch(
+      'catalog/FETCH_CATALOG_PRODUCTS',
+      this.$route.query.catalog
+    )
   },
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped>
 .form-select {
   width: 100%;

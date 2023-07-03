@@ -5,7 +5,7 @@
         <li class="inline-flex items-center">
           <nuxt-link
             to="/"
-            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
           >
             <img src="@/assets/img/home.svg" class="w-4 h-4 mr-1" />
             Home
@@ -13,16 +13,16 @@
         </li>
         <li v-for="(item, index) in breadCrumb" :key="index">
           <div class="flex items-center">
-            <img src="@/assets/img/right-array.svg" class="w-4 h-4 mr-1" />
+            <img src="@/assets/img/right-arrow.svg" class="w-4 h-4 mr-1" />
             <nuxt-link
               v-if="item.link"
               :to="item.link"
-              class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white disabled"
+              class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 disabled"
             >
               {{ item.title }}
             </nuxt-link>
             <div
-              class="ml-1 text-sm font-medium text-gray-700 md:ml-2 dark:text-gray-400 dark:hover:text-white disabled"
+              class="ml-1 text-sm font-medium text-gray-700 md:ml-2 disabled"
             >
               {{ item.title }}
             </div>

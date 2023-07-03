@@ -40,7 +40,7 @@
         :key="index"
         class="flex justify-start items-center mb-2"
       >
-        <div @click="handleToggleAllProductSelection">
+        <div>
           <input
             type="checkbox"
             :checked="producer.checked"

@@ -156,7 +156,7 @@ export default {
 
       if (header) {
         // console.log('console is identify')
-        if (y > 160) {
+        if (y > 200) {
           // h.style.display = 'block'
           header.classList.add('fixed')
           header.classList.remove('top-8')
