@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="flex justify-center">
+    <div class="flex justify-start mb-5">
       <div class="text-2xl">SmartPhones</div>
     </div>
-    <div class="flex justify-end items-center">
-      <span>
+    <div class="flex justify-end items-center mb-4">
+      <span class="w-64">
         <multiselect
-          v-model="filter.type"
+          v-model="sort"
           :options="filterOptions"
           label="title"
           track-by="key"
@@ -32,23 +32,36 @@
         </div>
       </div>
     </div>
+    <div>
+      <GlobalPagination
+        :total-count="products.count"
+        :page="page"
+        :page-size="pageSize"
+        @onPaginate="handlePageChange"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import Multiselect from 'vue-multiselect'
+import GlobalPagination from '@/components/GlobalPagination.vue'
 
 export default {
   name: 'CatalogDetails',
   components: {
     Multiselect,
+    GlobalPagination,
   },
   data() {
     return {
-      filter: {
-        type: '',
-      },
+      sort: null,
+
       filterOptions: [
+        {
+          title: 'Hammasi',
+          key: '',
+        },
         {
           title: 'Arzonroq',
           key: 'price_asc',
@@ -73,49 +86,99 @@ export default {
     products() {
       return this.$store.getters['catalog/GET_PRODUCTS']
     },
+
+    pageSize() {
+      return this.$store.getters['catalog/GET_FILTER'].page_size
+    },
+    page: {
+      get() {
+        return this.$store.getters['catalog/GET_FILTER'].page
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_FILTER_ITEM', {
+          page: val,
+        })
+
+        this.handleSetQuery({ page: val })
+      },
+    },
+
+    sortType: {
+      get() {
+        return this.$store.getters['catalog/GET_FILTER']
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_FILTER_ITEM', {
+          sort: val,
+        })
+        this.handleSetQuery({ sort: val })
+      },
+    },
+  },
+
+  watch: {
+    sort(val) {
+      if (val) {
+        this.sortType = val.key
+      }
+    },
   },
 
   mounted() {
-    // console.log('this.rotue', this.$route)
     this.$store.dispatch(
       'catalog/FETCH_CATALOG_PRODUCTS',
       this.$route.query.catalog
     )
+    this.$store.dispatch('catalog/FETCH_PRODUCERS')
+
+    const routeQuery = this.$route.query
+    if (routeQuery.brands) {
+      const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
+
+      this.$store.commit('catalog/SET_FILTER_ITEM', {
+        brands: integerBrands,
+      })
+    }
+
+    if (routeQuery.sort) {
+      this.$store.commit('catalog/SET_FILTER_ITEM', {
+        sort: routeQuery.sort,
+      })
+    }
+
+    if (routeQuery.minPrice) {
+      this.$store.commit('catalog/SET_FILTER_ITEM', {
+        minPrice: routeQuery.minPrice,
+      })
+    }
+
+    if (routeQuery.maxPrice) {
+      this.$store.commit('catalog/SET_FILTER_ITEM', {
+        maxPrice: routeQuery.maxPrice,
+      })
+    }
+  },
+  methods: {
+    handleSetQuery(queryObject) {
+      const oldRouteQuery = { ...this.$route.query }
+      const routerQuery = {
+        ...oldRouteQuery,
+        ...this.filter,
+        ...queryObject,
+      }
+
+      this.$router.replace({ query: { ...routerQuery } })
+    },
+
+    handlePageChange(page) {
+      this.page = page
+      // this.handleSetQuery()
+    },
   },
 }
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style lang="scss" scoped>
-.form-select {
-  width: 100%;
-  margin-bottom: 28px;
-  position: relative;
-  select {
-    width: 100%;
-    height: 44px;
-    border-radius: 6px;
-    font-size: 14px;
-    line-height: 24px;
-    background-color: #fff;
-    padding: 0 17px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg width='15' height='14' viewBox='0 0 15 14' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.1641 4.78625L7.50598 9.44434L2.83073 4.76908' stroke='%23333333' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
-    background-repeat: no-repeat;
-    background-position: 99% center;
-    box-shadow: 0 0 0 1px #d5d8df;
-  }
-  .label {
-    color: #767676;
-    position: absolute;
-    left: 13px;
-    padding: 0px 4px 0px 4px;
-    background: #fff;
-    top: -8px;
-    font-size: 12px;
-  }
-}
-</style>
+<style lang="scss" scoped src="@/assets/scss/Catalog.scss"></style>

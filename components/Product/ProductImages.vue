@@ -154,41 +154,7 @@ export default {
     }
   },
 
-  // mounted() {
-  //   if (window.innerWidth > 1024) {
-  //     document.querySelectorAll('.image-zoom').forEach((elem) => {
-  //       let x, y, width, height
 
-  //       elem.onmouseenter = () => {
-  //         // getBoundingClientRect() method returns the size of an element and its position relative to the viewport
-  //         const size = elem.getBoundingClientRect()
-  //         x = size.x
-  //         y = size.y
-  //         width = size.width
-  //         height = size.height
-  //       }
-  //       // onmousemove event occurs when the pointer is moving while it is over an element
-  //       elem.onmousemove = (e) => {
-  //         const horizontal = ((e.clientX - x) / width) * 100
-  //         const vertical = ((e.clientY - y) / height) * 100
-
-  //         elem.style.setProperty('--x', horizontal + '%')
-  //         elem.style.setProperty('--y', vertical + '%')
-  //       }
-  //     })
-  //   }
-
-  //   this.$nextTick(() => {
-  //     setTimeout(() => {
-  //       const self = this
-  //       const swiperTop = this.$refs.swiperTop?.$swiper
-
-  //       swiperTop.on('slideChange', function () {
-  //         self.activeIndex = swiperTop.activeIndex
-  //       })
-  //     }, 150)
-  //   })
-  // },
 
   methods: {
     clickThumb(index) {

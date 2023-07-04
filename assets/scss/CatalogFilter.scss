@@ -1,0 +1,26 @@
+
+.vue-slider {
+  margin-right: 14px;
+  margin-left: 5px;
+}
+.vue-slider-rail {
+  background-color: #08f05d;
+  border-radius: 1px;
+  height: 2px;
+  margin: 0px 4px;
+}
+.vue-slider-dot {
+  width: 18px !important;
+  height: 18px !important;
+  border: 2px solid #16a34a;
+  background-color: #fff;
+  border-radius: 100%;
+  cursor: pointer;
+  .vue-slider-dot-handle {
+    box-shadow: none;
+  }
+}
+.vue-slider-process {
+  background-color: #16a34a;
+  height: 2px;
+}

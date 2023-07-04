@@ -1,6 +1,8 @@
 <template>
   <nav class="bg-slate-700 py-1 w-full top-0 z-20">
-    <div class="flex items-center justify-between mx-auto max-w-screen-xl text-white">
+    <div
+      class="flex items-center justify-between mx-auto max-w-screen-xl text-white"
+    >
       <div class="768:hidden block">Brand</div>
       <div class="768:hidden flex items-center">
         <button class="mr-2">
@@ -14,10 +16,12 @@
             {{ selectedRegion?.name }}
           </div>
           <div class="dropdown__list block z-40">
-            <button 
-            v-for="(region, index) in regions_list" 
-            :key="index" class="dropdown__item"
-              @click="handleSelectRegion(region.id)">
+            <button
+              v-for="(region, index) in regions_list"
+              :key="index"
+              class="dropdown__item"
+              @click="handleSelectRegion(region.id)"
+            >
               {{ region.name }}
             </button>
           </div>
@@ -26,15 +30,21 @@
       <div class="768:flex items-center hidden">
         <button class="mr-2 dropdown__action hidden 768:inline-block">
           <div class="flex justify-between items-center text-white">
-            <img src="@/assets/img/header-location.svg" class="h-5 w-5 inline-block" />
-      
+            <img
+              src="@/assets/img/header-location.svg"
+              class="h-5 w-5 inline-block"
+            />
+
             {{ selectedRegion?.name }}
           </div>
 
           <div class="dropdown__list block z-40">
             <button
-v-for="(region, index) in dropdownRegions" :key="index" class="dropdown__item"
-              @click="handleSelectRegion(region.id)">
+              v-for="(region, index) in dropdownRegions"
+              :key="index"
+              class="dropdown__item"
+              @click="handleSelectRegion(region.id)"
+            >
               {{ region.name }}
             </button>
           </div>
@@ -59,7 +69,7 @@ export default {
     ...mapGetters({
       selectedRegion: 'header/GET_SELECTED_REGION',
       regions_list: 'header/GET_REGIONS_LIST',
-      dropdownRegions: 'header/GET_DROPDOWN_REGIONS'
+      dropdownRegions: 'header/GET_DROPDOWN_REGIONS',
     }),
   },
 

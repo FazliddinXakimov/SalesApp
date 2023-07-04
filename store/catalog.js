@@ -1,30 +1,24 @@
 const SET_FILTER = 'SET_FILTER'
 const SET_PRODUCERS = 'SET_PRODUCERS'
 const SET_PRODUCTS = 'SET_PRODUCTS'
-
-// const defaultFilters = {
-//   filter: {
-//     priceRange: {
-//       min: 0,
-//       max: 0,
-//     },
-//     sort: null,
-//     brands: [],
-//   },
-// }
+const SET_FILTER_ITEM = 'SET_FILTER_ITEM'
+// const SET_BRANDS = "SET_BRANDS"
+const SET_FILTER_BRANDS_ITEM = 'SET_FILTER_BRANDS_ITEM'
 
 export const state = () => ({
   filter: {
-    priceRange: {
-      min: 0,
-      max: 0,
-    },
+    minPrice: 0,
+    maxPrice: 10000000,
     sort: null,
     brands: [],
+    page: 1,
+    page_size: 4,
   },
   producers: [],
 
   products: {
+    count: 0,
+    next: 0,
     results: [],
   },
 })
@@ -33,6 +27,9 @@ export const getters = {
   GET_PRODUCERS: (state) => state.producers,
   GET_FILTER: (state) => state.filter,
   GET_PRODUCTS: (state) => state.products,
+  IS_INCLUDES_BRAND: (state) => (brand) => {
+    return state.filter.brands.includes(brand)
+  },
 }
 export const mutations = {
   [SET_PRODUCERS]: (state, data) => {
@@ -42,11 +39,24 @@ export const mutations = {
       checked: false,
     }))
   },
+
   [SET_FILTER]: (state, filterOptions) => {
-    state.filter = filterOptions
+    state.filter = { ...state.filter, filterOptions }
   },
   [SET_PRODUCTS]: (state, products) => {
     state.products = products
+  },
+  [SET_FILTER_BRANDS_ITEM]: (state, brandId) => {
+    if (state.filter.brands.includes(brandId)) {
+      state.filter.brands = state.filter.brands.filter((b) => b !== brandId)
+    } else {
+      state.filter.brands.push(brandId)
+    }
+  },
+  [SET_FILTER_ITEM]: (state, { ...partialFilterOptions }) => {
+    Object.keys(partialFilterOptions).forEach((key) => {
+      state.filter[key] = partialFilterOptions[key]
+    })
   },
 }
 export const actions = {
@@ -68,10 +78,12 @@ export const actions = {
       this.$axios
         .get(`/products/products_by_category/${id}/`, {
           params: {
-            min: state.filter.priceRange.min,
-            max: state.filter.priceRange.max,
+            min_price: state.filter.minPrice,
+            max_price: state.filter.maxPrice,
             sort: state.filter.sort,
-            brands: state.filter.brands,
+            brands: state.filter.brands.join(','),
+            page: state.filter.page,
+            page_size: state.filter.page_size,
           },
         })
         .then((response) => {
