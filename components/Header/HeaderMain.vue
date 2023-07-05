@@ -4,7 +4,7 @@
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
       >
-        <div class="768:flex hidden">
+        <div class="768:flex hidden basis-1/6">
           <nuxt-link
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
@@ -13,38 +13,47 @@
           </nuxt-link>
         </div>
 
-        <div class="flex justify-start items-center">
+        <div class="flex justify-start items-center basis-4/6">
           <button
-            class="bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded mr-2"
+            class="flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded mr-2"
             @click="catalogModal = true"
           >
             <fa :icon="['fas', `${getSelection}`]" />
             <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
           </button>
-          <div class="rounded-lg">
-            <div class="w-full">
-              <div class="relative search__input">
-                <fa
-                  :icon="['fas', 'magnifying-glass']"
-                  class="absolute fa fa-search text-gray-400 top-4 left-4"
-                />
 
-                <input
-                  type="text"
-                  class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
-                  name=""
-                />
-                <span class="absolute top-3 right-5 border-l pl-4">
+          <div class="relative w-full mr-4">
+            <div class="rounded-lg">
+              <div class="w-full">
+                <div class="relative search__input">
                   <fa
-                    :icon="['fas', 'microphone']"
-                    class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
+                    :icon="['fas', 'magnifying-glass']"
+                    class="absolute fa fa-search text-gray-400 top-4 left-4"
                   />
-                </span>
+
+                  <input
+                    type="text"
+                    class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
+                    name=""
+                  />
+                  <span class="absolute top-3 right-5 border-l pl-4">
+                    <fa
+                      :icon="['fas', 'microphone']"
+                      class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
+                    />
+                  </span>
+                </div>
               </div>
+            </div>
+            <div
+              v-if="false"
+              class="absolute top-12 left-0 z-30 max-h-[700px] w-full overflow-scroll rounded-lg bg-white border border-neutral-light p-4 !pb-0 shadow-md max-laptop:!fixed"
+            >
+              fdafasdfasfds
             </div>
           </div>
         </div>
-        <div class="768:flex item-center justify-between hidden">
+        <div class="768:flex item-center justify-between hidden basis-1/6">
           <button
             class="mr-10"
             @click="$router.push(localePath(`/favorities`))"
@@ -100,7 +109,6 @@
         </div>
       </div>
     </nav>
-    <div class="header-height-copy"></div>
     <Catalog
       v-if="catalogModal"
       :category="isOpenCatalog"
@@ -117,7 +125,7 @@ import { userLogout } from '@/jwt/userData'
 
 export default {
   components: {
-    Catalog: () => import('@/components/Catalog/Catalog.vue'),
+    Catalog: () => import('@/components/Catalog/CatalogSidebar.vue'),
     LoginModal: () => import('@/components/Modal/LoginModal.vue'),
     CartModal: () => import('@/components/Modal/CartModal.vue'),
   },

@@ -3,7 +3,7 @@
     <MainLoading />
     <HeaderTop />
     <HeaderMain />
-    <TopCategories />
+    <CatalogTop />
     <div class="max-w-screen-xl mx-auto">
       <Nuxt />
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import TopCategories from '@/components/Header/TopCategories.vue'
+import CatalogTop from '@/components/Catalog/CatalogTop.vue'
 import MainLoading from '@/components/MainLoading.vue'
 import MobileBottomNavbar from '@/components/Header/MobileBottomNavbar.vue'
 export default {
@@ -23,8 +23,7 @@ export default {
     // MainFooter: () => import('@/components/MainFooter.vue'),
     MobileBottomNavbar,
     MainLoading,
-    TopCategories,
+    CatalogTop,
   },
-  middleware: 'cache-control',
 }
 </script>
