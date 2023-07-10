@@ -2,6 +2,12 @@
   <div>
     <Banner :banners="banners" />
 
+    <div class="flex justify-between items-center">
+      <h1 class="text-2xl mt-10 mb-4">Brands</h1>
+      <span class="text-blue-400">View more ></span>
+    </div>
+    <HomeBrands />
+
     <div v-for="(data, index) in allProducts" :key="index" class="mt-16">
       <div class="flex justify-between items-center">
         <h1 class="text-2xl mb-4">
@@ -10,37 +16,23 @@
         <span class="text-blue-400">View more ></span>
       </div>
 
-      <div class="swiper-products">
-        <div class="swiper">
-          <swiper class="swiper-wrapper" :options="swiperOptions">
-            <swiper-slide
-              v-for="(product, ind) in data.products"
-              :key="ind"
-              class="swiper-slide product-card-item"
-            >
-              <ProductCard :product="product" />
-            </swiper-slide>
-          </swiper>
-        </div>
-
-        <div>
-          <div :class="`swiper-button-prev button-prev`"></div>
-          <div :class="`swiper-button-next button-next`"></div>
+      <div>
+        <div class="grid grid-cols-4 gap-4">
+          <ProductCard
+            v-for="(product, ind) in data.products"
+            :key="ind"
+            :product="product"
+          />
         </div>
       </div>
     </div>
-    <div class="flex justify-between items-center">
-      <h1 class="text-2xl mt-10 mb-4">Brands</h1>
-      <span class="text-blue-400">View more ></span>
-    </div>
-    <HomeBrands />
+
     <div class="mb-20"></div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import ProductCard from '@/components/Product/ProductCard.vue'
 import Banner from '@/components/Home/HomeBanner.vue'
@@ -48,7 +40,7 @@ import HomeBrands from '@/components/Home/HomeBrands.vue'
 
 export default {
   name: 'IndexPage',
-  components: { Banner, ProductCard, Swiper, SwiperSlide, HomeBrands },
+  components: { Banner, ProductCard, HomeBrands },
   data() {
     return {
       swiperOptions: {
@@ -102,5 +94,3 @@ export default {
   methods: {},
 }
 </script>
-
-

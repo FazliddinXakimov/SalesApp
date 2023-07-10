@@ -1,19 +1,7 @@
 <template>
-  <div class="bg-white border rounded mx-2">
+  <div class="bg-white border border-gray-400 overflow-hidden rounded mx-2">
     <nuxt-link :to="`/product/detail/${product.id}`">
-      <div
-        class="h-48 w-full bg-gray-200 flex flex-col justify-between p-4 bg-cover bg-center"
-        :style="`background-image: url(${product.image})`"
-      >
-        <div>
-          <span
-            v-if="product.on_sale"
-            class="uppercase text-xs bg-green-50 p-0.5 border-green-500 border rounded text-green-700 font-medium select-none"
-          >
-            available
-          </span>
-        </div>
-      </div>
+      <img :src="product.image" class="h-48 object-contain mx-auto" />
     </nuxt-link>
     <div class="p-4 flex flex-col">
       <div class="content-center">
@@ -127,7 +115,7 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   /* width: 160px; */
-  height: 1.2em;
+  /* height: 1.2em; */
   white-space: nowrap;
 }
 </style>

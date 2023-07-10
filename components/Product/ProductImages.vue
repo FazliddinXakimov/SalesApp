@@ -69,30 +69,8 @@
         </swiper-slide>
       </swiper>
       <div>
-        <div class="swiper-button-prev">
-          <button class="swiper-button-prev swiper-button-white">
-            <img
-              class="swiper-prev-image"
-              alt="button-prev"
-              title="button-prev"
-              width="27"
-              src="@/assets/img/arrow-left.svg"
-              height="27"
-            />
-          </button>
-        </div>
-        <div class="swiper-button-next">
-          <button class="swiper-button-next swiper-button-white">
-            <img
-              src="@/assets/img/arrow-right.svg"
-              alt="button-next"
-              class="swiper-next-image"
-              title="button-next"
-              width="27"
-              height="27"
-            />
-          </button>
-        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
       </div>
     </div>
   </div>
@@ -154,8 +132,6 @@ export default {
     }
   },
 
-
-
   methods: {
     clickThumb(index) {
       const swiperTop = this.$refs.swiperTop?.$swiper
@@ -173,4 +149,4 @@ export default {
   },
 }
 </script>
-<style lang="scss" src="@/assets/scss/ProductImages.scss"></style>
+<style lang="scss" src="@/assets/scss/ProductImages.scss" scoped></style>

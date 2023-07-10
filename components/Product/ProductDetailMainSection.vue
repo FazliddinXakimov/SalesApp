@@ -11,7 +11,9 @@
 
     <div class="768:basis-7/12 pl-4">
       <div class="text-xl mb-4">{{ product.title }}</div>
-      <div class="text-lg mb-4">{{ product.brand.title }}</div>
+      <div v-if="product && product.brand" class="text-lg mb-4">
+        {{ product.brand.title }}
+      </div>
       <div class="text-2xl mb-4">
         {{ product.sale_price | numberFilter }} sum
       </div>

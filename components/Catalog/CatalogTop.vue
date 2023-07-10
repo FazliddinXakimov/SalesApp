@@ -1,7 +1,10 @@
 <template>
   <div class="pb-4 max-laptopM:hidden max-laptop:pb-2 pt-2">
     <div class="mx-auto max-w-screen-xl">
-      <nav aria-label="Tabs" class="flex border-gray-100 text-sm font-medium">
+      <nav
+        aria-label="Tabs"
+        class="flex justify-between items-center border-gray-100 text-sm font-medium"
+      >
         <span v-for="(topItem, index) in categories" :key="index">
           <nuxt-link
             :to="

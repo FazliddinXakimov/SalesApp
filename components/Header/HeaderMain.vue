@@ -22,7 +22,7 @@
             <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
           </button>
 
-          <div class="relative w-full mr-4">
+          <div class="relative w-full mr-10">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
@@ -32,24 +32,54 @@
                   />
 
                   <input
+                    v-model="searchValue"
                     type="text"
                     class="bg-white h-12 w-full px-12 rounded-lg focus:outline-none hover:cursor-pointer"
                     name=""
+                    @input="handleSearch"
+                    @focus="isFocus = true"
                   />
-                  <span class="absolute top-3 right-5 border-l pl-4">
-                    <fa
-                      :icon="['fas', 'microphone']"
-                      class="fa fa-microphone text-gray-500 hover:text-green-500 hover:cursor-pointer"
-                    />
-                  </span>
+                  <!-- @blur="isFocus = false" -->
                 </div>
               </div>
             </div>
             <div
-              v-if="false"
-              class="absolute top-12 left-0 z-30 max-h-[700px] w-full overflow-scroll rounded-lg bg-white border border-neutral-light p-4 !pb-0 shadow-md max-laptop:!fixed"
+              v-if="isFocus && searchOptions.length > 0"
+              class="absolute overflow-x-auto top-12 left-0 z-30 max-h-96 w-full overflow-scroll rounded-lg bg-white border border-neutral-light p-4 !pb-0 shadow-md max-laptop:!fixed"
             >
-              fdafasdfasfds
+              <div v-if="searchCategoryOptions.length">
+                <div class="text-lg font-bold">Category</div>
+                <div
+                  v-for="(category, index) in searchCategoryOptions"
+                  :key="index"
+                  class="flex justify-start items-center my-1 cursor-pointer"
+                  @click="toCatalogPage(category)"
+                >
+                  <div>
+                    {{ category.title }}
+                  </div>
+                </div>
+              </div>
+              <div v-if="searchProductsOptions.length">
+                <div class="text-lg font-bold">Products</div>
+                <div
+                  v-for="(product, index) in searchProductsOptions"
+                  :key="index"
+                  class="flex justify-start items-center my-1 cursor-pointer"
+                  @click="toDetailPage(product)"
+                >
+                  <img
+                    :src="product.image"
+                    :alt="product.title"
+                    class="w-20 h-20 mr-2"
+                  />
+                  <div>
+                    {{ product.id }}
+                    {{ product.title }}
+                  </div>
+                </div>
+              </div>
+              <!-- {{ searchOptions }} -->
             </div>
           </div>
         </div>
@@ -122,6 +152,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { userLogout } from '@/jwt/userData'
+import { variables } from '@/utils/constants'
 
 export default {
   components: {
@@ -131,7 +162,13 @@ export default {
   },
   data() {
     return {
+      searchValue: '',
       isOpenCatalog: false,
+      searchTimeout: null,
+      searchOptions: [],
+      searchCategoryOptions: [],
+      searchProductsOptions: [],
+      isFocus: false,
     }
   },
 
@@ -194,10 +231,55 @@ export default {
         }
       )
     },
+
+    handleSearch() {
+      if (this.searchValue.length > 3) {
+        clearTimeout(this.searchTimeout)
+
+        this.searchTimeout = setTimeout(async () => {
+          const response = await this.$axios.$get('/products/search/', {
+            params: { query: this.searchValue },
+          })
+          this.searchOptions = response
+          this.searchCategoryOptions = response.filter(
+            (r) => r.type === variables.searchOptions.category
+          )
+
+          this.searchProductsOptions = response.filter(
+            (r) => r.type === variables.searchOptions.product
+          )
+        }, 300)
+      } else {
+        this.searchOptions = []
+        this.searchCategoryOptions = []
+        this.searchProductsOptions = []
+      }
+    },
     logout() {
       userLogout()
       this.$store.commit('auth/SET_LOGOUT')
       this.$router.push(this.localePath('/'))
+    },
+
+    toCatalogPage(catalog) {
+      this.$router.push(
+        this.localePath({
+          name: `catalog-id`,
+          params: { id: catalog.slug },
+          query: { catalog: catalog.id },
+        })
+      )
+      this.isFocus = false
+    },
+
+    toDetailPage(product) {
+      this.$router.push(
+        this.localePath({
+          name: `product-detail-id`,
+          params: { id: product.id },
+        })
+      )
+      this.isFocus = false
     },
   },
 }
@@ -209,6 +291,25 @@ export default {
 .catalog__btn {
   padding-top: 12px;
   padding-bottom: 12px;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
 
 @media (min-width: 1024px) {

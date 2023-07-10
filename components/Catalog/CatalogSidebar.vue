@@ -24,6 +24,7 @@
             <div v-if="currentCategory" class="px-6 last:pb-12">
               <div
                 class="mb-2 cursor-pointer text-lg font-semibold leading-6 text-black"
+                @click="toCatalogPage(currentCategory)"
               >
                 {{ currentCategory.title }}
               </div>
@@ -35,6 +36,7 @@
                   <div>
                     <div
                       class="cursor-pointer text-slate-500 hover:text-blue-600 text-xl mt-3"
+                      @click="toCatalogPage(child)"
                     >
                       {{ child.title }}
                     </div>
@@ -43,6 +45,7 @@
                       <li v-for="(item, ind) in child.children" :key="ind">
                         <span
                           class="ml-2 cursor-pointer text-slate-500 hover:text-blue-600 text-sm"
+                          @click="toCatalogPage(item)"
                         >
                           {{ item.title }}
                         </span>
@@ -112,6 +115,17 @@ export default {
       this.currentCategory = category
     },
 
+    toCatalogPage(catalog) {
+      this.$router.push(
+        this.localePath({
+          name: `catalog-id`,
+          params: { id: catalog.slug },
+          query: { catalog: catalog.id },
+        })
+      )
+
+      this.catalogModal = false
+    },
     onSubmit(slug, sub) {
       this.SET_NULL_PRODUCTS_LIST()
       this.$nextTick(() => {

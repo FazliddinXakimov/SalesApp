@@ -29,14 +29,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #cart-modal .modal-dialog {
   height: auto;
   margin: auto;
   align-items: center;
 }
 
-#cart-modal  .modal-site-inner {
+#cart-modal .modal-site-inner {
   max-width: 480px;
   border-radius: 12px;
 }

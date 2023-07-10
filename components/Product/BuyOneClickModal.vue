@@ -175,7 +175,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #buy-one-click .modal-dialog {
   height: auto;
   margin: auto;

@@ -141,7 +141,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 #order-modal .modal-dialog {
   height: auto;
   margin: auto;
