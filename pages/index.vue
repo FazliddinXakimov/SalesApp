@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner :banners="banners" />
+    <Banner :banners="banners" @handleClickBanner="handleClickBanner" />
 
     <div class="flex justify-between items-center">
       <h1 class="text-2xl mt-10 mb-4">Brands</h1>
@@ -17,12 +17,21 @@
       </div>
 
       <div>
-        <div class="grid grid-cols-4 gap-4">
+        <div class="grid 1024:grid-cols-4 768:grid-cols-3 grid-cols-1 gap-4">
           <ProductCard
             v-for="(product, ind) in data.products"
             :key="ind"
             :product="product"
           />
+        </div>
+        <div v-if="data.inline_banner" class="mt-16">
+          <!-- <nuxt-link> -->
+          <img
+            :src="data.inline_banner.image"
+            class="w-full h-96 cursor-pointer"
+            @click="handleClickBanner(data.inline_banner)"
+          />
+          <!-- </nuxt-link> -->
         </div>
       </div>
     </div>
@@ -33,6 +42,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { variables } from '@/utils/constants'
 import 'swiper/css/swiper.css'
 import ProductCard from '@/components/Product/ProductCard.vue'
 import Banner from '@/components/Home/HomeBanner.vue'
@@ -91,6 +101,27 @@ export default {
 
     this.$store.commit('SET_MAIN_LOADING', false)
   },
-  methods: {},
+  methods: {
+    handleClickBanner(banner) {
+      if (banner.link_type === variables.searchOptions.category) {
+        this.$router.push(
+          this.localePath({
+            name: `catalog-id`,
+            params: { id: banner.link_slug },
+            query: { catalog: banner.link_item },
+          })
+        )
+      }
+      if (banner.link_type === variables.searchOptions.product) {
+        this.$router.push(
+          this.localePath({
+            name: `product-detail-id`,
+            params: { id: banner.link_slug },
+            query: { id: banner.link_item },
+          })
+        )
+      }
+    },
+  },
 }
 </script>

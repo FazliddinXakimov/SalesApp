@@ -2,10 +2,15 @@
   <div style="background-color: #f7f7f7">
     <div>
       <swiper :options="swiperOptions1">
-        <swiper-slide v-for="(item, index) in banners" :key="index + 'banner'">
-          <!-- <a :href="item.url" :target="item.is_blank"> -->
-          <img class="img__slide" :src="item.image" @click="viewBanner(item)" />
-          <!-- </a> -->
+        <swiper-slide
+          v-for="(item, index) in banners"
+          :key="index + 'banneindr'"
+        >
+          <img
+            class="img__slide"
+            :src="item.image"
+            @click="$emit('handleClickBanner', item)"
+          />
         </swiper-slide>
 
         <div slot="button-next" class="swiper-button-next"></div>
@@ -36,10 +41,6 @@ export default {
         },
       },
     }
-  },
-
-  methods: {
-    viewBanner({ id, is_viewed: isViewed }) {},
   },
 }
 </script>

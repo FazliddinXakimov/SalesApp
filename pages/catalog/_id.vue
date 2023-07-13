@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
+import Multiselect from 'vue-multiselect' 
 import GlobalPagination from '@/components/GlobalPagination.vue'
 
 export default {

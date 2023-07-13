@@ -68,7 +68,7 @@
           </div>
         </swiper-slide>
       </swiper>
-      <div>
+      <div v-if="imagesThumb.length > 3">
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
@@ -117,7 +117,7 @@ export default {
       swiperOptionThumbs: {
         direction: 'vertical',
         spaceBetween: 10,
-        slidesPerView: 4,
+        slidesPerView: 5,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',

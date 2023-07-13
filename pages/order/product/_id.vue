@@ -1,51 +1,38 @@
 <template>
   <div class="mt-5">
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10"/>
-    <ProductDetailMainSection
-      :product="product"
+    <ProductStreamMainSection
+      v-if="streamProduct"
+      :product="streamProduct"
       :selected-media="selectedMedia"
       @handleSelectMedia="handleSelectMedia"
     />
 
-    <ProductDetailTabs :product="product" />
-
-    <div class="mt-5">
-      <h1 class="text-2xl mb-4">Similar Products</h1>
-      <div class="swiper-products">
-        <div class="swiper">
-          <swiper class="swiper-wrapper" :options="swiperOptions">
-            <swiper-slide
-              v-for="(product, index) in similarProducts.results"
-              :key="index"
-              class="swiper-slide product-card-item"
-            >
-              <ProductCard :product="product" />
-            </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </div>
+    <ProductDetailTabs :product="streamProduct" />
+    <!-- <pre>{{ streamProduct }}</pre> -->
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-import 'swiper/css/swiper.css'
-import ProductCard from '@/components/Product/ProductCard.vue'
-import ProductDetailMainSection from '@/components/Product/ProductDetailMainSection.vue'
+import ProductStreamMainSection from '@/components/Order/ProductStreamMainSection.vue'
 import ProductDetailTabs from '@/components/Product/ProductDetailTabs.vue'
 
 export default {
   components: {
-    ProductCard,
-    Swiper,
-    SwiperSlide,
-    ProductDetailMainSection,
+    ProductStreamMainSection,
     ProductDetailTabs,
   },
   data() {
     return {
+      streamProduct: {
+        brand: {},
+        category: {},
+        seller: {},
+
+        properties: [],
+        images: [],
+      },
+
       videoController: '',
       selectedMedia: null,
       activeTab: 1,
@@ -89,18 +76,13 @@ export default {
   },
 
   async mounted() {
-    console.log('$route', this.$route)
+    const route = this.$route
 
-    await this.$store.dispatch(
-      'product-detail/FETCH_PRODUCT_DETAIL',
-      this.$route.query.id
-    )
-    await this.$store.dispatch(
-      'product-detail/FETCH_PRODUCT_SIMILAR_PRODUCTS',
-      this.product.category.id
+    const { data } = await this.$axios.get(
+      `/products/product_detail_by_stream/${route.query.stream}/`
     )
 
-    this.selectedMedia = this.product?.images[0]
+    this.streamProduct = data
   },
   methods: {
     determineIsImage(media) {

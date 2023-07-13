@@ -158,6 +158,6 @@ export default {
 }
 
 .form-item {
-  padding: 10px 0;
+  padding: 5px 0;
 }
 </style>

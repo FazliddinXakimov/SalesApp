@@ -5,10 +5,10 @@
     </nuxt-link>
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <h1 class="text-center text-gray-800 mt-1 cut-text">
-          <nuxt-link :to="`/product/detail/${product.id}`">
-            {{ product.title }}</nuxt-link
-          >
+        <h1 class="text-center text-gray-800 mt-1 cut-text cursor-pointer">
+          <div @click="toDetailPage(product)">
+            {{ product.title }}
+          </div>
         </h1>
         <p class="text-center text-gray-800 mt-1">
           {{ product.sale_price | numberFilter }} sum
@@ -95,6 +95,16 @@ export default {
       } else {
         this.$store.commit('cart/ADD_PRODUCT', this.product)
       }
+    },
+
+    toDetailPage(product) {
+      this.$router.push(
+        this.localePath({
+          name: 'product-detail-id',
+          params: { id: product.slug },
+          query: { id: product.id },
+        })
+      )
     },
 
     hanleIncrementProduct() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-4 max-laptopM:hidden max-laptop:pb-2 pt-2">
+  <div class="768:block hidden pb-4 max-laptopM:hidden max-laptop:pb-2 pt-2">
     <div class="mx-auto max-w-screen-xl">
       <nav
         aria-label="Tabs"

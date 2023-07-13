@@ -58,7 +58,7 @@ export default {
     },
     {
       src: '@/plugins/range-slider.js',
-      ssr: false
+      ssr: false,
     },
     {
       src: '@/plugins/main.js',
@@ -83,9 +83,7 @@ export default {
     },
   ],
 
-
   components: true,
-
 
   buildModules: [
     '@nuxtjs/eslint-module',
@@ -93,6 +91,9 @@ export default {
     '@nuxtjs/fontawesome',
     '@nuxtjs/svg',
   ],
+  styleResources: {
+    scss: ['@/assets/scss/_variables.scss'],
+  },
 
   fontawesome: {
     component: 'Fa',
@@ -136,11 +137,7 @@ export default {
     // debug: process.env.NODE_ENV !== 'production',
   },
 
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/i18n',
-  ],
-
+  modules: ['@nuxtjs/axios', '@nuxtjs/i18n'],
 
   build: {
     transpile: ['defu'],

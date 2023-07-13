@@ -1,10 +1,8 @@
 <template>
-  <div
-    class="grid grid-cols-6 gap-5 max-lg:min-w-max max-lg:grid-flow-col max-lg:grid-cols-2-"
-  >
+  <div class="grid 1024:grid-cols-6 grid-cols-3 gap-5">
     <a v-for="(brand, index) in brands.results" :key="index" href="#">
       <div
-        class="flex h-20 items-center justify-center rounded-lg bg-neutral-200 max-lg:min-w-[160px]"
+        class="flex h-20 items-center justify-center rounded-lg bg-neutral-200 max-lg:min-w-[120px]"
       >
         {{ brand.title }}
       </div>
