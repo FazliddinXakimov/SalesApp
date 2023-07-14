@@ -1,6 +1,10 @@
+import Vue from 'vue'
+
 export const variables = {
-  searchOptions: {
-    category: 'category',
+  linkNames: {
+    catalog: 'category',
     product: 'product',
   },
 }
+
+Vue.prototype.$const = variables

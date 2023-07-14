@@ -109,15 +109,18 @@
               : (passwordType = 'password')
           "
         >
-          <fa
+          <img
             v-if="passwordType == 'password'"
-            :icon="['fas', 'eye']"
-            class="text-gray-500 hover:cursor-pointer"
+            src="@/assets/img/eye.svg"
+            alt="eye-icon"
+            class="cursor-pointer w-5"
           />
-          <fa
+
+          <img
             v-if="passwordType == 'text'"
-            :icon="['fas', 'eye-slash']"
-            class="text-gray-500 hover:cursor-pointer"
+            src="@/assets/img/eye-slash.svg"
+            alt="eye-slash-icon"
+            class="cursor-pointer w-5"
           />
         </span>
       </div>

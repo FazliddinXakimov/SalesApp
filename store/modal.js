@@ -3,6 +3,7 @@ export const state = () => ({
   cartModal: false,
   catalogModal: false,
   orderModal: false,
+  streamOrderModal: false,
   buyOneClickModal: false,
 })
 
@@ -18,6 +19,9 @@ export const mutations = {
   },
   changeOrderModal: (state, data) => {
     state.orderModal = data
+  },
+  changeStreamOrderModal: (state, data) => {
+    state.streamOrderModal = data
   },
   changeBuyOneClickModal: (state, data) => {
     state.buyOneClickModal = data

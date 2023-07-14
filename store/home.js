@@ -12,7 +12,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  getMainPageProducts: (state) => state.products,
+  GET_MAIN_PAGE_PRODUCTS: (state) => state.products,
   GET_BANNERS_LIST: (state) => state.banners_list,
   GET_BRANDS: (state) => state.brands,
 }

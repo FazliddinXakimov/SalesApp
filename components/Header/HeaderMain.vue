@@ -15,20 +15,20 @@
 
         <div class="flex justify-start items-center basis-4/6">
           <button
-            class="flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded mr-2"
+            class="flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded-lg mr-2"
             @click="catalogModal = true"
           >
-            <fa :icon="['fas', `${getSelection}`]" />
-            <span class="mx-3 hidden 1024:inline-block"> Catalog </span>
+            <img src="@/assets/img/catalog.svg" class="w-4 h-4 ml-3 mr-2" />
+            <span class="mr-3 hidden 1024:inline-block"> Catalog </span>
           </button>
 
           <div class="relative w-full mr-10">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
-                  <fa
-                    :icon="['fas', 'magnifying-glass']"
-                    class="absolute fa fa-search text-gray-400 top-4 left-4"
+                  <img
+                    src="@/assets/img/search.svg"
+                    class="w-4 h-4 absolute top-4 left-4"
                   />
 
                   <input
@@ -242,7 +242,7 @@ export default {
           })
           this.searchOptions = response
           this.searchCategoryOptions = response.filter(
-            (r) => r.type === variables.searchOptions.category
+            (r) => r.type === variables.searchOptions.catalog
           )
 
           this.searchProductsOptions = response.filter(
@@ -275,7 +275,7 @@ export default {
     toDetailPage(product) {
       this.$router.push(
         this.localePath({
-          name: `product-detail-id`,
+          name: `product-id`,
           params: { id: product.id },
         })
       )

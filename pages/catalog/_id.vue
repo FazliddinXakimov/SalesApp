@@ -1,10 +1,8 @@
 <template>
   <div>
-    <BreadCrumb :bread-crumb="breadCrumb" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
     <div v-if="products.results.length > 0">
-      <div class="flex justify-start mb-5">
-        <div class="text-2xl">SmartPhones</div>
-      </div>
+      <div class="flex justify-start mb-5"></div>
       <div class="flex justify-end items-center mb-4">
         <span class="w-64">
           <multiselect
@@ -61,7 +59,7 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect' 
+import Multiselect from 'vue-multiselect'
 import GlobalPagination from '@/components/GlobalPagination.vue'
 
 export default {

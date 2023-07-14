@@ -1,14 +1,7 @@
 <template>
   <div class="mt-5">
-    <ProductStreamMainSection
-      v-if="streamProduct"
-      :product="streamProduct"
-      :selected-media="selectedMedia"
-      @handleSelectMedia="handleSelectMedia"
-    />
-
+    <ProductStreamMainSection v-if="streamProduct" :product="streamProduct" />
     <ProductDetailTabs :product="streamProduct" />
-    <!-- <pre>{{ streamProduct }}</pre> -->
   </div>
 </template>
 
@@ -34,7 +27,6 @@ export default {
       },
 
       videoController: '',
-      selectedMedia: null,
       activeTab: 1,
       breadCrumb: [
         {
@@ -76,10 +68,8 @@ export default {
   },
 
   async mounted() {
-    const route = this.$route
-
     const { data } = await this.$axios.get(
-      `/products/product_detail_by_stream/${route.query.stream}/`
+      `/products/product_detail_by_stream/${this.$route.query.stream}/`
     )
 
     this.streamProduct = data
@@ -92,9 +82,6 @@ export default {
         const mediaType = media.slice(media.lastIndexOf('.'))
         return imageExtensions.includes(mediaType)
       }
-    },
-    handleSelectMedia(media) {
-      this.selectedMedia = media
     },
   },
 }

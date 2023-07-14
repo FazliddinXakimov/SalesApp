@@ -100,7 +100,7 @@ export default {
     toDetailPage(product) {
       this.$router.push(
         this.localePath({
-          name: 'product-detail-id',
+          name: 'product-id',
           params: { id: product.slug },
           query: { id: product.id },
         })

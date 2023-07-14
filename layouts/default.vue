@@ -4,7 +4,7 @@
     <HeaderTop />
     <HeaderMain />
     <CatalogTop />
-    <div class="max-w-screen-xl mx-auto">
+    <div class="max-w-screen-xl mx-auto default_view__height">
       <Nuxt />
     </div>
     <MainFooter />
@@ -27,3 +27,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.default_view__height {
+  min-height: 100vh;
+}
+</style>

@@ -52,7 +52,7 @@ export default {
 }
 
 #login-modal .login-modal__inner {
-  padding: 63px 10px 40px;
+  padding: 63px 18px 40px;
 }
 
 .form-item {

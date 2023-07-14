@@ -141,7 +141,7 @@ export default {
 }
 </script>
 
-<style >
+<style>
 #order-modal .modal-dialog {
   height: auto;
   margin: auto;
@@ -154,7 +154,7 @@ export default {
 }
 
 #order-modal .order-modal__inner {
-  padding: 63px 10px 40px;
+  padding: 63px 18px 40px;
 }
 
 .form-item {

@@ -10,7 +10,13 @@
               class="modal-close-btn"
               @click="$emit('input', false)"
             >
-              <fa :icon="['fas', 'xmark']" />
+              <img
+                src="@/assets/img/close.svg"
+                width="12"
+                height="12"
+                class="cursor-pointer"
+                @click="catalogModal = false"
+              />
             </button>
             <slot />
           </div>

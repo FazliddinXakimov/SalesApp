@@ -2,10 +2,7 @@
   <div style="background-color: #f7f7f7">
     <div>
       <swiper :options="swiperOptions1">
-        <swiper-slide
-          v-for="(item, index) in banners"
-          :key="index + 'banneindr'"
-        >
+        <swiper-slide v-for="(item, index) in banners" :key="index">
           <img
             class="img__slide"
             :src="item.image"
@@ -21,7 +18,6 @@
 </template>
 
 <script>
-import 'swiper/css/swiper.css'
 export default {
   props: {
     banners: {
@@ -45,4 +41,4 @@ export default {
 }
 </script>
 
-<style src="@/assets/css/HomeBanner.css"></style>
+<style src="@/assets/css/Banner.css" scoped></style>

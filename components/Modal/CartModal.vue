@@ -42,7 +42,7 @@ export default {
 }
 
 #cart-modal .cart-modal__inner {
-  padding: 63px 10px 40px;
+  padding: 63px 18px 40px;
 }
 
 .form-item {

@@ -1,57 +1,10 @@
 <template>
   <MainModal
-    id="buy-one-click"
-    v-model="buyOneClick"
+    id="order-modal"
+    v-model="streamOrderModal"
     :backdrop-closable="false"
   >
-    <div class="buy-one-click__inner">
-      <div class="flex justify-between items-center mb-5">
-        <div class="basis-1/4">
-          <img :src="product.main_image" width="90" height="90" />
-        </div>
-        <div class="basis-3/4 flex flex-col">
-          <div class="text-lg">
-            {{ product.title }}
-          </div>
-          <div class="flex justify-between items-center">
-            <div>
-              <div>
-                Total Price
-                <span class="font-bold"
-                  >{{ (product.sale_price * count) | numberFilter }} sum</span
-                >
-              </div>
-              <div>
-                Product Price
-                <span class="font-bold"
-                  >{{ product.sale_price | numberFilter }} sum</span
-                >
-              </div>
-            </div>
-
-            <div
-              class="flex items-center justify-between bg-gray-11 rounded-lg h-8 w-[94px] 1024:ml-8 border"
-            >
-              <button
-                class="w-8 flex items-center justify-center"
-                @click="handleDecrement"
-              >
-                <img src="@/assets/img/minus.svg" class="w-4 h-4" />
-              </button>
-              <div class="w-8 font-bold flex items-center justify-center">
-                {{ count }}
-              </div>
-              <button
-                class="w-8 flex items-center justify-center"
-                @click="handleIncrement"
-              >
-                <img src="@/assets/img/plus.svg" class="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div class="order-modal__inner">
       <div class="form-item" :class="{ error_field: $v.order.name.$error }">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
           Name
@@ -103,6 +56,44 @@
           order.phone field is required
         </small>
       </div>
+      <div class="form-item">
+        <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
+          Region
+        </label>
+
+        <multiselect
+          v-model="order.region"
+          class="multiselect__input"
+          :options="regions"
+          label="name"
+          track-by="id"
+          :searchable="true"
+          :show-labels="false"
+          :allow-empty="false"
+          :close-on-select="true"
+          :placeholder="$t('Select')"
+          @select="changeRegion($event)"
+        ></multiselect>
+      </div>
+
+      <div class="form-item">
+        <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
+          District
+        </label>
+        <multiselect
+          v-model="order.district"
+          class="multiselect__input"
+          :disabled="isDistrictDisable"
+          :options="districts"
+          label="name"
+          track-by="id"
+          :searchable="true"
+          :show-labels="false"
+          :allow-empty="false"
+          :close-on-select="true"
+          :placeholder="$t('Select')"
+        ></multiselect>
+      </div>
 
       <button
         class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
@@ -116,12 +107,16 @@
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
+import Multiselect from 'vue-multiselect'
 
 export default {
+  components: {
+    Multiselect,
+  },
   props: {
-    product: {
-      type: Object,
-      default: () => {},
+    couponCode: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -129,8 +124,9 @@ export default {
       order: {
         phone: '',
         name: '',
+        region: '',
+        district: '',
       },
-      count: 1,
     }
   },
   validations() {
@@ -141,67 +137,74 @@ export default {
       },
     }
   },
-
   computed: {
-    buyOneClick: {
+    streamOrderModal: {
       set(val) {
-        this.$store.commit('modal/changeBuyOneClickModal', val)
+        this.$store.commit('modal/changeStreamOrderModal', val)
       },
       get() {
-        return this.$store.state.modal.buyOneClickModal
+        return this.$store.state.modal.streamOrderModal
       },
     },
-  },
 
+    isDistrictDisable() {
+      return !this.order.region.id
+    },
+
+    regions() {
+      return this.$store.getters['stream/GET_REGIONS']
+    },
+    districts() {
+      return this.$store.getters['stream/GET_DISTRICTS']
+    },
+  },
+  mounted() {
+    this.$store.dispatch('stream/FETCH_REGIONS_LIST')
+  },
   methods: {
+    changeRegion(region) {
+      this.order.district = null
+      this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region.id)
+    },
     async handleSubmitOrder() {
       this.$v.order.$touch()
       if (!this.$v.order.$invalid) {
-        const exportProducts = [
-          {
-            count: this.count,
-            product: this.product.id,
-          },
-        ]
         try {
-          await this.$store.dispatch('cart/CREATE_ORDER', {
-            ...this.order,
+          await this.$store.dispatch('stream/CREATE_STREAM_ORDER', {
+            city: this.order.city,
             phone: this.order.phone.replace(/\+| /g, ''),
-            coupon_code: null,
-            products: [...exportProducts],
+            name: this.order.name,
+            stream_id: this.$route.query.stream,
+            coupon_code: this.couponCode || null,
+            products: [
+              {
+                product: this.product.id,
+                count: 1,
+              },
+            ],
           })
-
-          this.buyOneClick = false
-        } catch (error) {
-          this.buyOneClick = true
-        }
-      }
-    },
-    handleIncrement() {
-      this.count++
-    },
-    handleDecrement() {
-      if (this.count > 1) {
-        this.count--
+        } catch (error) {}
       }
     },
   },
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
 <style>
-#buy-one-click .modal-dialog {
+#order-modal .modal-dialog {
   height: auto;
   margin: auto;
   align-items: center;
 }
 
-#buy-one-click .modal-site-inner {
+#order-modal .modal-dialog .modal-site-inner {
   max-width: 480px;
   border-radius: 12px;
 }
 
-#buy-one-click .buy-one-click__inner {
+#order-modal .order-modal__inner {
   padding: 63px 18px 40px;
 }
 

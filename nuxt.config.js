@@ -85,25 +85,11 @@ export default {
 
   components: true,
 
-  buildModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/fontawesome',
-    '@nuxtjs/svg',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss', '@nuxtjs/svg'],
   styleResources: {
     scss: ['@/assets/scss/_variables.scss'],
   },
 
-  fontawesome: {
-    component: 'Fa',
-    suffix: false,
-    icons: {
-      solid: true,
-      brands: true,
-      regular: true,
-    },
-  },
   i18n: {
     locales: [
       {

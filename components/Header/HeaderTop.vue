@@ -3,7 +3,7 @@
     <div
       class="flex items-center justify-between mx-auto max-w-screen-xl text-white"
     >
-      <div class="768:hidden block">Brand</div>
+      <div class="768:hidden block">SalesAPP</div>
       <div class="768:hidden flex items-center">
         <button class="mr-2">
           <a href="tel:+998997293417">

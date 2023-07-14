@@ -7,7 +7,7 @@
         :options="swiperOptionTop"
       >
         <swiper-slide
-          v-for="(topImage, index) in imagesTop"
+          v-for="(topImage, index) in images"
           :key="index"
           class="slide-1"
         >
@@ -37,7 +37,7 @@
         :options="swiperOptionThumbs"
       >
         <swiper-slide
-          v-for="(thumbImage, index) in imagesThumb"
+          v-for="(thumbImage, index) in images"
           :key="index"
           class="slide-item"
         >
@@ -68,7 +68,7 @@
           </div>
         </swiper-slide>
       </swiper>
-      <div v-if="imagesThumb.length > 3">
+      <div v-if="images.length > 3">
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
       </div>
@@ -86,15 +86,7 @@ export default {
     SwiperSlide,
   },
   props: {
-    type: {
-      type: Number, // 1 - for product detail,
-      default: 2,
-    },
-    imagesTop: {
-      type: Array,
-      default: () => [],
-    },
-    imagesThumb: {
+    images: {
       type: Array,
       default: () => [],
     },
@@ -133,11 +125,6 @@ export default {
   },
 
   methods: {
-    clickThumb(index) {
-      const swiperTop = this.$refs.swiperTop?.$swiper
-      this.activeIndex = index
-      swiperTop.slideTo(index)
-    },
     identifyImage(media) {
       if (media) {
         const imageExtensions = ['.gif', '.jpg', '.jpeg', '.png']
@@ -145,6 +132,11 @@ export default {
         const mediaType = media.slice(media.lastIndexOf('.'))
         return imageExtensions.includes(mediaType)
       }
+    },
+    clickThumb(index) {
+      const swiperTop = this.$refs.swiperTop?.$swiper
+      this.activeIndex = index
+      swiperTop.slideTo(index)
     },
   },
 }
