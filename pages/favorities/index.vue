@@ -20,7 +20,7 @@
         <div :class="`swiper-button-next button-next`"></div>
       </div>
     </div>
-    <div v-else class="flex items-center flex-col justify-center my-20">
+    <div v-else class="flex items-center flex-col justify-center my-20 mt-32">
       <img src="@/assets/img/heart_cart.svg" class="w-20 h-20" />
       <div class="mt-3">Cart is Empty</div>
       <button
@@ -83,5 +83,3 @@ export default {
   },
 }
 </script>
-
-

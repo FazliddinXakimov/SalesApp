@@ -21,7 +21,7 @@
         <CardProductsInfo :total-price="totalPrice" />
       </div>
     </div>
-    <div v-else class="flex items-center flex-col justify-center">
+    <div v-else class="flex items-center flex-col justify-center mt-32">
       <img src="@/assets/img/shopping-cart.svg" class="w-20 h-20" />
       <div class="mt-3">Cart is Empty</div>
       <button

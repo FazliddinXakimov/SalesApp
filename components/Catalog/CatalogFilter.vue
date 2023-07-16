@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border ml-r border p-4 rounded">
     <div class="text-lg font-bold mb-2">Цена</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
