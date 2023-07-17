@@ -2,6 +2,6 @@ import createPersistedState from 'vuex-persistedstate'
 
 export default ({ store }) => {
   createPersistedState({
-    paths: ['auth', 'header', 'cart', 'favorities', 'references'],
+    paths: ['header', 'cart', 'favorities', 'references'],
   })(store)
 }

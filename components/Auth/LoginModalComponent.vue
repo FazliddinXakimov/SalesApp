@@ -132,13 +132,15 @@ export default {
       this.$v.login.$touch()
 
       if (!this.$v.login.phone.$invalid) {
-        const response = await this.$axios.post('users/register/', {
+        const response = await this.$axios.post('users/login/', {
           phone: this.login.phone.replace(/\+| /g, ''),
           password: this.login.password,
         })
-        if (response.success) {
+
+        if (response.data.success) {
           this.$store.commit('auth/setUserData', response.data)
-          this.$store.commit('auth/setToken', response.data.token)
+
+          this.$store.commit('auth/SET_TOKEN', response.data)
           this.loginModal = false
         }
       }

@@ -13,7 +13,7 @@
           id="name"
           v-model="personalData.first_name"
           v-mask="'+998 ## ### ## ##'"
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="tel"
           placeholder="+998 ## ### ## ##"
         />
@@ -46,7 +46,7 @@
         <input
           id="name"
           v-model="personalData.first_name"
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
         />
         <small
@@ -78,7 +78,7 @@
         <input
           id="name"
           v-model="personalData.last_name"
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
         />
         <small
@@ -109,8 +109,8 @@
 
         <multiselect
           v-model="personalData.region"
-          class="multiselect__input appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          :options="[]"
+          class="multiselect__input appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          :options="regions"
           label="name"
           track-by="id"
           :searchable="true"
@@ -130,7 +130,7 @@
           v-model="personalData.district"
           class="multiselect__input"
           :disabled="isDistrictDisable"
-          :options="[]"
+          :options="districts"
           label="name"
           track-by="id"
           :searchable="true"
@@ -176,6 +176,15 @@ export default {
     isDistrictDisable() {
       return !this.personalData.region.id
     },
+    regions() {
+      return this.$store.getters['stream/GET_REGIONS']
+    },
+    districts() {
+      return this.$store.getters['stream/GET_DISTRICTS']
+    },
+  },
+  mounted() {
+    this.$store.dispatch('stream/FETCH_REGIONS_LIST')
   },
 
   methods: {
@@ -191,8 +200,3 @@ export default {
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style>
-.personal__information .multiselect__tags {
-  background: #e5e7eb !important;
-}
-</style>

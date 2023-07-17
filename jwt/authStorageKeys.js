@@ -1,3 +1,7 @@
-export const USER_DATA = 'userData'
-export const REFRESH_TOKEN = 'refreshToken'
-export const ACCESS_TOKEN = 'accessToken'
+export default {
+  USER_DATA: 'userData',
+  REFRESH_TOKEN: 'refreshToken',
+  ACCESS_TOKEN: 'accessToken',
+
+  refreshEndPoint: '/users/refresh/'
+}

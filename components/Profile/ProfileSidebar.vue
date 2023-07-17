@@ -3,19 +3,25 @@
     <div>
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg bg-blue-500 text-white p-4 text-left"
+        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        :class="getTabClass(1)"
+        @click="$emit('changeActiveTab', 1)"
       >
         Personal Information
       </button>
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg p-4 text-left transition duration-500 hover:bg-neutral-100 hover:text-neutral-500 focus:bg-neutral-100 focus:text-neutral-500 focus:ring-0 dark:hover:bg-neutral-600 dark:hover:text-neutral-200 dark:focus:bg-neutral-600 dark:focus:text-neutral-200"
+        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        :class="getTabClass(2)"
+        @click="$emit('changeActiveTab', 2)"
       >
         Change Password
       </button>
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg p-4 text-left transition duration-500 hover:bg-neutral-100 hover:text-neutral-500 focus:bg-neutral-100 focus:text-neutral-500 focus:ring-0 dark:hover:bg-neutral-600 dark:hover:text-neutral-200 dark:focus:bg-neutral-600 dark:focus:text-neutral-200"
+        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        :class="getTabClass(3)"
+        @click="$emit('changeActiveTab', 3)"
       >
         My Orders
       </button>
@@ -24,5 +30,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    activeTab: {
+      type: Number,
+      default: 1,
+    },
+  },
+  computed: {},
+
+  methods: {
+    getTabClass(tab) {
+      return this.activeTab === tab
+        ? 'bg-blue-500 text-white'
+        : 'hover:bg-neutral-100 hover:text-neutral-500'
+    },
+  },
+}
 </script>
