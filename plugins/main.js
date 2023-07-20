@@ -1,4 +1,5 @@
 import Vue from 'vue'
-import { numberFilter } from '~/utils/formatters'
+import { numberFilter, formatDateTime } from '~/utils/formatters'
 
 Vue.filter('numberFilter', numberFilter)
+Vue.filter('formatDateTime', formatDateTime)

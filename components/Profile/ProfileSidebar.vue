@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div>
+    <div class="border rounded-md overflow-hidden">
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        class="block w-full cursor-pointer border p-2 text-left"
         :class="getTabClass(1)"
         @click="$emit('changeActiveTab', 1)"
       >
@@ -11,7 +11,7 @@
       </button>
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        class="block w-full cursor-pointer border p-2 text-left"
         :class="getTabClass(2)"
         @click="$emit('changeActiveTab', 2)"
       >
@@ -19,7 +19,7 @@
       </button>
       <button
         type="button"
-        class="block w-full cursor-pointer rounded-lg p-4 text-left"
+        class="block w-full cursor-pointer border p-2 text-left"
         :class="getTabClass(3)"
         @click="$emit('changeActiveTab', 3)"
       >

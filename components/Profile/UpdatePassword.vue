@@ -50,6 +50,14 @@
       >
         please enter valid password
       </small>
+      <small
+        v-show="
+          !$v.newPassword.password.minLength && $v.newPassword.password.$error
+        "
+        class="error__text"
+      >
+        password must be at least 6 character
+      </small>
     </div>
     <div
       class="relative form-item w-96 mx-auto"
@@ -94,7 +102,7 @@
           </span>
         </div>
         <small
-          v-show="
+          v-if="
             !$v.newPassword.repeatPassword.required &&
             $v.newPassword.repeatPassword.$error
           "
@@ -102,20 +110,47 @@
         >
           please enter valid password
         </small>
+
+        <small
+          v-else-if="
+            !$v.newPassword.repeatPassword.minLength &&
+            $v.newPassword.repeatPassword.$error
+          "
+          class="error__text"
+        >
+          repeatPassword must be at least 6 character
+        </small>
+        <small
+          v-else-if="
+            !$v.newPassword.repeatPassword.sameAs &&
+            $v.newPassword.repeatPassword.$error
+          "
+          class="error__text"
+        >
+          password is not the same
+        </small>
       </div>
     </div>
     <button
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-2 w-96"
+      @click="updatePassword"
     >
       Update Password
     </button>
+    <SuccessModal text="Password has been changed successfully" />
   </div>
 </template>
 
 <script>
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
+// eslint-disable-next-line no-unused-vars
+import SuccessModal from '@/components/SuccessModal.vue'
+import useJwt from '@/jwt/useJwtService'
 
 export default {
+  components: {
+    SuccessModal,
+  },
   data() {
     return {
       newPassword: {
@@ -125,6 +160,17 @@ export default {
       passwordType: 'password',
     }
   },
+
+  computed: {
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
+      },
+    },
+  },
   validations() {
     return {
       newPassword: {
@@ -133,12 +179,30 @@ export default {
           minLength: minLength(6),
         },
         repeatPassword: {
+          
           required,
           minLength: minLength(6),
           sameAsPassword: sameAs('password'),
         },
       },
     }
+  },
+
+  methods: {
+    async updatePassword() {
+      this.$v.newPassword.$touch()
+      if (!this.$v.newPassword.$invalid) {
+        await this.$store.dispatch('profile/UPDATE_USER_PASSWORD', {
+          new_password: this.newPassword.password,
+          user_id: useJwt.getUserData().user_data.id,
+        })
+
+        this.successModal = true
+        setTimeout(() => {
+          this.successModal = false
+        }, 1000)
+      }
+    },
   },
 }
 </script>

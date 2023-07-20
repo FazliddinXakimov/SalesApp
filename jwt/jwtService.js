@@ -10,6 +10,18 @@ export default class JwtService {
   }
 
   getUserData() {
-    return localStorage.getItem(storageKeys.USER_DATA)
+    return JSON.parse(localStorage.getItem(storageKeys.USER_DATA))
+  }
+
+  logout() {
+    try {
+      localStorage.removeItem(storageKeys.USER_DATA)
+      localStorage.removeItem(storageKeys.ACCESS_TOKEN)
+      localStorage.removeItem(storageKeys.REFRESH_TOKEN)
+
+      return true
+    } catch (error) {
+      return false
+    }
   }
 }

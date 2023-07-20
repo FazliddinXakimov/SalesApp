@@ -3,6 +3,7 @@
     <MainLoading />
     <HeaderTop />
     <HeaderMain />
+
     <CatalogTop />
     <div class="max-w-screen-xl mx-auto default_view__height">
       <Nuxt />
@@ -15,6 +16,7 @@
 <script>
 import CatalogTop from '@/components/Catalog/CatalogTop.vue'
 import MainLoading from '@/components/MainLoading.vue'
+
 import MobileBottomNavbar from '@/components/Header/MobileBottomNavbar.vue'
 export default {
   components: {

@@ -1,4 +1,5 @@
 import storageKeys from '@/jwt/authStorageKeys'
+import useJwt from '@/jwt/useJwtService'
 const SET_AUTH_TYPE = 'SET_AUTH_TYPE'
 const SET_LOGOUT = 'SET_LOGOUT'
 const SET_TOKEN = 'SET_TOKEN'
@@ -60,6 +61,12 @@ export const actions = {
     })
     commit('setUserData', response.user_data)
     commit('SET_TOKEN', response)
+  },
+
+  LOGOUT({ commit }) {
+    useJwt.logout()
+    commit('SET_LOGOUT')
+    this.$router.push('/')
   },
 
   CHECK_REGISTER(_, data) {

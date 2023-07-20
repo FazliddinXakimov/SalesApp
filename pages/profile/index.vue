@@ -10,12 +10,13 @@
     <div class="768:basis-3/4 pl-4">
       <PersonalInformation v-if="activeTab === 1" />
       <UpdatePassword v-else-if="activeTab === 2" />
-      <MyOrders v-else-if="activeTab === 3" />
+      <MyOrders v-else-if="activeTab === 3" :orders="myOrders" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import ProfileSideBar from '@/components/Profile/ProfileSidebar.vue'
 
 export default {
@@ -31,6 +32,12 @@ export default {
     return {
       activeTab: 1,
     }
+  },
+
+  computed: {
+    ...mapGetters({
+      myOrders: 'profile/GET_MY_ORDERS',
+    }),
   },
 
   mounted() {

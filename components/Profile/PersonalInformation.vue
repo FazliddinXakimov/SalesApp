@@ -4,14 +4,14 @@
     <div class="flex justify-between items-center">
       <div
         class="form-item w-full mr-8"
-        :class="{ error_field: $v.personalData.first_name.$error }"
+        :class="{ error_field: $v.personalData.phone_number.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
           Phone
         </label>
         <input
           id="name"
-          v-model="personalData.first_name"
+          v-model="personalData.phone_number"
           v-mask="'+998 ## ### ## ##'"
           class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="tel"
@@ -19,21 +19,21 @@
         />
         <small
           v-show="
-            !$v.personalData.first_name.minLength &&
-            $v.personalData.first_name.$error
+            !$v.personalData.phone_number.minLength &&
+            $v.personalData.phone_number.$error
           "
           class="error__text"
         >
-          personalData.first_name field min value is 17
+          personalData.phone_number field min value is 17
         </small>
         <small
           v-show="
-            !$v.personalData.first_name.required &&
-            $v.personalData.first_name.$error
+            !$v.personalData.phone_number.required &&
+            $v.personalData.phone_number.$error
           "
           class="error__text"
         >
-          personalData.first_name field is required
+          personalData.phone_number field is required
         </small>
       </div>
       <div
@@ -70,92 +70,93 @@
       </div>
       <div
         class="form-item w-full"
-        :class="{ error_field: $v.personalData.last_name.$error }"
+        :class="{ error_field: $v.personalData.username.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Name
+          Username
         </label>
         <input
           id="name"
-          v-model="personalData.last_name"
+          v-model="personalData.username"
           class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
         />
         <small
           v-show="
-            !$v.personalData.last_name.minLength &&
-            $v.personalData.last_name.$error
+            !$v.personalData.username.minLength &&
+            $v.personalData.username.$error
           "
           class="error__text"
         >
-          personalData.last_name field min value is 17
+          personalData.username field min value is 17
         </small>
         <small
           v-show="
-            !$v.personalData.last_name.required &&
-            $v.personalData.last_name.$error
+            !$v.personalData.username.required &&
+            $v.personalData.username.$error
           "
           class="error__text"
         >
-          personalData.last_name field is required
+          personalData.username field is required
         </small>
       </div>
     </div>
+
     <div class="flex justify-between items-center">
-      <div class="form-item w-full mr-10">
+      <div class="w-full mr-10">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           Region
         </label>
-
-        <multiselect
+        <v-select
           v-model="personalData.region"
-          class="multiselect__input appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           :options="regions"
+          placeholder="Select an option"
+          :reduce="(value) => value.id"
           label="name"
-          track-by="id"
-          :searchable="true"
-          :show-labels="false"
-          :allow-empty="false"
-          :close-on-select="true"
-          :placeholder="$t('Select')"
-          @select="changeRegion($event)"
-        ></multiselect>
+          @input="changeRegion"
+        />
       </div>
-
-      <div class="form-item w-full">
+      <div class="w-full">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           District
         </label>
-        <multiselect
+        <v-select
           v-model="personalData.district"
-          class="multiselect__input"
-          :disabled="isDistrictDisable"
           :options="districts"
+          placeholder="Select an option"
           label="name"
-          track-by="id"
-          :searchable="true"
-          :show-labels="false"
-          :allow-empty="false"
-          :close-on-select="true"
-          :placeholder="$t('Select')"
-        ></multiselect>
+          :reduce="(value) => value.id"
+          :disabled="isDistrictDisable"
+        />
       </div>
+    </div>
+    <div>
+      <button
+        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full my-2 w-96"
+        @click="updateUserProfile"
+      >
+        Update
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
+// import Multiselect from 'vue-multiselect'
 import { required, minLength } from 'vuelidate/lib/validators'
+import vSelect from 'vue-select'
+import useJwt from '@/jwt/useJwtService'
+
 export default {
   components: {
-    Multiselect,
+    // Multiselect,
+    vSelect,
   },
   data() {
     return {
       personalData: {
         first_name: '',
-        last_name: '',
+        username: '',
         phone_number: '',
         region: '',
         district: '',
@@ -166,15 +167,19 @@ export default {
   validations() {
     return {
       personalData: {
-        phone: { required, minLength: minLength(17) },
+        phone_number: { required, minLength: minLength(17) },
         first_name: { required, minLength: minLength(3) },
-        last_name: { required, minLength: minLength(3) },
+        // username: { required, minLength: minLength(3) },
       },
     }
   },
   computed: {
     isDistrictDisable() {
-      return !this.personalData.region.id
+      return !this.personalData.region
+    },
+
+    userDetail() {
+      return this.$store.getters['profile/GET_USER_DETAIL']
     },
     regions() {
       return this.$store.getters['stream/GET_REGIONS']
@@ -183,20 +188,55 @@ export default {
       return this.$store.getters['stream/GET_DISTRICTS']
     },
   },
-  mounted() {
+  async mounted() {
+    const data = useJwt.getUserData().user_data
     this.$store.dispatch('stream/FETCH_REGIONS_LIST')
+    await this.$store.dispatch('profile/FETCH_USER_DETAIL', data.id)
+
+    this.personalData.username = this.userDetail.username
+    this.personalData.first_name = this.userDetail.name
+    this.personalData.phone_number = this.userDetail.phone.replace('998', '')
+    this.personalData.region = this.userDetail?.city?.region?.id
+    await this.$store.dispatch(
+      'stream/FETCH_DISTRICTS_LIST',
+      this.personalData.region
+    )
+    this.personalData.district = this.userDetail.city?.id
   },
 
   methods: {
     changeRegion(region) {
-      if (region && region.id) {
-        this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region.id)
+      // console.log('region', region)
+      if (region) {
+        this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region)
       } else {
         this.order.district = null
       }
+    },
+
+    async updateUserProfile() {
+      this.$v.personalData.$touch()
+      const data = useJwt.getUserData().user_data
+      await this.$store.dispatch('profile/UPDATE_USER_DETAIL', {
+        id: this.userDetail.id,
+        data: {
+          name: this.personalData.first_name,
+          username: this.personalData.username,
+          phone: this.personalData.phone_number.replace(/\+| /g, ''),
+          city: this.personalData.district,
+        },
+      })
+
+      await this.$store.dispatch('profile/FETCH_USER_DETAIL', data.id)
+
+      this.personalData.username = this.userDetail.username
+      this.personalData.first_name = this.userDetail.name
+
+      this.personalData.phone_number = this.userDetail.phone
     },
   },
 }
 </script>
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-select/dist/vue-select.css"></style>

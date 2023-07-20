@@ -5,6 +5,8 @@ export const state = () => ({
   orderModal: false,
   streamOrderModal: false,
   buyOneClickModal: false,
+  myOrderProductModal: false,
+  successModal: false,
 })
 
 export const mutations = {
@@ -25,5 +27,11 @@ export const mutations = {
   },
   changeBuyOneClickModal: (state, data) => {
     state.buyOneClickModal = data
+  },
+  changeMyOrderProductModal: (state, data) => {
+    state.myOrderProductModal = data
+  },
+  changeSuccessModal: (state, data) => {
+    state.successModal = data
   },
 }

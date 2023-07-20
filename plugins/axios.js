@@ -10,8 +10,9 @@ import storageKeys from '@/jwt/authStorageKeys'
 export default function ({ $axios, store, app, error, redirect }, inject) {
   const lang = app.store.$i18n.locale
 
-  const isAlreadyFetchAccessToken = false
+  let isAlreadyFetchAccessToken = false
   $axios.setHeader('Accept-Language', lang)
+  
 
   $axios.onError((errorResponse) => {
     // throw error,
@@ -26,25 +27,29 @@ export default function ({ $axios, store, app, error, redirect }, inject) {
     if (statusCode === 400) {
       return
     }
-    if (statusCode === 401 && isAlreadyFetchAccessToken) {
-      // refresh = true
 
-      store
-        .dispatch('auth/refreshToken')
-        .then((response) => {
-          localStorage.setItem('accessToken', response.access)
-          return $axios(errorResponse.config)
-        })
-        .catch((refreshError) => {
-          // store.dispatch('auth/logout')
-          return Promise(refreshError)
-        })
-    } else if (
-      statusCode === 401 &&
-      !isAlreadyFetchAccessToken &&
-      errorResponse.response.config.url === storageKeys.refreshEndPoint
-    ) {
-      // logout logic must be
+    if (statusCode === 401) {
+      if (!isAlreadyFetchAccessToken) {
+        isAlreadyFetchAccessToken = true
+        store
+          .dispatch('auth/refreshToken')
+          .then((response) => {
+            this.isAlreadyFetchAccessToken = false
+            localStorage.setItem('accessToken', response.access)
+            return $axios(errorResponse.config)
+          })
+          .catch((refreshError) => {
+            return Promise(refreshError)
+          })
+      } else if (
+        isAlreadyFetchAccessToken &&
+        errorResponse.response.config.url === storageKeys.refreshEndPoint
+      ) {
+        // logout logic must be
+        store.dispatch('auth/LOGOUT')
+        redirect('/')
+        console.log('refreshTokenExpired')
+      }
     }
 
     if (statusCode === 403) {

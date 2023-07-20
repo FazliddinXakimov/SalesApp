@@ -131,7 +131,7 @@ export default {
     async handleLogin() {
       this.$v.login.$touch()
 
-      if (!this.$v.login.phone.$invalid) {
+      if (!this.$v.login.$invalid) {
         const response = await this.$axios.post('users/login/', {
           phone: this.login.phone.replace(/\+| /g, ''),
           password: this.login.password,

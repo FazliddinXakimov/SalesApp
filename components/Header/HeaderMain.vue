@@ -257,7 +257,7 @@ export default {
     },
     logout() {
       userLogout()
-      this.$store.commit('auth/SET_LOGOUT')
+      this.$store.dispatch('auth/LOGOUT')
       this.$router.push(this.localePath('/'))
     },
 

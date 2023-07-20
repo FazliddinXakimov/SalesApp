@@ -7,7 +7,7 @@ export default {
   },
   privateRuntimeConfig: {
     axios: {
-      baseURL: process.env.baseURL,
+      baseURL: process.env.baseURL, 
     },
   },
   server: {
@@ -75,6 +75,9 @@ export default {
     },
     {
       src: '@/plugins/vuelidate.js',
+    },
+    {
+      src: '@/plugins/v-tooltip.js',
     },
 
     {
