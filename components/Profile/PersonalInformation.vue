@@ -68,10 +68,7 @@
           personalData.first_name field is required
         </small>
       </div>
-      <div
-        class="form-item w-full"
-        :class="{ error_field: $v.personalData.username.$error }"
-      >
+      <div class="form-item w-full">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
           Username
         </label>
@@ -81,24 +78,6 @@
           class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           type="text"
         />
-        <small
-          v-show="
-            !$v.personalData.username.minLength &&
-            $v.personalData.username.$error
-          "
-          class="error__text"
-        >
-          personalData.username field min value is 17
-        </small>
-        <small
-          v-show="
-            !$v.personalData.username.required &&
-            $v.personalData.username.$error
-          "
-          class="error__text"
-        >
-          personalData.username field is required
-        </small>
       </div>
     </div>
 
@@ -145,7 +124,6 @@
 // import Multiselect from 'vue-multiselect'
 import { required, minLength } from 'vuelidate/lib/validators'
 import vSelect from 'vue-select'
-import useJwt from '@/jwt/useJwtService'
 
 export default {
   components: {
@@ -189,9 +167,8 @@ export default {
     },
   },
   async mounted() {
-    const data = useJwt.getUserData().user_data
     this.$store.dispatch('stream/FETCH_REGIONS_LIST')
-    await this.$store.dispatch('profile/FETCH_USER_DETAIL', data.id)
+    await this.$store.dispatch('profile/FETCH_USER_DETAIL', this.$auth.user.id)
 
     this.personalData.username = this.userDetail.username
     this.personalData.first_name = this.userDetail.name
@@ -216,7 +193,7 @@ export default {
 
     async updateUserProfile() {
       this.$v.personalData.$touch()
-      const data = useJwt.getUserData().user_data
+
       await this.$store.dispatch('profile/UPDATE_USER_DETAIL', {
         id: this.userDetail.id,
         data: {
@@ -227,7 +204,10 @@ export default {
         },
       })
 
-      await this.$store.dispatch('profile/FETCH_USER_DETAIL', data.id)
+      await this.$store.dispatch(
+        'profile/FETCH_USER_DETAIL',
+        this.$auth.user.id
+      )
 
       this.personalData.username = this.userDetail.username
       this.personalData.first_name = this.userDetail.name
@@ -238,5 +218,4 @@ export default {
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style src="vue-select/dist/vue-select.css"></style>

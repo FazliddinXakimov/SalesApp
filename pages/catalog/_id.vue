@@ -5,18 +5,13 @@
       <div class="flex justify-start mb-5"></div>
       <div class="flex justify-end items-center mb-4">
         <span class="w-64">
-          <multiselect
+          <v-select
             v-model="sort"
-            class="multiselect__input"
             :options="filterOptions"
+            placeholder="Select an option"
+            :reduce="(value) => value.id"
             label="title"
-            track-by="key"
-            :searchable="true"
-            :show-labels="false"
-            :allow-empty="false"
-            :close-on-select="true"
-            :placeholder="$t('Select')"
-          ></multiselect>
+          />
         </span>
       </div>
       <div class="flex justify-between">
@@ -59,14 +54,14 @@
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect'
+import vSelect from 'vue-select'
 import GlobalPagination from '@/components/GlobalPagination.vue'
 
 export default {
   name: 'CatalogDetails',
   components: {
-    Multiselect,
     GlobalPagination,
+    vSelect,
   },
   data() {
     return {
@@ -141,7 +136,7 @@ export default {
   watch: {
     sort(val) {
       if (val) {
-        this.sortType = val.key
+        this.sortType = val
       }
     },
   },
@@ -202,6 +197,7 @@ export default {
 
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped src="@/assets/scss/Catalog.scss"></style>
+<style src="vue-select/dist/vue-select.css"></style>
 <!-- <style>
 .multiselect__tags {
   border: 1px solid #6b7280 !important;

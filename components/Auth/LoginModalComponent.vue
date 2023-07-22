@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h1 class="text-center font-bold text-xl">Login</h1>
-    <div class="form-item" :class="{ error_field: $v.login.phone.$error }">
+    <!-- <h1 class="text-center font-bold text-xl">Login</h1> -->
+    <div
+      class="form-item"
+      :class="{ error_field: $v.login.phone.$error || isLoginOrPasswordError }"
+    >
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
         for="login_phone"
@@ -15,12 +18,13 @@
         class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="tel"
         placeholder="+998 ## ### ## ##"
+        @keyup="isLoginOrPasswordError = false"
       />
       <small
         v-show="!$v.login.phone.minLength && $v.login.phone.$error"
         class="error__text"
       >
-        phone field min value is 17
+        please enter valid phone number
       </small>
       <small
         v-show="!$v.login.phone.required && $v.login.phone.$error"
@@ -31,7 +35,9 @@
     </div>
     <div
       class="relative form-item"
-      :class="{ error_field: $v.login.password.$error }"
+      :class="{
+        error_field: $v.login.password.$error || isLoginOrPasswordError,
+      }"
     >
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
@@ -46,6 +52,7 @@
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           :type="passwordType"
           placeholder=""
+          @keyup="isLoginOrPasswordError = false"
         />
         <span
           class="absolute right-4 top-2"
@@ -74,21 +81,18 @@
         v-show="!$v.login.password.required && $v.login.password.$error"
         class="error__text"
       >
-        please enter valid password
+        password field is required
       </small>
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
-        @click="handleLogin"
-      >
-        Login
-      </button>
     </div>
-    <div class="text-center mt-4">
-      Don't have an account ?
-      <a href="#" class="text-blue-600" @click="currentComp = 'Register'"
-        >Sign up here</a
-      >
+    <div v-if="isLoginOrPasswordError" class="error__text flex justify-center">
+      Phone or password is invalid, please check
     </div>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
+      @click="handleLogin"
+    >
+      Login
+    </button>
   </div>
 </template>
 
@@ -103,6 +107,7 @@ export default {
         password: '',
       },
       passwordType: 'password',
+      isLoginOrPasswordError: false,
     }
   },
   computed: {
@@ -114,34 +119,33 @@ export default {
         return this.$store.state.modal.loginModal
       },
     },
-    currentComp: {
-      set(val) {
-        this.$store.commit('auth/SET_AUTH_TYPE', val)
-      },
-      get() {
-        return this.$store.getters['auth/getCurrentAuthType']
-      },
-    },
   },
 
   methods: {
     closeModal() {
       this.$store.commit('modal/changeLoginModal', false)
     },
+
     async handleLogin() {
       this.$v.login.$touch()
-
       if (!this.$v.login.$invalid) {
-        const response = await this.$axios.post('users/login/', {
-          phone: this.login.phone.replace(/\+| /g, ''),
-          password: this.login.password,
-        })
+        try {
+          const res = await this.$auth.loginWith('login', {
+            data: {
+              phone: this.login.phone.replace(/\+| /g, ''),
+              password: this.login.password,
+            },
+          })
 
-        if (response.data.success) {
-          this.$store.commit('auth/setUserData', response.data)
-
-          this.$store.commit('auth/SET_TOKEN', response.data)
           this.loginModal = false
+
+          console.log('res', res)
+          console.log('$auth', this.$auth)
+        } catch (error) {
+          console.log('error', error)
+          console.log('error.resposne', error.response)
+          console.error('Login failed:', error)
+          this.isLoginOrPasswordError = true
         }
       }
     },

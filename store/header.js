@@ -1,9 +1,21 @@
 const SELECT_REGION = 'SELECT_REGION'
 const SET_REGIONS_LIST = 'SET_REGIONS_LIST'
+const SET_LANG = 'SET_LANG'
 
 export const state = () => ({
   selectedRegion: 1,
   regions_list: [],
+  lang: 'uz',
+  langOptions: [
+    {
+      key: 'uz',
+      title: 'UZ',
+    },
+    {
+      key: 'ru',
+      title: 'РУ',
+    },
+  ],
 })
 
 export const getters = {
@@ -13,6 +25,8 @@ export const getters = {
 
   GET_DROPDOWN_REGIONS: (state) =>
     state.regions_list?.filter((r) => r.id !== state.selectedRegion),
+  GET_LANG_OPTIONS: (state) => state.langOptions,
+  GET_LANG: (state) => state.lang,
 }
 
 export const mutations = {
@@ -21,6 +35,9 @@ export const mutations = {
   },
   [SET_REGIONS_LIST]: (state, data) => {
     state.regions_list = data
+  },
+  [SET_LANG]: (state, data) => {
+    state.lang = data
   },
 }
 

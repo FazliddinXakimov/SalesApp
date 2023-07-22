@@ -1,10 +1,56 @@
 <template>
   <div>
-    <h1 class="text-center font-bold text-xl">Register</h1>
+    <!-- <h1 class="text-center font-bold text-xl">Register</h1> -->
+
+    <ol class="flex justify-center items-center w-full mb-4 sm:mb-5">
+      <li
+        class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block"
+        :class="
+          registerIndex === 1
+            ? 'text-blue-600 after:border-blue-100'
+            : 'after:border-gray-100'
+        "
+      >
+        <div
+          class="flex items-center justify-center w-10 h-10 rounded-full lg:h-12 lg:w-12 shrink-0 cursor-pointer"
+          :class="registerIndex === 1 ? 'bg-blue-100 ' : 'bg-gray-100'"
+          @click="() => (registerIndex = 1)"
+        >
+          <img class="w-5 h-5" src="@/assets/img/register-phone.svg" />
+        </div>
+      </li>
+      <li
+        class="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-4 after:inline-block"
+        :class="
+          registerIndex === 2
+            ? 'text-blue-600 after:border-blue-100'
+            : 'after:border-gray-100'
+        "
+      >
+        <div
+          class="flex items-center justify-center w-10 h-10 rounded-full lg:h-12 lg:w-12 shrink-0 cursor-pointer"
+          :class="registerIndex === 2 ? 'bg-blue-100 ' : 'bg-gray-100'"
+          @click="() => (registerIndex = 2)"
+        >
+          <img class="w-7 h-7" src="@/assets/img/register-sms.svg" />
+          <!-- <img src="@/assets/img/register-sms.svg" /> -->
+        </div>
+      </li>
+      <li class="flex items-center">
+        <div
+          :class="registerIndex === 3 ? 'bg-blue-100 shrink-0' : 'bg-gray-100'"
+          class="flex items-center justify-center w-10 h-10 rounded-full lg:h-12 lg:w-12 cursor-pointer"
+          @click="() => (registerIndex = 3)"
+        >
+          <img class="w-6 h-6" src="@/assets/img/register-password.svg" />
+        </div>
+      </li>
+    </ol>
+
     <div
       v-if="registerIndex == 1"
       class="form-item"
-      :class="{ error_field: $v.register.phone.$error }"
+      :class="{ error_field: $v.register.phone.$error || !isPhoneSuccess }"
     >
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
@@ -19,7 +65,14 @@
         class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="tel"
         placeholder="+998 ## ### ## ##"
+        @keyup="keyUpRegisterPhone"
       />
+      <small
+        v-show="!$v.register.phone.required && $v.register.phone.$error"
+        class="error__text"
+      >
+        phone field is required
+      </small>
       <small
         v-show="!$v.register.phone.minLength && $v.register.phone.$error"
         class="error__text"
@@ -27,10 +80,13 @@
         phone field min value is 17
       </small>
       <small
-        v-show="!$v.register.phone.required && $v.register.phone.$error"
+        v-show="
+          phoneErrorCode === $const.responseStatus.PHONE_NUMBER_ALREADY_TAKEN &&
+          $v.register.phone.minLength
+        "
         class="error__text"
       >
-        phone field is required
+        phone number already taken
       </small>
     </div>
 
@@ -44,7 +100,7 @@
     <div
       v-if="registerIndex == 2"
       class="form-item"
-      :class="{ error_field: $v.register.code.$error }"
+      :class="{ error_field: $v.register.code.$error || !isSmsSuccess }"
     >
       <label
         class="block text-gray-700 text-sm font-bold mb-2"
@@ -59,6 +115,7 @@
         class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         type="tell"
         placeholder=""
+        @keyup="keyUpSmsCode"
       />
       <small
         v-show="!$v.register.code.required && $v.register.code.$error"
@@ -71,6 +128,15 @@
         class="error__text"
       >
         please enter valid code
+      </small>
+      <small
+        v-show="
+          smsErrorCode === $const.responseStatus.SMS_CODE_ERROR &&
+          $v.register.code.minLength
+        "
+        class="error__text"
+      >
+        sms code error
       </small>
     </div>
 
@@ -139,17 +205,12 @@
     >
       Register
     </button>
-    <div class="text-center mt-4">
-      Already have an account ?
-      <a href="#" class="text-blue-600" @click="currentComp = 'Login'"
-        >Sign in here</a
-      >
-    </div>
   </div>
 </template>
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
+
 export default {
   data() {
     return {
@@ -162,17 +223,13 @@ export default {
       },
       passwordType: 'password',
       registerIndex: 1,
+      isPhoneSuccess: true,
+      phoneErrorCode: '',
+      isSmsSuccess: true,
+      smsErrorCode: '',
     }
   },
   computed: {
-    currentComp: {
-      set(val) {
-        this.$store.commit('auth/SET_AUTH_TYPE', val)
-      },
-      get() {
-        return this.$store.getters['auth/getCurrentAuthType']
-      },
-    },
     loginModal: {
       set(val) {
         this.$store.commit('modal/changeLoginModal', val)
@@ -188,45 +245,89 @@ export default {
       this.$store.commit('modal/changeLoginModal', false)
     },
 
+    keyUpRegisterPhone() {
+      this.isPhoneSuccess = true
+      this.phoneErrorCode = ''
+
+    },
+    keyUpSmsCode() {
+      this.isSmsSuccess = true
+      this.smsErrorCode = ''
+    },
+
     async registerPhone() {
       this.$v.register.phone.$touch()
       if (!this.$v.register.phone.$invalid) {
-        const res = await this.$axios.post('users/register/', {
-          phone: this.register.phone.replace(/\+| /g, ''),
+        const res = await this.$auth.loginWith('register', {
+          data: { phone: this.register.phone.replace(/\+| /g, '') },
         })
-        this.$v.register.phone.$touch()
-        this.register.temp_user = res.data.id
-        this.register.auto_created = res.data.auto_created
-        this.registerIndex = 2
+        if (res.data.status === 200) {
+          this.isPhoneSuccess = true
+          this.register.temp_user = res.data.id
+          this.register.auto_created = res.data.auto_created
+          this.registerIndex = 2
+        } else {
+          this.phoneErrorCode = res.data.status
+          
+          this.isPhoneSuccess = false
+        }
       }
     },
 
     async registerPhonseSms() {
+      if (this.$v.register.phone.$invalid) {
+        this.registerIndex = 1
+      }
+
       this.$v.register.code.$touch()
       if (!this.$v.register.code.$invalid) {
-        await this.$axios.post('users/register/', {
-          sms_code: this.register.code.replace(/\+| /g, ''),
-          auto_created: this.register.auto_created,
-          temp_user: this.register.temp_user,
+        const res = await this.$auth.loginWith('register', {
+          data: {
+            sms_code: this.register.code.replace(/\+| /g, ''),
+            auto_created: this.register.auto_created,
+            temp_user: this.register.temp_user,
+          },
         })
-        this.registerIndex = 3
+
+        if (res.data.status === 200) {
+          this.isSmsSuccess = true
+          this.registerIndex = 3
+        } else {
+          this.smsErrorCode = res.data.status
+          this.isSmsSuccess = false
+        }
       }
     },
     async registerVerify() {
+      if (this.$v.register.phone.$invalid) {
+        this.registerIndex = 1
+        return
+      }
+
+      if (this.$v.register.code.$invalid) {
+        this.registerIndex = 2
+        return
+      }
+
       this.$v.register.password.$touch()
       if (!this.$v.register.password.$invalid) {
-        const response = await this.$axios.post('users/register/', {
-          password: this.register.password,
-          auto_created: this.register.auto_created,
-          temp_user: this.register.temp_user,
+        const response = await this.$auth.loginWith('registerVerify', {
+          data: {
+            password: this.register.password,
+            auto_created: this.register.auto_created,
+            temp_user: this.register.temp_user,
+          },
         })
-        console.log('response', response)
+
+        console.log('data', response.data)
+
+        // this.$auth.setUser(userData);
 
         if (response.data.success) {
-          this.$store.commit('auth/setUserData', response.data)
-          this.$store.commit('auth/setToken', response.data.token)
           this.loginModal = false
         }
+
+        console.log('$authdd', this.$auth)
       }
     },
   },

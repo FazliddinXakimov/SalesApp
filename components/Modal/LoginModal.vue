@@ -1,6 +1,29 @@
 <template>
   <MainModal id="login-modal" v-model="loginModal" :backdrop-closable="false">
     <div class="login-modal__inner">
+      <ul
+        class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 mb-5"
+      >
+        <li class="mr-2">
+          <span
+            href="#"
+            aria-current="page"
+            class="inline-block p-4 rounded-t-lg"
+            :class="getTabComponent('Login')"
+            @click="currentComp = 'Login'"
+            >Login</span
+          >
+        </li>
+        <li class="mr-2">
+          <span
+            href="#"
+            class="inline-block p-4 rounded-t-lg"
+            :class="getTabComponent('Register')"
+            @click="currentComp = 'Register'"
+            >Register</span
+          >
+        </li>
+      </ul>
       <KeepAlive>
         <component :is="currentComp" />
       </KeepAlive>
@@ -17,16 +40,13 @@ export default {
     Login,
     Register,
   },
+  data() {
+    return {
+      currentComp: 'Login',
+    }
+  },
 
   computed: {
-    currentComp: {
-      set(val) {
-        this.$store.commit('modal/SET_AUTH_TYPE', val)
-      },
-      get() {
-        return this.$store.getters['auth/getCurrentAuthType']
-      },
-    },
     loginModal: {
       set(val) {
         this.$store.commit('modal/changeLoginModal', val)
@@ -34,6 +54,18 @@ export default {
       get() {
         return this.$store.state.modal.loginModal
       },
+    },
+  },
+
+  mounted() {
+    console.log('$auth', this.$auth)
+  },
+
+  methods: {
+    getTabComponent(comp) {
+      return this.currentComp === comp
+        ? 'active text-blue-600 bg-gray-100'
+        : 'hover:text-gray-600 hover:bg-gray-50'
     },
   },
 }

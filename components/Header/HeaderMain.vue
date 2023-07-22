@@ -103,11 +103,11 @@
 
           <button class="mr-10 dropdown__action">
             <div
-              v-if="userIsLoggedIn"
+              v-if="$auth.loggedIn"
               class="flex flex-col justify-center items-center"
             >
               <img src="@/assets/img/user.svg" class="h-8 w-8" />
-              <span class="text-sm">Khakimov</span>
+              <span class="text-sm">{{ $auth.user.phone }}</span>
             </div>
             <div v-else class="flex flex-col justify-center items-center">
               <img
@@ -117,7 +117,7 @@
               />
               <span class="text-sm"> Войти </span>
             </div>
-            <div v-if="userIsLoggedIn" class="dropdown__list">
+            <div v-if="$auth.loggedIn" class="dropdown__list">
               <nuxt-link class="dropdown__item" to="/profile"
                 >Profile</nuxt-link
               >
@@ -176,7 +176,6 @@ export default {
     ...mapGetters({
       totalCartProductsCount: 'cart/getTotalProductsCount',
       totalFavoritiesCount: 'favorities/getTotalCount',
-      userIsLoggedIn: 'auth/getUserIsLoggedIn',
     }),
 
     getSelection() {
@@ -257,7 +256,7 @@ export default {
     },
     logout() {
       userLogout()
-      this.$store.dispatch('auth/LOGOUT')
+
       this.$router.push(this.localePath('/'))
     },
 

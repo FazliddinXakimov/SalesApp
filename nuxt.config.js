@@ -7,7 +7,7 @@ export default {
   },
   privateRuntimeConfig: {
     axios: {
-      baseURL: process.env.baseURL, 
+      baseURL: process.env.baseURL,
     },
   },
   server: {
@@ -15,7 +15,7 @@ export default {
     host: '0.0.0.0',
   },
   target: 'server',
-  ssr: true,
+  ssr: false,
   head: {
     title: 'SalesApp',
     htmlAttrs: {
@@ -126,7 +126,93 @@ export default {
     // debug: process.env.NODE_ENV !== 'production',
   },
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/i18n', '@nuxtjs/auth-next'],
+  auth: {
+    strategies: {
+      login: {
+        scheme: 'refresh',
+        token: {
+          property: 'access',
+          maxAge: 60 * 3,
+          name: 'Authorization',
+        },
+        refreshToken: {
+          property: 'refresh',
+          data: 'refresh',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: {
+          property: false,
+        },
+
+        endpoints: {
+          login: { url: 'users/login/', method: 'post' },
+          logout: false,
+          refresh: { url: 'users/refresh/', method: 'post' },
+          user: { url: 'users/get_me/', method: 'get' },
+        },
+
+        redirect: {
+          home: '/',
+        },
+      },
+      register: {
+        scheme: 'refresh',
+        token: {
+          property: 'access',
+          maxAge: 60 * 3,
+          name: 'Authorization',
+        },
+        refreshToken: {
+          property: 'refresh',
+          data: 'refresh',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+
+        endpoints: {
+          login: { url: 'users/register/', method: 'post' },
+          refresh: { url: 'users/refresh/', method: 'post' },
+          logout: false,
+          user: false,
+        },
+
+        redirect: {
+          home: '/',
+        },
+      },
+      registerVerify: {
+        scheme: 'refresh',
+        token: {
+          property: 'token.access',
+          maxAge: 60 * 3,
+          name: 'Authorization',
+        },
+        refreshToken: {
+          property: 'token.refresh',
+          data: 'refresh',
+          maxAge: 60 * 60 * 24 * 30,
+        },
+        user: {
+          property: false,
+        },
+
+        endpoints: {
+          login: { url: 'users/register/', method: 'post' },
+          refresh: { url: 'users/refresh/', method: 'post' },
+          user: { url: 'users/get_me/', method: 'get' },
+          logout: false,
+        },
+
+        redirect: {
+          home: '/',
+        },
+      },
+    },
+  },
+
+  router: {
+    middleware: ['auth-middleware'],
+  },
 
   build: {
     transpile: ['defu'],

@@ -145,7 +145,6 @@
 import { required, minLength, sameAs } from 'vuelidate/lib/validators'
 // eslint-disable-next-line no-unused-vars
 import SuccessModal from '@/components/SuccessModal.vue'
-import useJwt from '@/jwt/useJwtService'
 
 export default {
   components: {
@@ -179,7 +178,6 @@ export default {
           minLength: minLength(6),
         },
         repeatPassword: {
-          
           required,
           minLength: minLength(6),
           sameAsPassword: sameAs('password'),
@@ -194,7 +192,7 @@ export default {
       if (!this.$v.newPassword.$invalid) {
         await this.$store.dispatch('profile/UPDATE_USER_PASSWORD', {
           new_password: this.newPassword.password,
-          user_id: useJwt.getUserData().user_data.id,
+          user_id: this.$auth.user.id,
         })
 
         this.successModal = true

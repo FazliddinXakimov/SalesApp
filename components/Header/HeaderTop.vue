@@ -51,10 +51,33 @@
         </button>
       </div>
       <div class="768:flex items-center hidden">
-        <button class="mr-2">
-          <img src="@/assets/img/header-phone.svg" class="h-5 w-5" />
+        <div>
+          <button class="mr-2">
+            <img src="@/assets/img/header-phone.svg" class="h-5 w-5" />
+          </button>
+          <a class="" href="tel:+998997293417">+998 99 729 34 17</a>
+        </div>
+        <button class="ml-2 dropdown__action hidden 768:inline-block">
+          <div class="flex justify-between items-center text-white">
+            <img
+              src="@/assets/img/globus.svg"
+              class="h-5 w-5 inline-block mr-1"
+            />
+
+            {{ getCurrentLang?.title }}
+          </div>
+
+          <div class="dropdown__list block z-40">
+            <button
+              v-for="(lang, index) in getLangOptions"
+              :key="index"
+              class="dropdown__item"
+              @click="handleChangeLang(lang.key)"
+            >
+              {{ lang.title }}
+            </button>
+          </div>
         </button>
-        <a class="" href="tel:+998997293417">+998 99 729 34 17</a>
       </div>
     </div>
   </nav>
@@ -65,17 +88,33 @@ import { mapGetters } from 'vuex'
 
 export default {
   components: {},
+
   computed: {
     ...mapGetters({
       selectedRegion: 'header/GET_SELECTED_REGION',
       regions_list: 'header/GET_REGIONS_LIST',
       dropdownRegions: 'header/GET_DROPDOWN_REGIONS',
+      lang: 'header/GET_LANG',
+      langOptions: 'header/GET_LANG_OPTIONS',
     }),
+
+    getCurrentLang() {
+      return this.langOptions.find((l) => l.key === this.lang)
+    },
+
+    getLangOptions() {
+      return this.langOptions.filter((l) => l.key !== this.lang)
+    },
   },
 
   methods: {
     handleSelectRegion(value) {
       this.$store.commit('header/SELECT_REGION', value)
+    },
+
+    async handleChangeLang(lang) {
+      await this.$i18n.setLocale(lang)
+      this.$store.commit('header/SET_LANG', lang)
     },
   },
 }
