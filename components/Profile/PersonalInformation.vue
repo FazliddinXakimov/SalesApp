@@ -7,15 +7,16 @@
         :class="{ error_field: $v.personalData.phone_number.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Phone
+          Phone{{ personalData.phone_number }}
         </label>
         <input
           id="name"
           v-model="personalData.phone_number"
           v-mask="'+998 ## ### ## ##'"
-          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:shadow-outline"
           type="tel"
           placeholder="+998 ## ### ## ##"
+          @keyup="keyupLoginPhone"
         />
         <small
           v-show="
@@ -46,7 +47,7 @@
         <input
           id="name"
           v-model="personalData.first_name"
-          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
         />
         <small
@@ -75,14 +76,14 @@
         <input
           id="name"
           v-model="personalData.username"
-          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          class="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
         />
       </div>
     </div>
 
-    <div class="flex justify-between items-center">
-      <div class="w-full mr-10">
+    <div class="flex justify-between mt-6">
+      <div class="w-full mr-8">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           Region
         </label>
@@ -95,7 +96,7 @@
           @input="changeRegion"
         />
       </div>
-      <div class="w-full">
+      <div class="w-full mr-8">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           District
         </label>
@@ -108,14 +109,14 @@
           :disabled="isDistrictDisable"
         />
       </div>
-    </div>
-    <div>
-      <button
-        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full my-2 w-96"
-        @click="updateUserProfile"
-      >
-        Update
-      </button>
+      <div class="w-full">
+        <button
+          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-96"
+          @click="updateUserProfile"
+        >
+          Update
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -124,6 +125,7 @@
 // import Multiselect from 'vue-multiselect'
 import { required, minLength } from 'vuelidate/lib/validators'
 import vSelect from 'vue-select'
+import { formatUzbekPhoneNumber } from '@/utils/phone-format'
 
 export default {
   components: {
@@ -135,7 +137,7 @@ export default {
       personalData: {
         first_name: '',
         username: '',
-        phone_number: '',
+        phone_number: '+998 ',
         region: '',
         district: '',
       },
@@ -172,7 +174,11 @@ export default {
 
     this.personalData.username = this.userDetail.username
     this.personalData.first_name = this.userDetail.name
+
+    console.log('this.userDetail', this.userDetail)
     this.personalData.phone_number = this.userDetail.phone.replace('998', '')
+    console.log('personaldata.phone', this.personalData.phone_number)
+    console.log('replace', this.userDetail.phone.replace('998', ''))
     this.personalData.region = this.userDetail?.city?.region?.id
     await this.$store.dispatch(
       'stream/FETCH_DISTRICTS_LIST',
@@ -183,11 +189,18 @@ export default {
 
   methods: {
     changeRegion(region) {
-      // console.log('region', region)
       if (region) {
         this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region)
+        this.personalData.district = null
       } else {
-        this.order.district = null
+        this.personalData.district = null
+      }
+    },
+
+    keyupLoginPhone(e) {
+      const value = e.target.value
+      if (value.length < 5) {
+        e.target.value = '+998 '
       }
     },
 
@@ -212,7 +225,9 @@ export default {
       this.personalData.username = this.userDetail.username
       this.personalData.first_name = this.userDetail.name
 
-      this.personalData.phone_number = this.userDetail.phone
+      this.personalData.phone_number = formatUzbekPhoneNumber(
+        this.userDetail.phone
+      )
     },
   },
 }

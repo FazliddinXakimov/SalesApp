@@ -1,5 +1,5 @@
 <template>
-  <div class=" ml-r border p-4 rounded">
+  <div class="ml-r border p-4 rounded">
     <div class="text-lg font-bold mb-2">Цена</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
@@ -83,9 +83,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      producers: 'catalog/GET_PRODUCERS',
-      filter: 'catalog/GET_FILTER',
-      isIncludes: 'catalog/IS_INCLUDES_BRAND',
+      producers: 'seller/GET_PRODUCERS',
+      filter: 'seller/GET_FILTER',
+      isIncludes: 'seller/IS_INCLUDES_BRAND',
     }),
 
     minPrice: {
@@ -94,7 +94,7 @@ export default {
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           minPrice: val,
         })
         this.handleSetQuery({ minPrice: val })
@@ -106,7 +106,7 @@ export default {
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           maxPrice: val,
         })
 
@@ -120,40 +120,40 @@ export default {
       deep: true,
       handler() {
         this.$store.dispatch(
-          'catalog/FETCH_SELLER_PRODUCTS',
-          this.$route.query.catalog
+          'seller/FETCH_SELLER_PRODUCTS',
+          this.$route.params.id
         )
       },
     },
   },
 
   mounted() {
-    this.$store.dispatch('catalog/FETCH_PRODUCERS')
+    this.$store.dispatch('seller/FETCH_PRODUCERS')
 
     const routeQuery = this.$route.query
 
     if (routeQuery.brands) {
       const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
 
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         brands: integerBrands,
       })
     }
 
     if (routeQuery.sort) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         sort: routeQuery.sort,
       })
     }
 
     if (routeQuery.minPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         minPrice: routeQuery.minPrice,
       })
     }
 
     if (routeQuery.maxPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         maxPrice: routeQuery.maxPrice,
       })
     }
@@ -172,7 +172,7 @@ export default {
     },
 
     handleCheckProducer(id) {
-      this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
+      this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
       this.handleSetQuery()
     },
   },

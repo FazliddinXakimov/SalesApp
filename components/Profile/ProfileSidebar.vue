@@ -1,31 +1,40 @@
 <template>
   <div>
-    <div class="border rounded-md overflow-hidden">
-      <button
-        type="button"
-        class="block w-full cursor-pointer border p-2 text-left"
-        :class="getTabClass(1)"
-        @click="$emit('changeActiveTab', 1)"
-      >
-        Personal Information
-      </button>
-      <button
-        type="button"
-        class="block w-full cursor-pointer border p-2 text-left"
-        :class="getTabClass(2)"
-        @click="$emit('changeActiveTab', 2)"
-      >
-        Change Password
-      </button>
-      <button
-        type="button"
-        class="block w-full cursor-pointer border p-2 text-left"
-        :class="getTabClass(3)"
-        @click="$emit('changeActiveTab', 3)"
-      >
-        My Orders
-      </button>
-    </div>
+    <ul
+      class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 mb-5"
+    >
+      <li class="mr-2">
+        <span
+          href="#"
+          aria-current="page"
+          class="inline-block p-4 rounded-t-lg"
+          :class="getTabComponent(1)"
+          @click="$emit('changeActiveTab', 1)"
+        >
+          Personal Information</span
+        >
+      </li>
+      <li class="mr-2">
+        <span
+          href="#"
+          class="inline-block p-4 rounded-t-lg"
+          :class="getTabComponent(2)"
+          @click="$emit('changeActiveTab', 2)"
+        >
+          Change Password</span
+        >
+      </li>
+      <li class="mr-2">
+        <span
+          href="#"
+          class="inline-block p-4 rounded-t-lg"
+          :class="getTabComponent(3)"
+          @click="$emit('changeActiveTab', 3)"
+        >
+          My Orders</span
+        >
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -40,10 +49,10 @@ export default {
   computed: {},
 
   methods: {
-    getTabClass(tab) {
-      return this.activeTab === tab
-        ? 'bg-blue-500 text-white'
-        : 'hover:bg-neutral-100 hover:text-neutral-500'
+    getTabComponent(comp) {
+      return this.activeTab === comp
+        ? 'active text-blue-600 bg-gray-100'
+        : 'hover:text-gray-600 hover:bg-gray-50'
     },
   },
 }

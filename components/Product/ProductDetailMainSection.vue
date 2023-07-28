@@ -69,6 +69,20 @@
           </button>
         </div>
       </div>
+      <div
+        class="my-4 border flex justify-between items-center border rounded-md p-4"
+      >
+        <div class="flex items-center">
+          <img src="@/assets/img/seller.svg" class="w-10 h-10 mr-5" />
+          <span class="font-bold"> {{ product.seller.title }}</span>
+        </div>
+        <button
+          class="bg-transparent text-green-700 hover:bg-green-700 hover:text-white font-semibold py-2 px-4 border border-green-500 rounded"
+          @click="$router.push(localePath(`/seller/${product.seller.id}`))"
+        >
+          Do'kon sahifasi
+        </button>
+      </div>
     </div>
 
     <BuyOneClickModal :product="product" />

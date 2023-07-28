@@ -1,8 +1,11 @@
 <template>
   <div>
     <Banner :banners="banners" @handleClickBanner="handleClickBanner" />
-    <Brands :brands="brands" />
-    <Products :all-products="allProducts" />
+    <!-- <Brands :brands="brands" /> -->
+    <Products
+      :all-products="allProducts"
+      @handleClickBanner="handleClickBanner"
+    />
 
     <div class="mb-20"></div>
   </div>
@@ -11,12 +14,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import Banner from '@/components/Home/Banner.vue'
-import Brands from '@/components/Home/Brands.vue'
 import Products from '@/components/Home/Products.vue'
 
 export default {
   name: 'IndexPage',
-  components: { Banner, Brands, Products },
+  components: { Banner, Products },
   data() {
     return {
       swiperOptions: {
@@ -57,29 +59,38 @@ export default {
   async mounted() {
     this.$store.commit('SET_MAIN_LOADING', true)
 
+    console.log('this.auth', this.$auth)
     await Promise.allSettled([
       this.$store.dispatch('references/FETCH_TOP_CATEGORIES'),
       this.$store.dispatch('references/FETCH_ROOT_CATEGORIES'),
       this.$store.dispatch('header/FETCH_REGIONS_LIST'),
       this.$store.dispatch('home/FETCH_MAIN_PRODUCTS'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
-      this.$store.dispatch('home/FETCH_BRANDS'),
     ])
 
     this.$store.commit('SET_MAIN_LOADING', false)
   },
   methods: {
     handleClickBanner(banner) {
-      const { catalog, product } = this.$const.linkName
-      const linkName = banner.link_type === catalog ? catalog : product
+      const { product } = this.$const.linkNames
 
-      this.$router.push(
-        this.localePath({
-          name: `${linkName}-id`,
-          params: { id: banner.link_slug },
-          query: { catalog: banner.link_item },
-        })
-      )
+      if (banner.link_type === product) {
+        this.$router.push(
+          this.localePath({
+            name: `product-id`,
+            params: { id: banner.link_slug },
+            query: { id: banner.link_item },
+          })
+        )
+      } else {
+        this.$router.push(
+          this.localePath({
+            name: `catalog-id`,
+            params: { id: banner.link_slug },
+            query: { catalog: banner.link_item },
+          })
+        )
+      }
     },
   },
 }

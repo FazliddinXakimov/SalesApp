@@ -16,26 +16,26 @@
           id="newPassword"
           v-model.trim="newPassword.password"
           class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          :type="passwordType"
+          :type="passwordType1"
           placeholder=""
         />
         <span
           class="absolute right-4 top-2"
           @click="
-            passwordType == 'password'
-              ? (passwordType = 'text')
-              : (passwordType = 'password')
+            passwordType1 == 'password'
+              ? (passwordType1 = 'text')
+              : (passwordType1 = 'password')
           "
         >
           <img
-            v-if="passwordType == 'password'"
+            v-if="passwordType1 == 'password'"
             src="@/assets/img/eye.svg"
             alt="eye-icon"
             class="cursor-pointer w-5"
           />
 
           <img
-            v-if="passwordType == 'text'"
+            v-if="passwordType1 == 'text'"
             src="@/assets/img/eye-slash.svg"
             alt="eye-slash-icon"
             class="cursor-pointer w-5"
@@ -75,26 +75,26 @@
             id="newPassword"
             v-model.trim="newPassword.repeatPassword"
             class="appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-            :type="passwordType"
+            :type="passwordType2"
             placeholder=""
           />
           <span
             class="absolute right-4 top-2"
             @click="
-              passwordType == 'password'
-                ? (passwordType = 'text')
-                : (passwordType = 'password')
+              passwordType2 == 'password'
+                ? (passwordType2 = 'text')
+                : (passwordType2 = 'password')
             "
           >
             <img
-              v-if="passwordType == 'password'"
+              v-if="passwordType2 == 'password'"
               src="@/assets/img/eye.svg"
               alt="eye-icon"
               class="cursor-pointer w-5"
             />
 
             <img
-              v-if="passwordType == 'text'"
+              v-if="passwordType2 == 'text'"
               src="@/assets/img/eye-slash.svg"
               alt="eye-slash-icon"
               class="cursor-pointer w-5"
@@ -156,7 +156,8 @@ export default {
         password: null,
         repeatPassword: null,
       },
-      passwordType: 'password',
+      passwordType1: 'password',
+      passwordType2: 'password'
     }
   },
 

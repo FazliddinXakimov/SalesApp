@@ -1,16 +1,19 @@
 <template>
-  <div class="flex justify-between">
-    <div class="768:basis-1/4">
-      <ProfileSideBar
-        :active-tab="activeTab"
-        @changeActiveTab="changeActiveTab"
-      />
-    </div>
+  <div>
+    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <div>
+      <div>
+        <ProfileSideBar
+          :active-tab="activeTab"
+          @changeActiveTab="changeActiveTab"
+        />
+      </div>
 
-    <div class="768:basis-3/4 pl-4">
-      <PersonalInformation v-if="activeTab === 1" />
-      <UpdatePassword v-else-if="activeTab === 2" />
-      <MyOrders v-else-if="activeTab === 3" :orders="myOrders" />
+      <div>
+        <PersonalInformation v-if="activeTab === 1" />
+        <UpdatePassword v-else-if="activeTab === 2" />
+        <MyOrders v-else-if="activeTab === 3" :orders="myOrders" />
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +34,11 @@ export default {
   data() {
     return {
       activeTab: 1,
+      breadCrumb: [
+        {
+          title: 'Profile',
+        },
+      ],
     }
   },
 

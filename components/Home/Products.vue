@@ -5,7 +5,7 @@
         {{ data.title }}
       </h1>
 
-      <div class="grid 1024:grid-cols-4 768:grid-cols-3 grid-cols-1 gap-4">
+      <div class="grid 1024:grid-cols-5 768:grid-cols-4 grid-cols-1 gap-4">
         <ProductCard
           v-for="(product, ind) in data.products"
           :key="ind"
@@ -16,7 +16,7 @@
         <img
           :src="data.inline_banner.image"
           class="w-full h-96 cursor-pointer"
-          @click="handleClickBanner(data.inline_banner)"
+          @click="$emit('handleClickBanner', data.inline_banner)"
         />
       </div>
     </div>

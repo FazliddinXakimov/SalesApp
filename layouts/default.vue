@@ -32,6 +32,6 @@ export default {
 
 <style scoped>
 .default_view__height {
-  min-height: 100vh;
+  min-height: 70vh;
 }
 </style>

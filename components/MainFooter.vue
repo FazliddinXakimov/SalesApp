@@ -1,75 +1,147 @@
 <template>
-  <footer class="bg-black ">
+  <footer class="bg-black text-white">
     <div class="mx-auto w-full max-w-screen-xl">
-      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
         <div>
-          <h2 class="mb-6 text-sm font-semibold text-white uppercase">
-            Company
-          </h2>
-          <ul class="text-white font-medium">
+          <h2 class="mb-6 text-sm font-semibold uppercase">Social Media</h2>
+          <ul class="font-medium">
             <li class="mb-4">
-              <a href="#" class="hover:underline">About</a>
+              <a
+                :href="footerData.youtube"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/youtube.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Youtube</span>
+              </a>
             </li>
             <li class="mb-4">
-              <a href="#" class="hover:underline">Careers</a>
+              <a
+                :href="footerData.instagram"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/instagram.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Instagram</span>
+              </a>
             </li>
             <li class="mb-4">
-              <a href="#" class="hover:underline">Brand Center</a>
+              <a
+                :href="footerData.facebook"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/facebook.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Facebook</span>
+              </a>
             </li>
             <li class="mb-4">
-              <a href="#" class="hover:underline">Blog</a>
+              <a
+                :href="footerData.telegram"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/telegram.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Telegram</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="mb-6 text-sm font-semibold uppercase">Legal</h2>
+          <ul class="font-medium">
+            <li class="mb-4">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'about-id',
+                    params: { id: footerData.for_advertisers.slug },
+                  })
+                "
+                class="hover:underline"
+                >{{ footerData.for_advertisers.title }}</nuxt-link
+              >
+            </li>
+            <li class="mb-4">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'about-id',
+                    params: { id: footerData.privacy_policy.slug },
+                  })
+                "
+                class="hover:underline"
+                >{{ footerData.privacy_policy.title }}</nuxt-link
+              >
+            </li>
+            <li class="mb-4">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'about-id',
+                    params: { id: footerData.public_offer.slug },
+                  })
+                "
+                >{{ footerData.public_offer.title }}</nuxt-link
+              >
+            </li>
+            <li class="mb-4">
+              <nuxt-link
+                :to="{ path: localePath('/sell-with-us') }"
+                class="hover:underline"
+                >{{ footerData.sell_with_us.title }}</nuxt-link
+              >
             </li>
           </ul>
         </div>
         <div>
-          <h2 class="mb-6 text-sm font-semibold text-white uppercase">
-            Help center
-          </h2>
-          <ul class="text-white font-medium">
+          <h2 class="mb-6 text-sm font-semibold uppercase">Download</h2>
+
+          <ul class="font-medium">
             <li class="mb-4">
-              <a href="#" class="hover:underline">Discord Server</a>
+              <a
+                :href="footerData.google_play"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/google-play.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Google Play</span>
+              </a>
             </li>
             <li class="mb-4">
-              <a href="#" class="hover:underline">Twitter</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Facebook</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Contact Us</a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="mb-6 text-sm font-semibold text-white uppercase">Legal</h2>
-          <ul class="text-white font-medium">
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Privacy Policy</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Licensing</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Terms &amp; Conditions</a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="mb-6 text-sm font-semibold text-white uppercase">
-            Download
-          </h2>
-          <ul class="text-white font-medium">
-            <li class="mb-4">
-              <a href="#" class="hover:underline">iOS</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Android</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">Windows</a>
-            </li>
-            <li class="mb-4">
-              <a href="#" class="hover:underline">MacOS</a>
+              <a
+                :href="footerData.app_store"
+                target="_blank"
+                class="flex items-center"
+              >
+                <img
+                  src="@/assets/img/app-store.svg"
+                  alt=""
+                  class="w-10 h-10 mr-3"
+                />
+                <span>Google Play</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -79,5 +151,21 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+
+export default {
+  data() {
+    return {}
+  },
+
+  computed: {
+    ...mapGetters({
+      footerData: 'references/GET_FOOTER',
+    }),
+  },
+
+  mounted() {
+    this.$store.dispatch('references/FETCH_FOOTER')
+  },
+}
 </script>

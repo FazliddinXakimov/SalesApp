@@ -36,3 +36,21 @@ a:hover {
 .swiper-button-next:after {
   content: '' !important;
 }
+
+.vs--searchable .vs__dropdown-toggle {
+  border: 1px solid #e5e7eb;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.vs__selected {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vs__search {
+  margin: 0 !important;
+  padding: 0 !important;
+}

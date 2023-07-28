@@ -1,23 +1,26 @@
 <template>
   <div>
     <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+
+    <div class="flex justify-center text-xl font-bold">
+      {{ products.seller_data.title }}
+    </div>
     <div>
       <div class="flex justify-start mb-5"></div>
       <div class="flex justify-end items-center mb-4">
         <span class="w-64">
-          {{ sort }}
           <v-select
             v-model="sort"
             :options="filterOptions"
             placeholder="Select an option"
-            :reduce="(value) => value.id"
+            :reduce="(value) => value.key"
             label="title"
           />
         </span>
       </div>
       <div class="flex justify-between">
         <div class="basis-1/4">
-          <CatalogFilter />
+          <SellerFilter />
         </div>
         <div class="basis-3/4">
           <div
@@ -30,7 +33,6 @@
               :product="product"
             />
           </div>
-
           <div v-else class="flex justify-center flex-col items-center mt-32">
             <img src="@/assets/img/empty-catalog.svg" class="h-36 w-36" />
             <div class="font-medium text-lg">
@@ -61,14 +63,14 @@
 <script>
 import vSelect from 'vue-select'
 import GlobalPagination from '@/components/GlobalPagination.vue'
-import CatalogFilter from '@/components/Catalog/CatalogFilter.vue'
+import SellerFilter from '@/components/Seller/SellerFilter.vue'
 
 export default {
   name: 'CatalogDetails',
   components: {
     GlobalPagination,
     vSelect,
-    CatalogFilter,
+    SellerFilter,
   },
   data() {
     return {
@@ -106,19 +108,19 @@ export default {
 
   computed: {
     products() {
-      return this.$store.getters['catalog/GET_PRODUCTS']
+      return this.$store.getters['seller/GET_PRODUCTS']
     },
 
     pageSize() {
-      return this.$store.getters['catalog/GET_FILTER'].page_size
+      return this.$store.getters['seller/GET_FILTER'].page_size
     },
     page: {
       get() {
-        return this.$store.getters['catalog/GET_FILTER'].page
+        return this.$store.getters['seller/GET_FILTER'].page
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           page: val,
         })
 
@@ -128,11 +130,11 @@ export default {
 
     sortType: {
       get() {
-        return this.$store.getters['catalog/GET_FILTER']
+        return this.$store.getters['seller/GET_FILTER']
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           sort: val,
         })
         this.handleSetQuery({ sort: val })
@@ -149,35 +151,37 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch(
-      'catalog/FETCH_CATALOG_PRODUCTS',
-      this.$route.query.catalog
-    )
-    this.$store.dispatch('catalog/FETCH_PRODUCERS')
+    // console.log('this.$route', this.$route)
+    this.$store.dispatch('seller/FETCH_SELLER_PRODUCTS', this.$route.params.id)
+    this.$store.dispatch('seller/FETCH_PRODUCERS')
 
     const routeQuery = this.$route.query
     if (routeQuery.brands) {
-      const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
+      let integerBrands
 
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      if (routeQuery.brands.length > 1)
+        integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
+      else integerBrands = routeQuery.brands
+
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         brands: integerBrands,
       })
     }
 
     if (routeQuery.sort) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         sort: routeQuery.sort,
       })
     }
 
     if (routeQuery.minPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         minPrice: routeQuery.minPrice,
       })
     }
 
     if (routeQuery.maxPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
+      this.$store.commit('seller/SET_FILTER_ITEM', {
         maxPrice: routeQuery.maxPrice,
       })
     }

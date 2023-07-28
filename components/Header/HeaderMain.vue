@@ -151,7 +151,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { userLogout } from '@/jwt/userData'
+
 import { variables } from '@/utils/constants'
 
 export default {
@@ -255,7 +255,7 @@ export default {
       }
     },
     logout() {
-      userLogout()
+      this.$auth.logout()
 
       this.$router.push(this.localePath('/'))
     },

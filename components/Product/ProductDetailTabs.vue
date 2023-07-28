@@ -26,17 +26,6 @@
             >Instruction</a
           >
         </li>
-        <li class="mr-2">
-          <a
-            class="inline-block p-4 border-b-2 rounded-t-lg"
-            :class="{
-              'text-blue-600 border-blue-600 active dark:text-blue-500 dark:border-blue-500':
-                activeTab === 3,
-            }"
-            @click="handleSelectTab(3)"
-            >Comments</a
-          >
-        </li>
       </ul>
     </div>
     <div class="mt-5">

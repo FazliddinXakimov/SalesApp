@@ -25,3 +25,4 @@ export function returnNumber(str) {
     .trim()
     .replace(/[^0-9]/g, '')
 }
+

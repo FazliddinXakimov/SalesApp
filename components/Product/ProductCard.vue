@@ -1,15 +1,17 @@
 <template>
-  <div class="bg-white border border-gray-400 overflow-hidden rounded mx-2">
-    <nuxt-link :to="`/product/detail/${product.id}`">
-      <img :src="product.image" class="h-48 object-contain mx-auto" />
-    </nuxt-link>
+  <div
+    class="bg-white border border-gray-200 overflow-hidden rounded-xl mx-2 cursor-pointer shadow-md hover:-translate-y-1 duration-200"
+    @click="toDetailPage(product)"
+  >
+    <img :src="product.image" class="h-48 object-contain mx-auto" />
+
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <h1 class="text-center text-gray-800 mt-1 cut-text cursor-pointer">
-          <div @click="toDetailPage(product)">
-            {{ product.title }}
-          </div>
-        </h1>
+        <p
+          class="text-center text-gray-800 mt-1 truncate text-ellipsis cursor-pointer"
+        >
+          {{ product.title }}
+        </p>
         <p class="text-center text-gray-800 mt-1">
           {{ product.sale_price | numberFilter }} sum
         </p>
@@ -20,8 +22,15 @@
         </p>
       </div>
       <div class="inline-flex items-center mt-2"></div>
-      <div class="flex justify-between items-center mt-4">
-        <div v-if="!isCart" class="cursor-pointer" @click="addProductToCart">
+      <div
+        class="flex justify-between items-center mt-4"
+        @click.stop="() => {}"
+      >
+        <div
+          v-if="!isCart"
+          class="cursor-pointer"
+          @click.stop="addProductToCart"
+        >
           <img src="@/assets/img/shopping-cart.svg" class="w-7 h-7" />
         </div>
         <div
@@ -30,7 +39,7 @@
         >
           <button
             class="w-8 flex items-center justify-center"
-            @click="handleDecrementProduct"
+            @click.stop="handleDecrementProduct"
           >
             <img src="@/assets/img/minus.svg" class="w-4 h-4" />
           </button>
@@ -39,7 +48,7 @@
           </div>
           <button
             class="w-8 flex items-center justify-center"
-            @click="hanleIncrementProduct"
+            @click.stop="hanleIncrementProduct"
           >
             <img src="@/assets/img/plus.svg" class="w-4 h-4" />
           </button>
@@ -47,7 +56,7 @@
 
         <button
           class="flex items-center justify-center"
-          @click="handleToggleFavorite"
+          @click.stop="handleToggleFavorite"
         >
           <img
             v-if="isHaveFavorite"
@@ -124,8 +133,8 @@ export default {
 .cut-text {
   text-overflow: ellipsis;
   overflow: hidden;
-  /* width: 160px; */
-  /* height: 1.2em; */
+  width: 160px;
+  height: 1.2em;
   white-space: nowrap;
 }
 </style>
