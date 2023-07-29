@@ -97,7 +97,7 @@
         personalData.phone field is required
       </small>
     </div>
-    <div :class="{ error_field: $v.personalData.phone.$error }">
+    <div>
       <label for="message" class="block text-gray-700 text-sm font-bold mb-2"
         >Comment</label
       >

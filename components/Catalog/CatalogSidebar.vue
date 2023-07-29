@@ -18,7 +18,7 @@
           </div>
         </div>
         <div
-          class="flex h-full w-[540px] justify-between overflow-auto bg-white py-8 text-primary"
+          class="768:flex h-full w-[540px] justify-between overflow-auto bg-white py-8 text-primary hidden"
         >
           <div class="flex flex-col gap-8">
             <div v-if="currentCategory" class="px-6 last:pb-12">

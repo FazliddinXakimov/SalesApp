@@ -2,9 +2,9 @@
   <div>
     <nav id="header" class="bg-gray-300 w-full top-8 left-0 border-b z-20">
       <div
-        class="max-w-screen-xl flex items-center justify-between mx-auto py-3"
+        class="max-w-screen-xl flex items-center justify-between mx-auto py-3 px-2"
       >
-        <div class="768:flex hidden basis-1/6">
+        <div class="768:flex hidden 768:basis-1/6">
           <nuxt-link
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
@@ -13,16 +13,18 @@
           </nuxt-link>
         </div>
 
-        <div class="flex justify-start items-center basis-4/6">
+        <div
+          class="flex 768:justify-start justify-between items-center 768:basis-4/6 w-full"
+        >
           <button
             class="flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded-lg mr-2"
             @click="catalogModal = true"
           >
-            <img src="@/assets/img/catalog.svg" class="w-4 h-4 ml-3 mr-2" />
+            <img src="@/assets/img/catalog.svg" class="w-4 h-5 ml-3 mr-2" />
             <span class="mr-3 hidden 1024:inline-block"> Catalog </span>
           </button>
 
-          <div class="relative w-full mr-10">
+          <div class="relative w-full 768:mr-10">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
@@ -241,11 +243,11 @@ export default {
           })
           this.searchOptions = response
           this.searchCategoryOptions = response.filter(
-            (r) => r.type === variables.searchOptions.catalog
+            (r) => r.type === variables.linkNames.catalog
           )
 
           this.searchProductsOptions = response.filter(
-            (r) => r.type === variables.searchOptions.product
+            (r) => r.type === variables.linkNames.product
           )
         }, 300)
       } else {
@@ -275,7 +277,8 @@ export default {
       this.$router.push(
         this.localePath({
           name: `product-id`,
-          params: { id: product.id },
+          params: { id: product.slug },
+          query: { id: product.id },
         })
       )
       this.isFocus = false

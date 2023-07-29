@@ -1,7 +1,7 @@
 <template>
   <nav class="bg-slate-700 py-1 w-full top-0 z-20">
     <div
-      class="flex items-center justify-between mx-auto max-w-screen-xl text-white"
+      class="flex items-center justify-between mx-auto max-w-screen-xl text-white px-3"
     >
       <div class="768:hidden block">SalesAPP</div>
       <div class="768:hidden flex items-center">

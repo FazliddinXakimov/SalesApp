@@ -1,19 +1,18 @@
 <template>
   <div class="mt-10">
-    <BreadCrumb :bread-crumb="breadCrumb" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
     <div v-if="products.length > 0" class="swiper-products">
       <h1 class="text-2xl mb-4">Favorite Products</h1>
-      <div class="swiper">
-        <swiper class="swiper-wrapper" :options="swiperOptions">
-          <swiper-slide
-            v-for="(product, index) in products"
-            :key="index"
-            class="swiper-slide product-card-item"
-          >
-            <ProductCard :product="product" />
-          </swiper-slide>
-        </swiper>
+      <div
+        class="grid 1024:grid-cols-5 768:grid-cols-4 640:grid-cols-2 grid-cols-1 gap-4"
+      >
+        <ProductCard
+          v-for="(product, index) in products"
+          :key="index"
+          :product="product"
+        />
       </div>
+
       <!-- v-if="products.length > 6" -->
       <div>
         <div :class="`swiper-button-prev button-prev`"></div>

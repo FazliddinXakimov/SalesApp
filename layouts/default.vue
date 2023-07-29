@@ -5,7 +5,7 @@
     <HeaderMain />
 
     <CatalogTop />
-    <div class="max-w-screen-xl mx-auto default_view__height">
+    <div class="max-w-screen-xl mx-auto default_view__height px-3">
       <Nuxt />
     </div>
     <MainFooter />
