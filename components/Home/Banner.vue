@@ -10,8 +10,12 @@
           />
         </swiper-slide>
 
-        <div slot="button-next" class="swiper-button-next"></div>
-        <div slot="button-prev" class="swiper-button-prev"></div>
+        <div slot="button-next" class="swiper-button-next">
+          <img src="@/assets/img/arrow-left.svg" class="w-4 h-4" />
+        </div>
+        <div slot="button-prev" class="swiper-button-prev">
+          <img src="@/assets/img/arrow-left.svg" class="w-4 h-4 bg-green-600" />
+        </div>
       </swiper>
     </div>
   </div>

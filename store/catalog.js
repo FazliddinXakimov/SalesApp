@@ -12,7 +12,7 @@ export const state = () => ({
     sort: null,
     brands: [],
     page: 1,
-    page_size: 4,
+    page_size: 8,
   },
   producers: [],
 

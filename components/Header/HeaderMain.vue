@@ -9,7 +9,9 @@
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
           >
-            <span class="text-2xl font-semibold whitespace-nowrap">Brand</span>
+            <span class="1024:text-2xl text-xl font-semibold whitespace-nowrap"
+              >Brand</span
+            >
           </nuxt-link>
         </div>
 
@@ -21,10 +23,12 @@
             @click="catalogModal = true"
           >
             <img src="@/assets/img/catalog.svg" class="w-4 h-5 ml-3 mr-2" />
-            <span class="mr-3 hidden 1024:inline-block"> Catalog </span>
+            <span class="mr-3 hidden 1024:inline-block">
+              {{ $t('catalog') }}
+            </span>
           </button>
 
-          <div class="relative w-full 768:mr-10">
+          <div class="relative w-full 1024:mr-10 mr-5">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
@@ -41,7 +45,6 @@
                     @input="handleSearch"
                     @focus="isFocus = true"
                   />
-                  <!-- @blur="isFocus = false" -->
                 </div>
               </div>
             </div>
@@ -50,7 +53,7 @@
               class="absolute overflow-x-auto top-12 left-0 z-30 max-h-96 w-full overflow-scroll rounded-lg bg-white border border-neutral-light p-4 !pb-0 shadow-md max-laptop:!fixed"
             >
               <div v-if="searchCategoryOptions.length">
-                <div class="text-lg font-bold">Category</div>
+                <div class="text-lg font-bold">{{ $t('category') }}</div>
                 <div
                   v-for="(category, index) in searchCategoryOptions"
                   :key="index"
@@ -63,7 +66,7 @@
                 </div>
               </div>
               <div v-if="searchProductsOptions.length">
-                <div class="text-lg font-bold">Products</div>
+                <div class="text-lg font-bold">{{ $t('products') }}</div>
                 <div
                   v-for="(product, index) in searchProductsOptions"
                   :key="index"
@@ -87,7 +90,7 @@
         </div>
         <div class="768:flex item-center justify-between hidden basis-1/6">
           <button
-            class="mr-10"
+            class="1024:mr-10 mr-3"
             @click="$router.push(localePath(`/favorities`))"
           >
             <div class="flex flex-col justify-center items-center">
@@ -99,11 +102,11 @@
                 </BadgeComp>
               </span>
 
-              <span class="text-sm">Избранное </span>
+              <span class="text-sm">{{ $t('favorities') }} </span>
             </div>
           </button>
 
-          <button class="mr-10 dropdown__action">
+          <button class="1024:mr-10 mr-3 dropdown__action">
             <div
               v-if="$auth.loggedIn"
               class="flex flex-col justify-center items-center"
@@ -135,7 +138,7 @@
                   {{ totalCartProductsCount }}
                 </BadgeComp>
               </span>
-              <span class="text-sm"> Корзина </span>
+              <span class="text-sm"> {{ $t('basket') }} </span>
             </div>
           </button>
         </div>

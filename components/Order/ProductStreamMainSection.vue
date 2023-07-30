@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div class="flex justify-between">
+    <div class="960:flex justify-between">
       <div class="768:basis-5/12">
         <ProductImages :images="product.images" :name="product.title" />
       </div>
-      <div class="768:basis-3/12 pl-4">
-        <div class="text-xl mb-2 font-bold">{{ product.title }}</div>
+      <div class="768:basis-3/12 pl-4 mt-10 960:mt-0">
+        <div class="text-xl mb-2 font-bold text-center 960:text-start">
+          {{ product.title }}
+        </div>
 
         <div class="text-lg mt-10 mb-5">Характеристики:</div>
         <ul class="list-disc">
@@ -19,7 +21,7 @@
         </ul>
       </div>
 
-      <div class="768:basis-4/12">
+      <div class="768:basis-4/12 mt-10 960:mt-0">
         <div class="border rounded p-4">
           <div class="mb-3">
             <div class="relative flex justify-start items-stretch">
@@ -72,7 +74,7 @@
         </div>
       </div>
     </div>
-    <StreamOrderModal :coupon-code="coupon_code" />
+    <StreamOrderModal :coupon-code="coupon_code" :product="product" />
   </div>
 </template>
 
@@ -86,7 +88,6 @@ export default {
   components: {
     ProductImages,
     StreamOrderModal,
-
   },
 
   props: {
@@ -128,7 +129,6 @@ export default {
       return this.$store.state.cart.product_ids.includes(this.product.id)
     },
 
-
     streamOrderModal: {
       set(val) {
         this.$store.commit('modal/changeStreamOrderModal', val)
@@ -138,7 +138,6 @@ export default {
       },
     },
   },
-
 
   methods: {
     async handleCheckCoupon() {

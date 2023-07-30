@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="getTotalCountOfPages > 1"
-    class="flex items-center justify-center border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+    class="flex items-center justify-center bg-white px-4 py-3 sm:px-6"
   >
     <nav
       class="isolate inline-flex -space-x-px rounded-md shadow-sm"

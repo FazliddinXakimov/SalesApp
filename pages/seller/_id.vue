@@ -206,11 +206,4 @@ export default {
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped src="@/assets/scss/Catalog.scss"></style>
-<style src="vue-select/dist/vue-select.css"></style>
-<!-- <style>
-.multiselect__tags {
-  border: 1px solid #6b7280 !important;
-}
-</style> -->

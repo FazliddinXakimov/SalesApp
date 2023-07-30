@@ -60,39 +60,28 @@
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           Region
         </label>
-
-        <multiselect
+        <v-select
           v-model="order.region"
-          class="multiselect__input"
           :options="regions"
+          placeholder="Select an option"
+          :reduce="(value) => value.id"
           label="name"
-          track-by="id"
-          :searchable="true"
-          :show-labels="false"
-          :allow-empty="false"
-          :close-on-select="true"
-          :placeholder="$t('Select')"
-          @select="changeRegion($event)"
-        ></multiselect>
+          @input="changeRegion"
+        />
       </div>
 
       <div class="form-item">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           District
         </label>
-        <multiselect
+        <v-select
           v-model="order.district"
-          class="multiselect__input"
-          :disabled="isDistrictDisable"
           :options="districts"
+          placeholder="Select an option"
           label="name"
-          track-by="id"
-          :searchable="true"
-          :show-labels="false"
-          :allow-empty="false"
-          :close-on-select="true"
-          :placeholder="$t('Select')"
-        ></multiselect>
+          :reduce="(value) => value.id"
+          :disabled="isDistrictDisable"
+        />
       </div>
 
       <button
@@ -102,21 +91,29 @@
         Оформить заказ
       </button>
     </div>
+    <SuccessModal text="Order completed successfully" />
   </MainModal>
 </template>
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
-import Multiselect from 'vue-multiselect'
+import vSelect from 'vue-select'
+import SuccessModal from '@/components/SuccessModal.vue'
 
 export default {
   components: {
-    Multiselect,
+    vSelect,
+    SuccessModal,
   },
+
   props: {
     couponCode: {
       type: String,
       default: '',
+    },
+    product: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -147,8 +144,17 @@ export default {
       },
     },
 
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
+      },
+    },
+
     isDistrictDisable() {
-      return !this.order.region.id
+      return !this.order.region
     },
 
     regions() {
@@ -170,28 +176,52 @@ export default {
       this.$v.order.$touch()
       if (!this.$v.order.$invalid) {
         try {
-          await this.$store.dispatch('stream/CREATE_STREAM_ORDER', {
-            city: this.order.city,
-            phone: this.order.phone.replace(/\+| /g, ''),
-            name: this.order.name,
-            stream_id: this.$route.query.stream,
-            coupon_code: this.couponCode || null,
-            products: [
-              {
-                product: this.product.id,
-                count: 1,
-              },
-            ],
-          })
-        } catch (error) {}
+          console.log('submit')
+          const response = await this.$store.dispatch(
+            'stream/CREATE_STREAM_ORDER',
+            {
+              city: this.order.district,
+              phone: this.order.phone.replace(/\+| /g, ''),
+              name: this.order.name,
+              stream_id: this.$route.query.stream,
+              coupon_code: this.couponCode || null,
+              products: [
+                {
+                  product: this.product.id,
+                  count: 1,
+                },
+              ],
+            }
+          )
+
+          if (response.data.status === 201) {
+            this.successModal = true
+
+            setTimeout(() => {
+              this.successModal = false
+              this.streamOrderModal = false
+              this.order = {
+                phone: '',
+                name: '',
+                region: '',
+                district: '',
+              }
+              this.$v.order.$reset()
+            }, 1500)
+          }
+
+          console.log('response', response)
+        } catch (error) {
+          console.log('error', error)
+          console.log('response', error.response)
+        }
       }
     },
   },
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-
+<style src="vue-select/dist/vue-select.css"></style>
 <style>
 #order-modal .modal-dialog {
   height: auto;

@@ -1,5 +1,5 @@
 <template>
-  <div class=" ml-r border p-4 rounded">
+  <div class="ml-r border p-4 rounded">
     <div class="text-lg font-bold mb-2">Цена</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
@@ -32,16 +32,7 @@
         />
       </div>
     </div>
-    <!-- <vue-slider
-      ref="range_slider"
-      v-model="localPriceRange"
-      :tooltip="'none'"
-      :min="0"
-      :max="10000000"
-      :interval="1"
-      @change="handleDrag"
-    >
-    </vue-slider> -->
+
     <div>
       <div class="text-lg font-bold mt-3 mb-2">Производитель</div>
     </div>
@@ -68,8 +59,7 @@
 </template>
 
 <script>
-// import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
-// import 'vue-slider-component/dist-css/vue-slider-component.css'
+
 import { mapGetters } from 'vuex'
 
 export default {
@@ -87,6 +77,19 @@ export default {
       filter: 'catalog/GET_FILTER',
       isIncludes: 'catalog/IS_INCLUDES_BRAND',
     }),
+    page: {
+      get() {
+        return this.$store.getters['catalog/GET_FILTER'].page
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_FILTER_ITEM', {
+          page: val,
+        })
+
+        this.handleSetQuery({ page: val })
+      },
+    },
 
     minPrice: {
       get() {
@@ -118,9 +121,9 @@ export default {
   watch: {
     filter: {
       deep: true,
-      handler() {
+      handler(val, oldVal) {
         this.$store.dispatch(
-          'catalog/FETCH_SELLER_PRODUCTS',
+          'catalog/FETCH_CATALOG_PRODUCTS',
           this.$route.query.catalog
         )
       },

@@ -52,6 +52,7 @@ export const actions = {
   },
 
   CREATE_STREAM_ORDER({ commit }, data) {
+    console.log('stream created')
     return this.$axios.post('/orders/create_by_stream/', data)
   },
 }

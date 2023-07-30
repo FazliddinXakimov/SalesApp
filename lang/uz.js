@@ -1,1 +1,17 @@
-export default {}
+export default {
+  catalog: 'Katalog',
+  favorities: 'Sevimlilar',
+  basket: 'Savatcha',
+  category: 'Kategoriya',
+  products: 'Mahsulotlar',
+  removeAll: 'Tozalash',
+  totalPrice: 'Umumiy narx',
+  emptyBasket: "Savatcha bo'sh",
+  homePage: 'Bosh sahifa',
+  productsPrice: 'Mahsulotlar narxi',
+  deliveryPrice: 'Yetkazib berish narxi',
+  discount: 'Chegirma',
+  checkoutOrder: 'Buyurtma berish',
+  apply: "Jo'natish",
+  couponInvalid: 'Kupon haqiqiy emas',
+}

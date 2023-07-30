@@ -1,8 +1,8 @@
 <template>
-  <div class="mt-10">
+  <div class="my-10">
     <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
     <div v-if="products.length > 0" class="swiper-products">
-      <h1 class="text-2xl mb-4">Favorite Products</h1>
+      <h1 class="text-2xl mb-4">{{ $t('favorities') }}</h1>
       <div
         class="grid 1024:grid-cols-5 768:grid-cols-4 640:grid-cols-2 grid-cols-1 gap-4"
       >
@@ -44,7 +44,7 @@ export default {
     return {
       breadCrumb: [
         {
-          title: 'Favorities',
+          title: this.$t('favorities'),
           // link: '/cart',
         },
       ],

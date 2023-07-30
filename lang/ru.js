@@ -1,1 +1,17 @@
-export default {}
+export default {
+  catalog: 'Каталог',
+  favorities: 'Избранное',
+  basket: 'Корзина',
+  category: 'Категория',
+  products: 'Продукты',
+  removeAll: 'Убрать',
+  totalPrice: 'Итоговая цена',
+  emptyBasket: 'Корзина пуста',
+  homePage: 'Главная страница',
+  productsPrice: 'Цена продукции',
+  deliveryPrice: 'Цена доставки',
+  discount: 'Скидка',
+  checkoutOrder: 'Оформить заказ',
+  apply: 'Применить',
+  couponInvalid: 'Купон недействителен',
+}

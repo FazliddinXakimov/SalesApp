@@ -8,8 +8,74 @@
         'border-t border-secondary-light': index === 0,
       }"
     >
+      <div class="768:hidden">
+        <div class="flex justify-start mb-4">
+          <div class="mr-4">
+            <img
+              :src="product.image"
+              :alt="product.title"
+              class="aspect-w-1 aspect-h-1 rounded-lg object-contain max-tablet:h-[110px] max-tablet:w-[110px]"
+              loading="lazy"
+              width="100"
+              height="100"
+              decoding="async"
+            />
+          </div>
+          <div>
+            {{ product.title }}
+            <div>
+              <span class="badge badge-pill badge-success text-lgs">
+                {{ product.sale_price | numberFilter }} sum</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+          <div
+            class="flex items-center justify-between bg-gray-11 rounded-lg h-8 w-[94px] 1024:ml-8 border"
+          >
+            <button
+              class="w-8 flex items-center justify-center"
+              @click="handleDecrementProduct(product.id)"
+            >
+              <img src="@/assets/img/minus.svg" class="w-4 h-4" />
+            </button>
+            <div class="w-8 font-bold flex items-center justify-center">
+              {{ product.count }}
+            </div>
+            <button
+              class="w-8 flex items-center justify-center"
+              @click="hanleIncrementProduct(product.id)"
+            >
+              <img src="@/assets/img/plus.svg" class="w-4 h-4" />
+            </button>
+          </div>
+          <div class="flex w-full items-center justify-end gap-6 max-sm:gap-4">
+            <button
+              class="flex items-center justify-center"
+              @click="handleToggleFavorite(product)"
+            >
+              <img
+                v-if="isHaveFavorite(product.id)"
+                src="@/assets/img/favorite_active.svg"
+                class="h-6 w-6"
+              />
+              <img v-else src="@/assets/img/favorite.svg" class="h-6 w-6" />
+            </button>
+            <button
+              class="flex cursor-pointer items-center gap-3 text-secondary hover:text-primary-red"
+              @click="handleRemoveProduct(product.id)"
+            >
+              <img src="@/assets/img/trash.svg" class="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- large -->
       <div
-        class="flex items-center gap-8 max-tablet:items-start max-tablet:gap-4"
+        class="768:flex items-center gap-8 max-tablet:items-start max-tablet:gap-4 hidden"
       >
         <div class="flex gap-3 items-center justify-center">
           <!-- <div @click="handleToggleProductSelection(product.id)">

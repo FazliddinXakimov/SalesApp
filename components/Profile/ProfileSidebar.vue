@@ -11,8 +11,11 @@
           :class="getTabComponent(1)"
           @click="$emit('changeActiveTab', 1)"
         >
-          Personal Information</span
-        >
+          <span class="640:block hidden"> Personal Information</span>
+          <span class="640:hidden block">
+            <img src="@/assets/img/user.svg" class="w-6 h-6" />
+          </span>
+        </span>
       </li>
       <li class="mr-2">
         <span
@@ -21,8 +24,11 @@
           :class="getTabComponent(2)"
           @click="$emit('changeActiveTab', 2)"
         >
-          Change Password</span
-        >
+          <span class="640:block hidden">Change Password</span>
+          <span class="640:hidden block">
+            <img src="@/assets/img/register-password.svg" class="w-6 h-6" />
+          </span>
+        </span>
       </li>
       <li class="mr-2">
         <span
@@ -31,8 +37,11 @@
           :class="getTabComponent(3)"
           @click="$emit('changeActiveTab', 3)"
         >
-          My Orders</span
-        >
+          <span class="640:block hidden">My Orders</span>
+          <span class="640:hidden block">
+            <img src="@/assets/img/profile/orders-box.svg" class="w-6 h-6" />
+          </span>
+        </span>
       </li>
     </ul>
   </div>

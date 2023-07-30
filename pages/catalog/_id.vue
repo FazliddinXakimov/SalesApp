@@ -5,17 +5,17 @@
       <div class="flex justify-start mb-5"></div>
       <div class="flex justify-end items-center mb-4">
         <span class="w-64">
-          {{ sort }}
           <v-select
             v-model="sort"
             :options="filterOptions"
             placeholder="Select an option"
-            :reduce="(value) => value.id"
+            :reduce="(value) => value.key"
             label="title"
           />
         </span>
       </div>
-      <div class="flex justify-between">
+
+      <div class="flex justify-between mb-10">
         <div class="basis-1/4">
           <CatalogFilter />
         </div>
@@ -43,16 +43,15 @@
               Go To Home
             </button>
           </div>
+          <div class="mt-10">
+            <GlobalPagination
+              :total-count="products.count"
+              :page="page"
+              :page-size="pageSize"
+              @onPaginate="handlePageChange"
+            />
+          </div>
         </div>
-      </div>
-
-      <div>
-        <GlobalPagination
-          :total-count="products.count"
-          :page="page"
-          :page-size="pageSize"
-          @onPaginate="handlePageChange"
-        />
       </div>
     </div>
   </div>
@@ -181,6 +180,11 @@ export default {
         maxPrice: routeQuery.maxPrice,
       })
     }
+    if (routeQuery.page) {
+      const pageNumber = routeQuery.page / 1
+      console.log('pageNumber', typeof pageNumber)
+      // this.page = pageNumber
+    }
   },
   methods: {
     handleSetQuery(queryObject) {
@@ -202,11 +206,4 @@ export default {
 }
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style lang="scss" scoped src="@/assets/scss/Catalog.scss"></style>
-<style src="vue-select/dist/vue-select.css"></style>
-<!-- <style>
-.multiselect__tags {
-  border: 1px solid #6b7280 !important;
-}
-</style> -->

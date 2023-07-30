@@ -117,14 +117,18 @@
         Подвердить
       </button>
     </div>
+    <SuccessModal text="Murojaatingiz kerakli joyga jonatildi" />
   </div>
 </template>
 
 <script>
 import { required, minLength } from 'vuelidate/lib/validators'
+import SuccessModal from '@/components/SuccessModal.vue'
 
 export default {
-  components: {},
+  components: {
+    SuccessModal,
+  },
   data() {
     return {
       personalData: {
@@ -134,6 +138,17 @@ export default {
         comment: '',
       },
     }
+  },
+
+  computed: {
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
+      },
+    },
   },
 
   validations() {
@@ -152,10 +167,24 @@ export default {
 
       console.log('this.personalData', this.personalData)
       if (!this.$v.personalData.$invalid) {
-        await this.$store.dispatch('references/CREATE_PROPOSAL', {
-          ...this.personalData,
-          phone: this.personalData.phone.replace(/\+| /g, ''),
-        })
+        const response = await this.$store.dispatch(
+          'references/CREATE_PROPOSAL',
+          {
+            ...this.personalData,
+            phone: this.personalData.phone.replace(/\+| /g, ''),
+          }
+        )
+
+        if (response.status === 200) {
+          this.successModal = true
+
+          setTimeout(() => {
+            this.successModal = false
+
+            this.$router.push(this.localePath('/'))
+          }, 1500)
+        }
+        console.log('response', response)
       }
     },
   },

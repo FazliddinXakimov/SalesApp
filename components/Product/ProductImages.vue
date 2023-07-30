@@ -1,6 +1,6 @@
 <template>
   <div class="product-gallery flex flex-row-reverse">
-    <div class="product-gallery-top 1200:overflow-hidden">
+    <div class="product-gallery-top 768:overflow-hidden">
       <swiper
         ref="swiperTop"
         class="swiper gallery-top"
@@ -30,7 +30,7 @@
       <div class="swiper-pagination"></div>
     </div>
     <!-- swiper2 Thumbs -->
-    <div class="product-gallery-thumbs hidden 1200:block 1200:z-[5]">
+    <div class="product-gallery-thumbs hidden 1024:block 1024:z-[5]">
       <swiper
         ref="swiperThumbs"
         class="swiper gallery-thumbs"

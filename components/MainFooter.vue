@@ -68,16 +68,9 @@
           <h2 class="mb-6 text-sm font-semibold uppercase">Legal</h2>
           <ul class="font-medium">
             <li class="mb-4">
-              <nuxt-link
-                :to="
-                  localePath({
-                    name: 'about-id',
-                    params: { id: footerData.for_advertisers.slug },
-                  })
-                "
-                class="hover:underline"
-                >{{ footerData.for_advertisers.title }}</nuxt-link
-              >
+              <a :href="footerData.url" class="hover:underline">{{
+                footerData.for_advertisers.title
+              }}</a>
             </li>
             <li class="mb-4">
               <nuxt-link

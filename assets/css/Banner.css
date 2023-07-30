@@ -31,6 +31,15 @@
   --swiper-navigation-size: 15px;
 }
 
+.swiper-button-prev {
+  background: url('@/assets/img/arrow-left.svg') no-repeat 45%;
+  left: 10px;
+}
+.swiper-button-next {
+  background: url('@/assets/img/arrow-right.svg') no-repeat 55%;
+  right: 10px;
+}
+
 @media (max-width: 768px) {
   .img__slide {
     height: 200px;

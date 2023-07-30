@@ -1,11 +1,13 @@
 <template>
-  <div class="flex justify-between">
+  <div class="960:flex justify-between">
     <div class="768:basis-4/12">
       <ProductImages :images="product.images" :name="product.title" />
     </div>
 
-    <div class="768:basis-4/12 pl-4">
-      <div class="text-xl mb-4">{{ product.title }}</div>
+    <div class="768:basis-4/12 pl-4 mt-10 960:mt-0">
+      <div class="text-xl mb-4 text-center 960:text-start">
+        {{ product.title }}
+      </div>
       <div v-if="product && product.brand" class="text-lg mb-4">
         {{ product.brand.title }}
       </div>
@@ -21,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div class="768:basis-4/12">
+    <div class="768:basis-4/12 mt-10 960:mt-0">
       <div class="border rounded-md p-4">
         <div>
           <span> Total Price: </span>
@@ -34,6 +36,13 @@
           Product price:
           <span class="font-bold"
             >{{ product.sale_price | numberFilter }} sum
+          </span>
+        </div>
+
+        <div v-if="product.bonus_exist">
+          Bonus Type:
+          <span class="font-bold">
+            {{ product.bonus_type }}
           </span>
         </div>
 

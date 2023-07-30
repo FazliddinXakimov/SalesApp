@@ -49,16 +49,13 @@ export default {
   },
   css: [
     'swiper/css/swiper.css',
+    'vue-select/dist/vue-select.css',
     '@/assets/css/main.css',
     '@/assets/css/swiper.css',
   ],
   plugins: [
     {
       src: '@/plugins/axios.js',
-    },
-    {
-      src: '@/plugins/range-slider.js',
-      ssr: false,
     },
     {
       src: '@/plugins/main.js',

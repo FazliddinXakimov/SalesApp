@@ -1,8 +1,8 @@
 <template>
-  <div class="768:basis-1/3">
-    <div class="ml-5 border p-4 rounded">
+  <div class="768:basis-1/3 my-10 1024:my-0">
+    <div class="1024:ml-5 border p-4 rounded">
       <h1 class="text-xl pt-2 pb-5 border-b flex justify-between items-center">
-        <span> TotalPrice: </span>
+        <span> {{ $t('totalPrice') }}: </span>
         <span>{{ calculateTotalPrice | numberFilter }} sum</span>
       </h1>
 
@@ -17,27 +17,29 @@
           type="button"
           @click="handleCheckCoupon"
         >
-          Пременить
+          {{ $t('apply') }}
         </button>
       </div>
-      <div v-if="!isCouponExist" class="text-red-600">Coupon is not valid</div>
+      <div v-if="!isCouponExist" class="text-red-600">
+        {{ $t('couponInvalid') }}
+      </div>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
-        <span> Products Price </span>
+        <span> {{ $t('productsPrice') }}: </span>
         <span>{{ totalPrice | numberFilter }} sum</span>
       </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
-        <span> Delivery Price: </span>
+        <span> {{ $t('deliveryPrice') }}: </span>
         <span>{{ deliveryPrice | numberFilter }} sum</span>
       </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
-        <span> Discount: </span>
+        <span> {{ $t('discount') }}: </span>
         <span>{{ discount | numberFilter }} sum</span>
       </h1>
       <button
         class="flex justify-center items-center w-full bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded ml-2"
         @click="orderModal = true"
       >
-        Оформить заказ
+        {{ $t('checkoutOrder') }}
       </button>
     </div>
     <OrderModal :coupon-code="coupon_code" />

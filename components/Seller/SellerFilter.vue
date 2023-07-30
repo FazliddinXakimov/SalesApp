@@ -32,16 +32,7 @@
         />
       </div>
     </div>
-    <!-- <vue-slider
-      ref="range_slider"
-      v-model="localPriceRange"
-      :tooltip="'none'"
-      :min="0"
-      :max="10000000"
-      :interval="1"
-      @change="handleDrag"
-    >
-    </vue-slider> -->
+
     <div>
       <div class="text-lg font-bold mt-3 mb-2">Производитель</div>
     </div>
@@ -68,8 +59,7 @@
 </template>
 
 <script>
-// import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
-// import 'vue-slider-component/dist-css/vue-slider-component.css'
+
 import { mapGetters } from 'vuex'
 
 export default {

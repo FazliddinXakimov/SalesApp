@@ -1,8 +1,8 @@
 <template>
-  <div class="border p-10 rounded-md text-center">
-    <h1 class="text-2xl font-bold mb-5">Change Password</h1>
+  <div class="border p-10 rounded-md">
+    <h1 class="text-2xl font-bold mb-5 text-center">Change Password</h1>
     <div
-      class="relative form-item w-96 mx-auto"
+      class="relative form-item mx-auto max-w-xs"
       :class="{ error_field: $v.newPassword.password.$error }"
     >
       <label
@@ -60,7 +60,7 @@
       </small>
     </div>
     <div
-      class="relative form-item w-96 mx-auto"
+      class="relative form-item mx-auto max-w-xs"
       :class="{ error_field: $v.newPassword.repeatPassword.$error }"
     >
       <div>
@@ -131,12 +131,14 @@
         </small>
       </div>
     </div>
-    <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-2 w-96"
-      @click="updatePassword"
-    >
-      Update Password
-    </button>
+    <div class="mx-auto max-w-xs">
+      <button
+        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-full"
+        @click="updatePassword"
+      >
+        Update Password
+      </button>
+    </div>
     <SuccessModal text="Password has been changed successfully" />
   </div>
 </template>
@@ -157,7 +159,7 @@ export default {
         repeatPassword: null,
       },
       passwordType1: 'password',
-      passwordType2: 'password'
+      passwordType2: 'password',
     }
   },
 

@@ -1,13 +1,13 @@
 <template>
-  <div class="border p-10 rounded-md text-center personal__information">
-    <h1 class="text-2xl font-bold mb-5">Shaxsiy ma'lumotlar</h1>
-    <div class="flex justify-between items-center">
+  <div class="border p-10 rounded-md personal__information">
+    <h1 class="text-2xl font-bold mb-5 text-center">Shaxsiy ma'lumotlar</h1>
+    <div class="grid grid-cols-1 768:grid-cols-3 640:grid-cols-2 gap-5">
       <div
         class="form-item w-full mr-8"
         :class="{ error_field: $v.personalData.phone_number.$error }"
       >
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Phone{{ personalData.phone_number }}
+        <label class="block text-gray-700 text-sm font-bold" for="name">
+          Phone
         </label>
         <input
           id="name"
@@ -41,7 +41,7 @@
         class="form-item w-full mr-8"
         :class="{ error_field: $v.personalData.first_name.$error }"
       >
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+        <label class="block text-gray-700 text-sm font-bold" for="name">
           Name
         </label>
         <input
@@ -69,8 +69,9 @@
           personalData.first_name field is required
         </small>
       </div>
+
       <div class="form-item w-full">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+        <label class="block text-gray-700 text-sm font-bold" for="name">
           Username
         </label>
         <input
@@ -80,10 +81,7 @@
           type="text"
         />
       </div>
-    </div>
-
-    <div class="flex justify-between mt-6">
-      <div class="w-full mr-8">
+      <div class="w-full">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           Region
         </label>
@@ -96,7 +94,7 @@
           @input="changeRegion"
         />
       </div>
-      <div class="w-full mr-8">
+      <div class="w-full">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
           District
         </label>
@@ -111,7 +109,7 @@
       </div>
       <div class="w-full">
         <button
-          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-96"
+          class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-full"
           @click="updateUserProfile"
         >
           Update
@@ -122,14 +120,12 @@
 </template>
 
 <script>
-// import Multiselect from 'vue-multiselect'
 import { required, minLength } from 'vuelidate/lib/validators'
 import vSelect from 'vue-select'
 import { formatUzbekPhoneNumber } from '@/utils/phone-format'
 
 export default {
   components: {
-    // Multiselect,
     vSelect,
   },
   data() {
@@ -233,4 +229,3 @@ export default {
 }
 </script>
 
-<style src="vue-select/dist/vue-select.css"></style>
