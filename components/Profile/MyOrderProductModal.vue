@@ -17,13 +17,18 @@
           />
         </div>
         <div>
-          <div>Price: {{ product.price | numberFilter }} summ</div>
-          <div>Count: {{ product.count }}</div>
+          <div>
+            {{ $t('price') }}: {{ product.price | numberFilter }}
+            {{ $t('sum') }}m
+          </div>
+          <div>{{ $t('amount') }}: {{ product.count }}</div>
           <div v-if="product.bonus_exist">
-            Bonus Type: {{ product.bonus_type }}
+            {{ $t('bonusType') }}: {{ product.bonus_type }}
           </div>
 
-          <div v-if="product.bonus_exist">Bonus: {{ product.bonus }}</div>
+          <div v-if="product.bonus_exist">
+            {{ $t('bonus') }}: {{ product.bonus }}
+          </div>
         </div>
       </div>
     </div>

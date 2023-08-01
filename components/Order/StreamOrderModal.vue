@@ -7,7 +7,7 @@
   <div class="order-modal__inner">
     <div class="form-item" :class="{ error_field: $v.order.name.$error }">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-        Name
+        {{ $t('first_name') }}
       </label>
       <input
         id="name"
@@ -19,13 +19,13 @@
         v-show="!$v.order.name.minLength && $v.order.name.$error"
         class="error__text"
       >
-        order.name field min value is 17
+        {{ $t('firstNameMinlength') }}
       </small>
       <small
         v-show="!$v.order.name.required && $v.order.name.$error"
         class="error__text"
       >
-        order.name field is required
+        {{ $t('firstNameRequired') }}
       </small>
     </div>
     <div class="form-item" :class="{ error_field: $v.order.phone.$error }">
@@ -33,7 +33,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="order_phone"
       >
-        Phone Number
+        {{ $t('phone') }}
       </label>
       <input
         id="order_phone"
@@ -47,56 +47,78 @@
         v-show="!$v.order.phone.minLength && $v.order.phone.$error"
         class="error__text"
       >
-        order.phone field min value is 17
+        {{ $t('invalidPhone') }}
       </small>
       <small
         v-show="!$v.order.phone.required && $v.order.phone.$error"
         class="error__text"
       >
-        order.phone field is required
+        {{ $t('phoneRequired') }}
       </small>
     </div>
-    <div class="form-item">
+    <div
+      v-if="product.city_required"
+      class="form-item"
+      :class="{ error_field: $v.order.region.$error }"
+    >
       <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
-        Region
+        {{ $t('region') }}
+        {{ $v.order.region.$error }}
       </label>
       <v-select
         v-model="order.region"
         :options="regions"
-        placeholder="Select an option"
+        :placeholder="$t('select')"
         :reduce="(value) => value.id"
         label="name"
         @input="changeRegion"
       />
+
+      <small
+        v-show="!$v.order.region.required && $v.order.region.$error"
+        class="error__text"
+      >
+        {{ $t('regionFieldRequired') }}
+      </small>
     </div>
 
-    <div class="form-item">
+    <div
+      v-if="product.city_required"
+      class="form-item"
+      :class="{ error_field: $v.order.district.$error }"
+    >
       <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
-        District
+        {{ $t('district') }}
       </label>
       <v-select
         v-model="order.district"
         :options="districts"
-        placeholder="Select an option"
+        :placeholder="$t('select')"
         label="name"
         :reduce="(value) => value.id"
         :disabled="isDistrictDisable"
       />
+      <small
+        v-show="!$v.order.district.required && $v.order.district.$error"
+        class="error__text"
+      >
+        {{ $t('regionFieldRequired') }}
+      </small>
     </div>
 
     <button
       class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="handleSubmitOrder"
     >
-      Оформить заказ
+      {{ $t('checkout') }}
     </button>
-    <SuccessModal text="Order completed successfully" />
+    <SuccessModal :text="$t('successfullOrder')" />
   </div>
   <!-- </MainModal> -->
 </template>
 
 <script>
-import { required, minLength } from 'vuelidate/lib/validators'
+import { required, minLength, requiredIf } from 'vuelidate/lib/validators'
 import vSelect from 'vue-select'
 import SuccessModal from '@/components/SuccessModal.vue'
 
@@ -131,6 +153,8 @@ export default {
       order: {
         phone: { required, minLength: minLength(17) },
         name: { required, minLength: minLength(3) },
+        region: { required: requiredIf(() => this.product.city_required) },
+        district: { required: requiredIf(() => this.product.city_required) },
       },
     }
   },
@@ -170,27 +194,33 @@ export default {
   methods: {
     changeRegion(region) {
       this.order.district = null
-      this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region.id)
+      this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region)
     },
     async handleSubmitOrder() {
       this.$v.order.$touch()
       if (!this.$v.order.$invalid) {
         try {
-          console.log('submit')
+          const exportData = {
+            phone: this.order.phone.replace(/\+| /g, ''),
+            name: this.order.name,
+            stream_id: this.$route.query.stream,
+            coupon_code: this.couponCode || null,
+            products: [
+              {
+                product: this.product.id,
+                count: 1,
+              },
+            ],
+          }
+
+          if (this.product.city_required) {
+            exportData.city = this.order.district
+          }
+
           const response = await this.$store.dispatch(
             'stream/CREATE_STREAM_ORDER',
             {
-              city: this.order.district,
-              phone: this.order.phone.replace(/\+| /g, ''),
-              name: this.order.name,
-              stream_id: this.$route.query.stream,
-              coupon_code: this.couponCode || null,
-              products: [
-                {
-                  product: this.product.id,
-                  count: 1,
-                },
-              ],
+              ...exportData,
             }
           )
 

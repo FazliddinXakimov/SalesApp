@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-2xl mb-4">Similar Products</h1>
+    <h1 class="text-2xl mb-4">{{ $t('similarProducts') }}</h1>
     <div class="swiper-products">
       <div class="swiper">
         <swiper class="swiper-wrapper" :options="swiperOptions">

@@ -3,7 +3,7 @@
     class="bg-white border border-gray-200 overflow-hidden rounded-xl mx-2 cursor-pointer shadow-md hover:-translate-y-1 duration-200"
     @click="toDetailPage(product)"
   >
-    <img :src="product.image" class="h-48 object-contain mx-auto" />
+    <img :src="product.image" class="768:h-48 h-24 object-contain mx-auto" />
 
     <div class="p-4 flex flex-col">
       <div class="content-center">
@@ -13,12 +13,12 @@
           {{ product.title }}
         </p>
         <p class="text-center text-gray-800 mt-1">
-          {{ product.sale_price | numberFilter }} sum
+          {{ product.sale_price | numberFilter }} {{ $t('sum') }}
         </p>
         <p
           class="text-center text-red-500 line-through italic text-gray-800 mt-1"
         >
-          {{ product.price | numberFilter }} sum
+          {{ product.price | numberFilter }} {{ $t('sum') }}
         </p>
       </div>
       <div class="inline-flex items-center mt-2"></div>

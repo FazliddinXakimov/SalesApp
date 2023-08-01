@@ -7,12 +7,12 @@
           <tr
             class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"
           >
-            <th class="py-3 px-6 text-left">Product</th>
-            <th class="py-3 px-6 text-center">Created</th>
-            <th class="py-3 px-6 text-center">Status</th>
-            <th class="py-3 px-6 text-center">Delivery Price</th>
-            <th class="py-3 px-6 text-center">Discount Amount</th>
-            <th class="py-3 px-6 text-center">Total Price</th>
+            <th class="py-3 px-6 text-left">{{ $t('product') }}</th>
+            <th class="py-3 px-6 text-center">{{ $t('createdDate') }}</th>
+            <th class="py-3 px-6 text-center">{{ $t('status') }}</th>
+            <th class="py-3 px-6 text-center">{{ $t('deliveryPrice') }}</th>
+            <th class="py-3 px-6 text-center">{{ $t('discount') }}</th>
+            <th class="py-3 px-6 text-center">{{ $t('totalPrice') }}</th>
           </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
@@ -48,17 +48,25 @@
             </td>
             <td class="py-3 px-6 text-left">
               <div class="flex items-center">
-                <span>{{ order.delivery_price | numberFilter }} sum</span>
+                <span
+                  >{{ order.delivery_price | numberFilter }}
+                  {{ $t('sum') }}</span
+                >
               </div>
             </td>
             <td class="py-3 px-6 text-left">
               <div class="flex items-center">
-                <span>{{ order.discount_amount | numberFilter }} sum</span>
+                <span
+                  >{{ order.discount_amount | numberFilter }}
+                  {{ $t('sum') }}</span
+                >
               </div>
             </td>
             <td class="py-3 px-6 text-left">
               <div class="flex items-center">
-                <span>{{ order.total_price | numberFilter }} sum</span>
+                <span
+                  >{{ order.total_price | numberFilter }} {{ $t('sum') }}</span
+                >
               </div>
             </td>
           </tr>

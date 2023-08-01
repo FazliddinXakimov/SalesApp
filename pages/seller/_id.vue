@@ -18,7 +18,7 @@
           <v-select
             v-model="sort"
             :options="filterOptions"
-            placeholder="Select an option"
+            :placeholder="$t('select')"
             :reduce="(value) => value.key"
             label="title"
           />

@@ -8,7 +8,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="login_phone"
       >
-        Phone Number
+        {{ $t('phone') }}
       </label>
       <input
         id="login_phone"
@@ -23,13 +23,13 @@
         v-show="!$v.login.phone.minLength && $v.login.phone.$error"
         class="error__text"
       >
-        please enter valid phone number
+        {{ $t('invalidPhone') }}
       </small>
       <small
         v-show="!$v.login.phone.required && $v.login.phone.$error"
         class="error__text"
       >
-        phone field is required
+        {{ $t('phoneRequired') }}
       </small>
     </div>
     <div
@@ -42,7 +42,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="login_sms_code"
       >
-        Password
+        {{ $t('password') }}
       </label>
       <div class="relative">
         <input
@@ -80,17 +80,17 @@
         v-show="!$v.login.password.required && $v.login.password.$error"
         class="error__text"
       >
-        password field is required
+        {{ $t('passwordRequired') }}
       </small>
     </div>
     <div v-if="isLoginOrPasswordError" class="error__text flex justify-center">
-      Phone or password is invalid, please check
+      {{ $t('passwordAndPhoneInvalid') }}
     </div>
     <button
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="handleLogin"
     >
-      Login
+      {{ $t('login') }}
     </button>
   </div>
 </template>
@@ -129,7 +129,7 @@ export default {
       this.$v.login.$touch()
       if (!this.$v.login.$invalid) {
         try {
-          const res = await this.$auth.loginWith('login', {
+          await this.$auth.loginWith('login', {
             data: {
               phone: this.login.phone.replace(/\+| /g, ''),
               password: this.login.password,
@@ -137,13 +137,9 @@ export default {
           })
 
           this.loginModal = false
-
-          console.log('res', res)
-          console.log('$auth', this.$auth)
         } catch (error) {
           console.log('error', error)
-          console.log('error.resposne', error.response)
-          console.error('Login failed:', error)
+
           this.isLoginOrPasswordError = true
         }
       }

@@ -25,7 +25,7 @@
             {{ product.title }}
             <div>
               <span class="badge badge-pill badge-success text-lgs">
-                {{ product.sale_price | numberFilter }} sum</span
+                {{ product.sale_price | numberFilter }} {{ $t('sum') }}</span
               >
             </div>
           </div>
@@ -130,7 +130,7 @@
             class="flex min-w-[160px] flex-col items-end max-md:items-start max-tablet:gap-1"
           >
             <span class="badge badge-pill badge-success text-lgs">
-              {{ product.sale_price | numberFilter }} sum</span
+              {{ product.sale_price | numberFilter }} {{ $t('sum') }}</span
             >
           </div>
           <div class="flex w-full items-center justify-end gap-6 max-sm:gap-4">

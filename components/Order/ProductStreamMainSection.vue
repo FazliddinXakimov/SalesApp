@@ -9,7 +9,7 @@
           {{ product.title }}
         </div>
 
-        <div class="text-lg mt-10 mb-5">Характеристики:</div>
+        <div class="text-lg mt-10 mb-5">{{ $t('characteristics') }}:</div>
         <ul class="list-disc">
           <li
             v-for="(item, index) in product.properties"
@@ -28,7 +28,7 @@
               <input
                 id="register_sms_code"
                 v-model="coupon_code"
-                placeholder="Введите  промокод"
+                :placeholder="$t('enterCoupon')"
                 class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <button
@@ -36,31 +36,33 @@
                 type="button"
                 @click="handleCheckCoupon"
               >
-                Пременить
+                {{ $t('apply') }}
               </button>
             </div>
             <div v-if="!isCouponExist" class="text-red-600">
-              Coupon is not valid
+              {{ $t('couponInvalid') }}
             </div>
           </div>
           <div class="mb-4">
             <div>
-              Product price:
+              {{ $t('productsPrice') }}:
               <span class="font-bold"
-                >{{ product.sale_price | numberFilter }} sum
+                >{{ product.sale_price | numberFilter }} {{ $t('sum') }}
               </span>
             </div>
 
             <div>
-              <span> Delivery: </span>
+              <span> {{ $t('deliveryPrice') }}: </span>
               <span v-if="!product.free_delivery" class="font-bold">
-                {{ product.delivery_price | numberFilter }} sum
+                {{ product.delivery_price | numberFilter }} {{ $t('sum') }}
               </span>
-              <span v-else class="font-bold"> Free </span>
+              <span v-else class="font-bold"> {{ $t('free') }} </span>
             </div>
             <div>
-              <span> Discount: </span>
-              <span class="font-bold">{{ discount | numberFilter }} sum</span>
+              <span> {{ $t('discount') }}: </span>
+              <span class="font-bold"
+                >{{ discount | numberFilter }} {{ $t('sum') }}</span
+              >
             </div>
           </div>
           <StreamOrderModal :coupon-code="coupon_code" :product="product" />
@@ -171,7 +173,7 @@ export default {
 
     changeRegion(region) {
       if (region && region.id) {
-        this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region.id)
+        this.$store.dispatch('stream/FETCH_DISTRICTS_LIST', region)
       } else {
         this.order.district = null
       }

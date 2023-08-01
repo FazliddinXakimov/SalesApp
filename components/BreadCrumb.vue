@@ -8,7 +8,7 @@
             class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600"
           >
             <img src="@/assets/img/home.svg" class="w-4 h-4 mr-1" />
-            Home
+            {{ $t('homePage') }}
           </nuxt-link>
         </li>
         <li v-for="(item, index) in breadCrumb" :key="index">

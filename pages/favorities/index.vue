@@ -21,12 +21,11 @@
     </div>
     <div v-else class="flex items-center flex-col justify-center my-20 mt-32">
       <img src="@/assets/img/heart_cart.svg" class="w-20 h-20" />
-      <div class="mt-3">Cart is Empty</div>
       <button
         class="mt-3 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold py-2 px-4 border border-blue-500 hover:border-transparent rounded"
         @click="$router.push(localePath('/'))"
       >
-        Go To Home
+        {{ $t('homePage') }}
       </button>
     </div>
   </div>

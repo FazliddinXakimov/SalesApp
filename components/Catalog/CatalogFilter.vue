@@ -1,13 +1,13 @@
 <template>
   <div class="ml-r border p-4 rounded">
-    <div class="text-lg font-bold mb-2">Цена</div>
+    <div class="text-lg font-bold mb-2">{{ $t('price') }}</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
         <label
           class="block text-gray-700 text-sm font-bold mb-2"
           for="minPrice"
         >
-          от
+          {{ $t('from') }}
         </label>
         <input
           id="minPrice"
@@ -21,7 +21,7 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="maxPrice"
         >
-          до
+          {{ $t('to') }}
         </label>
         <input
           id="maxPrice"
@@ -34,7 +34,7 @@
     </div>
 
     <div>
-      <div class="text-lg font-bold mt-3 mb-2">Производитель</div>
+      <div class="text-lg font-bold mt-3 mb-2">{{ $t('brand') }}</div>
     </div>
     <div>
       <div
@@ -53,13 +53,10 @@
         <span class="text-lg ml-1">{{ producer.title }}</span>
       </div>
     </div>
-
-    <!-- v-if="products && products.length" -->
   </div>
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex'
 
 export default {

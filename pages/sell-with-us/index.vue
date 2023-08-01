@@ -1,13 +1,13 @@
 <template>
   <div class="border p-10 rounded-md sell_with_us mx-auto mt-10">
-    <h1 class="text-2xl font-bold mb-5 text-center">Sell With Us</h1>
+    <h1 class="text-2xl font-bold mb-5 text-center">{{ $t('sellWithUs') }}</h1>
     <div class="flex justify-between items-center">
       <div
         class="form-item w-full mr-8"
         :class="{ error_field: $v.personalData.first_name.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Name
+          {{ $t('first_name') }}
         </label>
         <input
           id="name"
@@ -22,7 +22,7 @@
           "
           class="error__text"
         >
-          personalData.first_name field min value is 17
+          {{ $t('firstNameMinlength') }}
         </small>
         <small
           v-show="
@@ -31,7 +31,7 @@
           "
           class="error__text"
         >
-          personalData.first_name field is required
+          {{ $t('firstNameRequired') }}
         </small>
       </div>
       <div
@@ -39,7 +39,7 @@
         :class="{ error_field: $v.personalData.last_name.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Last Name
+          {{ $t('last_name') }}
         </label>
         <input
           id="name"
@@ -54,7 +54,7 @@
           "
           class="error__text"
         >
-          personalData.last_name field min value is 17
+          {{ $t('lastNameMinlength') }}
         </small>
         <small
           v-show="
@@ -63,7 +63,7 @@
           "
           class="error__text"
         >
-          personalData.last_name field is required
+          {{ $t('lastNameRequired') }}
         </small>
       </div>
     </div>
@@ -72,7 +72,7 @@
       :class="{ error_field: $v.personalData.phone.$error }"
     >
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-        Phone
+        {{ $t('phone') }}
       </label>
       <input
         id="name"
@@ -88,19 +88,19 @@
         "
         class="error__text"
       >
-        personalData.phone field min value is 17
+        {{ $t('invalidPhone') }}
       </small>
       <small
         v-show="!$v.personalData.phone.required && $v.personalData.phone.$error"
         class="error__text"
       >
-        personalData.phone field is required
+        {{ $t('phoneRequired') }}
       </small>
     </div>
     <div>
-      <label for="message" class="block text-gray-700 text-sm font-bold mb-2"
-        >Comment</label
-      >
+      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">{{
+        $t('comment')
+      }}</label>
       <textarea
         id="message"
         v-model="personalData.comment"
@@ -114,10 +114,10 @@
         class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded w-full"
         @click="createProposal"
       >
-        Подвердить
+        {{ $t('confirm') }}
       </button>
     </div>
-    <SuccessModal text="Murojaatingiz kerakli joyga jonatildi" />
+    <SuccessModal :text="$t('successfullRequest-')" />
   </div>
 </template>
 

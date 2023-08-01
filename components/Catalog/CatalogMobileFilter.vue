@@ -6,14 +6,14 @@
           class="flex flex h-full w-80 flex-col border-r border-secondary-light bg-white py-8 text-primary overflow-auto"
         >
           <div class="p-4">
-            <div class="text-lg font-bold mb-2">Цена</div>
+            <div class="text-lg font-bold mb-2">{{ $t('price') }}</div>
             <div class="flex justify-between items-center">
               <div class="form-item mr-2">
                 <label
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="minPrice"
                 >
-                  от
+                  {{ $t('from') }}
                 </label>
                 <input
                   id="minPrice"
@@ -27,7 +27,7 @@
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="maxPrice"
                 >
-                  до
+                  {{ $t('to') }}
                 </label>
                 <input
                   id="maxPrice"
@@ -40,7 +40,7 @@
             </div>
 
             <div>
-              <div class="text-lg font-bold mt-3 mb-2">Производитель</div>
+              <div class="text-lg font-bold mt-3 mb-2">{{ $t('brand') }}</div>
             </div>
             <div>
               <div

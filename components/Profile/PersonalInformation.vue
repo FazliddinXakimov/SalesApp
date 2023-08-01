@@ -7,7 +7,7 @@
         :class="{ error_field: $v.personalData.phone_number.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold" for="name">
-          Phone
+          {{ $t('phone') }}
         </label>
         <input
           id="name"
@@ -25,7 +25,7 @@
           "
           class="error__text"
         >
-          personalData.phone_number field min value is 17
+          {{ $t('invalidPhone') }}
         </small>
         <small
           v-show="
@@ -34,7 +34,7 @@
           "
           class="error__text"
         >
-          personalData.phone_number field is required
+          {{ $t('phoneRequired') }}
         </small>
       </div>
       <div
@@ -42,7 +42,7 @@
         :class="{ error_field: $v.personalData.first_name.$error }"
       >
         <label class="block text-gray-700 text-sm font-bold" for="name">
-          Name
+          {{ $t('first_name') }}
         </label>
         <input
           id="name"
@@ -57,7 +57,7 @@
           "
           class="error__text"
         >
-          personalData.first_name field min value is 17
+          {{ $t('firstNameMinlength') }}
         </small>
         <small
           v-show="
@@ -66,7 +66,7 @@
           "
           class="error__text"
         >
-          personalData.first_name field is required
+          {{ $t('firstNameRequired') }}
         </small>
       </div>
 
@@ -83,12 +83,12 @@
       </div>
       <div class="w-full">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
-          Region
+          {{ $t('region') }}
         </label>
         <v-select
           v-model="personalData.region"
           :options="regions"
-          placeholder="Select an option"
+          :placeholder="$t('select')"
           :reduce="(value) => value.id"
           label="name"
           @input="changeRegion"
@@ -96,12 +96,12 @@
       </div>
       <div class="w-full">
         <label class="block text-gray-700 text-sm font-bold mb-1" for="name">
-          District
+          {{ $t('district') }}
         </label>
         <v-select
           v-model="personalData.district"
           :options="districts"
-          placeholder="Select an option"
+          :placeholder="$t('select')"
           label="name"
           :reduce="(value) => value.id"
           :disabled="isDistrictDisable"
@@ -112,7 +112,7 @@
           class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-full"
           @click="updateUserProfile"
         >
-          Update
+          {{ $t('update') }}
         </button>
       </div>
     </div>
@@ -228,4 +228,3 @@ export default {
   },
 }
 </script>
-

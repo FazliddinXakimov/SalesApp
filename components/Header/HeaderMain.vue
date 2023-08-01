@@ -9,8 +9,9 @@
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
           >
-            <span class="1024:text-2xl text-xl font-semibold whitespace-nowrap"
-              >Brand</span
+            <span
+              class="1024:text-2xl text-xl font-semibold whitespace-nowrap"
+              >{{ $t('brand') }}</span
             >
           </nuxt-link>
         </div>
@@ -120,13 +121,15 @@
                 class="h-8 w-8"
                 @click="openLoginModal"
               />
-              <span class="text-sm"> Войти </span>
+              <span class="text-sm"> {{ $t('login') }} </span>
             </div>
             <div v-if="$auth.loggedIn" class="dropdown__list">
-              <nuxt-link class="dropdown__item" to="/profile"
-                >Profile</nuxt-link
-              >
-              <button class="dropdown__item" @click="logout">Logout</button>
+              <nuxt-link class="dropdown__item" to="/profile">{{
+                $t('profil')
+              }}</nuxt-link>
+              <button class="dropdown__item" @click="logout">
+                {{ $t('logout') }}
+              </button>
             </div>
           </button>
           <button @click="$router.push(localePath(`/cart`))">
@@ -146,7 +149,6 @@
     </nav>
     <Catalog v-if="catalogModal" />
     <LoginModal />
-    <CartModal />
   </div>
 </template>
 
@@ -159,7 +161,6 @@ export default {
   components: {
     Catalog: () => import('@/components/Catalog/CatalogSidebar.vue'),
     LoginModal: () => import('@/components/Modal/LoginModal.vue'),
-    CartModal: () => import('@/components/Modal/CartModal.vue'),
   },
   data() {
     return {

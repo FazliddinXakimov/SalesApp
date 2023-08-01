@@ -5,7 +5,7 @@
         {{ data.title }}
       </h1>
 
-      <div class="grid 1024:grid-cols-5 768:grid-cols-4 grid-cols-1 gap-4">
+      <div class="grid 1024:grid-cols-5 768:grid-cols-4 grid-cols-2 gap-4">
         <ProductCard
           v-for="(product, ind) in data.products"
           :key="ind"

@@ -1,9 +1,9 @@
 <template>
-  <footer class="bg-black text-white">
+  <footer class="bg-black text-white pb-24 768:text-sm text-xs">
     <div class="mx-auto w-full max-w-screen-xl">
       <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
         <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase">Social Media</h2>
+          <h2 class="mb-6 font-semibold uppercase">Social Media</h2>
           <ul class="font-medium">
             <li class="mb-4">
               <a
@@ -14,7 +14,7 @@
                 <img
                   src="@/assets/img/youtube.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Youtube</span>
               </a>
@@ -28,7 +28,7 @@
                 <img
                   src="@/assets/img/instagram.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Instagram</span>
               </a>
@@ -42,7 +42,7 @@
                 <img
                   src="@/assets/img/facebook.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Facebook</span>
               </a>
@@ -56,7 +56,7 @@
                 <img
                   src="@/assets/img/telegram.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Telegram</span>
               </a>
@@ -65,7 +65,7 @@
         </div>
 
         <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase">Legal</h2>
+          <h2 class="mb-6 font-semibold uppercase">Legal</h2>
           <ul class="font-medium">
             <li class="mb-4">
               <a :href="footerData.url" class="hover:underline">{{
@@ -105,7 +105,7 @@
           </ul>
         </div>
         <div>
-          <h2 class="mb-6 text-sm font-semibold uppercase">Download</h2>
+          <h2 class="mb-6 font-semibold uppercase">Download</h2>
 
           <ul class="font-medium">
             <li class="mb-4">
@@ -117,7 +117,7 @@
                 <img
                   src="@/assets/img/google-play.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Google Play</span>
               </a>
@@ -131,7 +131,7 @@
                 <img
                   src="@/assets/img/app-store.svg"
                   alt=""
-                  class="w-10 h-10 mr-3"
+                  class="768:w-10 768:h-10 w-6 h-6 mr-3"
                 />
                 <span>Google Play</span>
               </a>

@@ -3,7 +3,7 @@
     <div class="order-modal__inner">
       <div class="form-item" :class="{ error_field: $v.order.name.$error }">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Name
+          {{ $t('first_name') }}
         </label>
         <input
           id="name"
@@ -15,13 +15,13 @@
           v-show="!$v.order.name.minLength && $v.order.name.$error"
           class="error__text"
         >
-          order.name field min value is 17
+          {{ $t('firstNameMinlength') }}
         </small>
         <small
           v-show="!$v.order.name.required && $v.order.name.$error"
           class="error__text"
         >
-          order.name field is required
+          {{ $t('firstNameRequired') }}
         </small>
       </div>
       <div class="form-item" :class="{ error_field: $v.order.phone.$error }">
@@ -29,7 +29,7 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="order_phone"
         >
-          Phone Number
+          {{ $t('phone') }}
         </label>
         <input
           id="order_phone"
@@ -43,13 +43,13 @@
           v-show="!$v.order.phone.minLength && $v.order.phone.$error"
           class="error__text"
         >
-          order.phone field min value is 17
+          {{ $t('invalidPhone') }}
         </small>
         <small
           v-show="!$v.order.phone.required && $v.order.phone.$error"
           class="error__text"
         >
-          order.phone field is required
+          {{ $t('phoneRequired') }}
         </small>
       </div>
 
@@ -57,22 +57,8 @@
         class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
         @click="handleSubmitOrder"
       >
-        Оформить заказ
+        {{ $t('checkout') }}
       </button>
-
-      <!-- <div
-        id="successfully__alert"
-        class="flex justify-center items-center flex-col"
-      >
-        <img src="@/assets/img/success.svg" width="80" height="80" />
-        <div class="text-lg mt-3">You order has been successfully created!</div>
-      </div> -->
-      <!-- <div id="falsy__alert" class="flex justify-center items-center flex-col">
-        <img src="@/assets/img/cancel_icon.svg" width="80" height="80" />
-        <div class="text-lg mt-3">
-          Something went wrong. Please try again later
-        </div>
-      </div> -->
     </div>
   </MainModal>
 </template>

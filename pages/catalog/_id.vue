@@ -8,13 +8,13 @@
           @click="catalogFilterSidebar = true"
         >
           <img src="@/assets/img/filter.svg" class="w-5 h-5" />
-          <span class="ml-2">Filter</span>
+          <span class="ml-2">{{ $t('filter') }}</span>
         </div>
         <span class="960:w-64 w-48">
           <v-select
             v-model="sort"
             :options="filterOptions"
-            placeholder="Select an option"
+            :placeholder="$t('select')"
             :reduce="(value) => value.key"
             label="title"
           />
@@ -28,7 +28,7 @@
         <div class="960:basis-3/4">
           <div
             v-if="products.results.length > 0"
-            class="grid 1024:grid-cols-4 768:grid-cols-3 640:grid-cols-2 grid-cols-1 gap-4"
+            class="grid 1024:grid-cols-4 768:grid-cols-3 grid-cols-2 gap-4"
           >
             <ProductCard
               v-for="(product, index) in products.results"
@@ -40,13 +40,13 @@
           <div v-else class="flex justify-center flex-col items-center mt-32">
             <img src="@/assets/img/empty-catalog.svg" class="h-36 w-36" />
             <div class="font-medium text-lg">
-              Unfortunately, there are currently no products in this category
+              {{ $t('emptyCategory') }}
             </div>
             <button
               class="bg-transparent text-green-500 border border-green-500 hover:bg-green-500 hover:text-white py-2 px-4 rounded mt-5"
               @click="$router.push(localePath('/'))"
             >
-              Go To Home
+              {{ $t('homePage') }}
             </button>
           </div>
           <div class="mt-10">

@@ -56,7 +56,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="register_phone"
       >
-        Phone Number
+        {{ $t('phone') }}
       </label>
       <input
         id="register_phone"
@@ -71,13 +71,13 @@
         v-show="!$v.register.phone.required && $v.register.phone.$error"
         class="error__text"
       >
-        phone field is required
+        {{ $t('phoneRequired') }}
       </small>
       <small
         v-show="!$v.register.phone.minLength && $v.register.phone.$error"
         class="error__text"
       >
-        phone field min value is 17
+        {{ $t('invalidPhone') }}
       </small>
       <small
         v-show="
@@ -86,7 +86,7 @@
         "
         class="error__text"
       >
-        phone number already taken
+        {{ $t('phoneAlreadyTaken') }}
       </small>
     </div>
 
@@ -95,7 +95,7 @@
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="registerPhone"
     >
-      Send Phone
+      {{ $t('further') }}
     </button>
     <div
       v-if="registerIndex == 2"
@@ -106,7 +106,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="register_sms_code"
       >
-        Sms Code
+        {{ $t('smsCode') }}
       </label>
       <input
         id="register_sms_code"
@@ -121,13 +121,13 @@
         v-show="!$v.register.code.required && $v.register.code.$error"
         class="error__text"
       >
-        SMS code fill is required
+        {{ $t('smsCodeFill') }}
       </small>
       <small
         v-show="!$v.register.code.minLength && $v.register.code.$error"
         class="error__text"
       >
-        please enter valid code
+        {{ $t('smsInvalid') }}
       </small>
       <small
         v-show="
@@ -136,7 +136,7 @@
         "
         class="error__text"
       >
-        sms code error
+        {{ $t('smsError') }}
       </small>
     </div>
 
@@ -145,7 +145,7 @@
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="registerPhonseSms"
     >
-      Send Code
+      {{ $t('further') }}
     </button>
 
     <div
@@ -157,7 +157,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="register_sms_code"
       >
-        Password
+        {{ $t('password') }}
       </label>
       <div class="relative">
         <input
@@ -194,7 +194,7 @@
         v-show="!$v.register.password.required && $v.register.password.$error"
         class="error__text"
       >
-        please enter valid password
+        {{ $t('passwordInvalid') }}
       </small>
     </div>
 
@@ -203,7 +203,7 @@
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="registerVerify"
     >
-      Register
+      {{ $t("register") }}
     </button>
   </div>
 </template>
@@ -248,7 +248,6 @@ export default {
     keyUpRegisterPhone() {
       this.isPhoneSuccess = true
       this.phoneErrorCode = ''
-
     },
     keyUpSmsCode() {
       this.isSmsSuccess = true
@@ -268,7 +267,7 @@ export default {
           this.registerIndex = 2
         } else {
           this.phoneErrorCode = res.data.status
-          
+
           this.isPhoneSuccess = false
         }
       }

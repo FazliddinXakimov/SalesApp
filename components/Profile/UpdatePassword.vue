@@ -1,6 +1,8 @@
 <template>
   <div class="border p-10 rounded-md">
-    <h1 class="text-2xl font-bold mb-5 text-center">Change Password</h1>
+    <h1 class="text-2xl font-bold mb-5 text-center">
+      {{ $t('changePassword') }}
+    </h1>
     <div
       class="relative form-item mx-auto max-w-xs"
       :class="{ error_field: $v.newPassword.password.$error }"
@@ -9,7 +11,7 @@
         class="block text-gray-700 text-sm font-bold mb-2"
         for="newPassword"
       >
-        Password
+        {{ $t('password') }}
       </label>
       <div class="relative">
         <input
@@ -48,7 +50,7 @@
         "
         class="error__text"
       >
-        please enter valid password
+        {{ $t('passwordRequired') }}
       </small>
       <small
         v-show="
@@ -56,7 +58,7 @@
         "
         class="error__text"
       >
-        password must be at least 6 character
+        {{ $t('passwordInvalid') }}
       </small>
     </div>
     <div
@@ -68,7 +70,7 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="newPassword"
         >
-          Password Confirmation
+          {{ $t('passwordConfirmation') }}
         </label>
         <div class="relative">
           <input
@@ -108,7 +110,7 @@
           "
           class="error__text"
         >
-          please enter valid password
+          {{ $t('passwordRequired') }}
         </small>
 
         <small
@@ -118,7 +120,7 @@
           "
           class="error__text"
         >
-          repeatPassword must be at least 6 character
+          {{ $t('passwordInvalid') }}
         </small>
         <small
           v-else-if="
@@ -127,7 +129,7 @@
           "
           class="error__text"
         >
-          password is not the same
+          {{ $t('passwordsNotSimilar') }}
         </small>
       </div>
     </div>
@@ -136,10 +138,10 @@
         class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 mt-6 rounded-full w-full"
         @click="updatePassword"
       >
-        Update Password
+        {{ $t('changePassword') }}
       </button>
     </div>
-    <SuccessModal text="Password has been changed successfully" />
+    <SuccessModal :text="$t('successfullPassword')" />
   </div>
 </template>
 

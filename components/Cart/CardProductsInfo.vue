@@ -3,7 +3,7 @@
     <div class="1024:ml-5 border p-4 rounded">
       <h1 class="text-xl pt-2 pb-5 border-b flex justify-between items-center">
         <span> {{ $t('totalPrice') }}: </span>
-        <span>{{ calculateTotalPrice | numberFilter }} sum</span>
+        <span>{{ calculateTotalPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
 
       <div class="relative mb-3 flex justify-start items-stretch mt-2">
@@ -25,15 +25,15 @@
       </div>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('productsPrice') }}: </span>
-        <span>{{ totalPrice | numberFilter }} sum</span>
+        <span>{{ totalPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('deliveryPrice') }}: </span>
-        <span>{{ deliveryPrice | numberFilter }} sum</span>
+        <span>{{ deliveryPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('discount') }}: </span>
-        <span>{{ discount | numberFilter }} sum</span>
+        <span>{{ discount | numberFilter }} {{ $t('sum') }}</span>
       </h1>
       <button
         class="flex justify-center items-center w-full bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded ml-2"

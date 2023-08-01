@@ -68,7 +68,7 @@
           <div
             class="flex justify-start border-b mb-2 pb-4 font-bold text-lg shadow-lg"
           >
-            <div class="flex-1">
+            <div>
               <img
                 src="@/assets/img/arrow-left.svg"
                 width="28"
@@ -77,7 +77,9 @@
                 @click="catalogModal = false"
               />
             </div>
-            <div class="flex-1">Category</div>
+            <div class="flex-1 flex justify-center items-center mr-5">
+              {{ $t('category') }}
+            </div>
           </div>
           <div
             v-for="(catalog, index) in categories"

@@ -12,7 +12,8 @@
                 activeTab === 1,
             }"
             @click="handleSelectTab(1)"
-            >Description</a
+          >
+            {{ $t('description') }}</a
           >
         </li>
         <li class="mr-2">
@@ -23,7 +24,7 @@
                 activeTab === 2,
             }"
             @click="handleSelectTab(2)"
-            >Instruction</a
+            >{{ $t('instruction') }}</a
           >
         </li>
       </ul>

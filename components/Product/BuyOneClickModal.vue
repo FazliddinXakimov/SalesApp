@@ -16,15 +16,16 @@
           <div class="flex justify-between items-center">
             <div>
               <div>
-                Total Price
+                {{ $t('totalPrice') }}
                 <span class="font-bold"
-                  >{{ (product.sale_price * count) | numberFilter }} sum</span
+                  >{{ (product.sale_price * count) | numberFilter }}
+                  {{ $t('sum') }}</span
                 >
               </div>
               <div>
-                Product Price
+                {{ $t('productsPrice') }}
                 <span class="font-bold"
-                  >{{ product.sale_price | numberFilter }} sum</span
+                  >{{ product.sale_price | numberFilter }} {{ $t('sum') }}</span
                 >
               </div>
             </div>
@@ -54,7 +55,7 @@
 
       <div class="form-item" :class="{ error_field: $v.order.name.$error }">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-          Name
+          {{ $t('first_name') }}
         </label>
         <input
           id="name"
@@ -66,13 +67,13 @@
           v-show="!$v.order.name.minLength && $v.order.name.$error"
           class="error__text"
         >
-          order.name field min value is 17
+          {{ $t('firstNameMinlength') }}
         </small>
         <small
           v-show="!$v.order.name.required && $v.order.name.$error"
           class="error__text"
         >
-          order.name field is required
+          {{ $t('firstNameRequired') }}
         </small>
       </div>
       <div class="form-item" :class="{ error_field: $v.order.phone.$error }">
@@ -80,7 +81,7 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="order_phone"
         >
-          Phone Number
+          {{ $t('phone') }}
         </label>
         <input
           id="order_phone"
@@ -94,13 +95,13 @@
           v-show="!$v.order.phone.minLength && $v.order.phone.$error"
           class="error__text"
         >
-          order.phone field min value is 17
+          {{ $t('invalidPhone') }}
         </small>
         <small
           v-show="!$v.order.phone.required && $v.order.phone.$error"
           class="error__text"
         >
-          order.phone field is required
+          {{ $t('phoneRequired') }}
         </small>
       </div>
 
@@ -108,7 +109,7 @@
         class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
         @click="handleSubmitOrder"
       >
-        Оформить заказ
+        {{ $t('checkout') }}
       </button>
     </div>
   </MainModal>
