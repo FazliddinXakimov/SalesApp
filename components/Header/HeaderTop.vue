@@ -26,6 +26,27 @@
             </button>
           </div>
         </button>
+        <button class="ml-2 dropdown__action 768:inline-block">
+          <div class="flex justify-between items-center text-white">
+            <img
+              src="@/assets/img/globus.svg"
+              class="h-5 w-5 inline-block mr-1"
+            />
+
+            {{ getCurrentLang?.title }}
+          </div>
+
+          <div class="dropdown__list block z-40">
+            <button
+              v-for="(lang, index) in getLangOptions"
+              :key="index"
+              class="dropdown__item"
+              @click="handleChangeLang(lang.key)"
+            >
+              {{ lang.title }}
+            </button>
+          </div>
+        </button>
       </div>
       <div class="768:flex items-center hidden">
         <button class="mr-2 dropdown__action hidden 768:inline-block">
@@ -57,7 +78,7 @@
           </button>
           <a class="" href="tel:+998997293417">+998 99 729 34 17</a>
         </div>
-        <button class="ml-2 dropdown__action hidden 768:inline-block">
+        <button class="ml-2 dropdown__action 768:inline-block">
           <div class="flex justify-between items-center text-white">
             <img
               src="@/assets/img/globus.svg"

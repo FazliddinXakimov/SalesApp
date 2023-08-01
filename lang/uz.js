@@ -14,4 +14,6 @@ export default {
   checkoutOrder: 'Buyurtma berish',
   apply: "Jo'natish",
   couponInvalid: 'Kupon haqiqiy emas',
+  region: 'Viloyat',
+  district: 'Tuman/Shahar',
 }

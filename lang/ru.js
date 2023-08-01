@@ -14,4 +14,6 @@ export default {
   checkoutOrder: 'Оформить заказ',
   apply: 'Применить',
   couponInvalid: 'Купон недействителен',
+  region: 'Регион/Область',
+  district: 'Район/Город ',
 }

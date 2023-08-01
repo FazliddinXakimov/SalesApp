@@ -1,10 +1,16 @@
 <template>
   <div>
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
     <div>
-      <div class="flex justify-start mb-5"></div>
-      <div class="flex justify-end items-center mb-4">
-        <span class="w-64">
+      <div class="flex 960:justify-end justify-start items-center mb-4">
+        <div
+          class="960:hidden flex justify-between items-center border border-gray-200 p-2.5 rounded-md mr-2 cursor-pointer"
+          @click="catalogFilterSidebar = true"
+        >
+          <img src="@/assets/img/filter.svg" class="w-5 h-5" />
+          <span class="ml-2">Filter</span>
+        </div>
+        <span class="960:w-64 w-48">
           <v-select
             v-model="sort"
             :options="filterOptions"
@@ -15,14 +21,14 @@
         </span>
       </div>
 
-      <div class="flex justify-between mb-10">
-        <div class="basis-1/4">
+      <div class="960:flex justify-between mb-10">
+        <div class="960:basis-1/4 960:block hidden">
           <CatalogFilter />
         </div>
-        <div class="basis-3/4">
+        <div class="960:basis-3/4">
           <div
             v-if="products.results.length > 0"
-            class="grid grid-cols-4 gap-4"
+            class="grid 1024:grid-cols-4 768:grid-cols-3 640:grid-cols-2 grid-cols-1 gap-4"
           >
             <ProductCard
               v-for="(product, index) in products.results"
@@ -54,6 +60,7 @@
         </div>
       </div>
     </div>
+    <CatalogMobileFilter v-if="catalogFilterSidebar" />
   </div>
 </template>
 
@@ -61,6 +68,7 @@
 import vSelect from 'vue-select'
 import GlobalPagination from '@/components/GlobalPagination.vue'
 import CatalogFilter from '@/components/Catalog/CatalogFilter.vue'
+import CatalogMobileFilter from '@/components/Catalog/CatalogMobileFilter.vue'
 
 export default {
   name: 'CatalogDetails',
@@ -68,6 +76,7 @@ export default {
     GlobalPagination,
     vSelect,
     CatalogFilter,
+    CatalogMobileFilter,
   },
   data() {
     return {
@@ -76,6 +85,7 @@ export default {
           title: 'Catalog',
         },
       ],
+
       sort: null,
 
       filterOptions: [
@@ -110,6 +120,15 @@ export default {
 
     pageSize() {
       return this.$store.getters['catalog/GET_FILTER'].page_size
+    },
+
+    catalogFilterSidebar: {
+      set(val) {
+        return this.$store.commit('modal/changeCatalogFilterSiderbar', val)
+      },
+      get() {
+        return this.$store.state.modal.catalogFilterSidebar
+      },
     },
     page: {
       get() {

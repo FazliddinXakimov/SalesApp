@@ -63,18 +63,10 @@
               <span class="font-bold">{{ discount | numberFilter }} sum</span>
             </div>
           </div>
-          <div>
-            <button
-              class="flex justify-center items-center w-full bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded"
-              @click="streamOrderModal = true"
-            >
-              Оформить заказ
-            </button>
-          </div>
+          <StreamOrderModal :coupon-code="coupon_code" :product="product" />
         </div>
       </div>
     </div>
-    <StreamOrderModal :coupon-code="coupon_code" :product="product" />
   </div>
 </template>
 

@@ -28,7 +28,7 @@
             </span>
           </button>
 
-          <div class="relative w-full 1024:mr-10 mr-5">
+          <div class="relative w-full 1024:mr-10">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
@@ -144,11 +144,7 @@
         </div>
       </div>
     </nav>
-    <Catalog
-      v-if="catalogModal"
-      :category="isOpenCatalog"
-      @openCatalog="isOpenCatalog = !isOpenCatalog"
-    />
+    <Catalog v-if="catalogModal" />
     <LoginModal />
     <CartModal />
   </div>
@@ -168,7 +164,7 @@ export default {
   data() {
     return {
       searchValue: '',
-      isOpenCatalog: false,
+
       searchTimeout: null,
       searchOptions: [],
       searchCategoryOptions: [],
@@ -182,10 +178,6 @@ export default {
       totalCartProductsCount: 'cart/getTotalProductsCount',
       totalFavoritiesCount: 'favorities/getTotalCount',
     }),
-
-    getSelection() {
-      return this.isOpenCatalog ? 'xmark' : 'bars'
-    },
 
     catalogModal: {
       set(val) {

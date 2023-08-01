@@ -7,6 +7,8 @@ export const state = () => ({
   buyOneClickModal: false,
   myOrderProductModal: false,
   successModal: false,
+  catalogFilterSidebar: false,
+  sellerFilterSidebar: false,
 })
 
 export const mutations = {
@@ -33,5 +35,11 @@ export const mutations = {
   },
   changeSuccessModal: (state, data) => {
     state.successModal = data
+  },
+  changeCatalogFilterSiderbar: (state, data) => {
+    state.catalogFilterSidebar = data
+  },
+  changeSellerFilterSidebar: (state, data) => {
+    state.sellerFilterSidebar = data
   },
 }
