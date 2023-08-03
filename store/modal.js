@@ -9,6 +9,7 @@ export const state = () => ({
   successModal: false,
   catalogFilterSidebar: false,
   sellerFilterSidebar: false,
+  mobileSidebar: false,
 })
 
 export const mutations = {
@@ -17,6 +18,9 @@ export const mutations = {
   },
   changeCartModal: (state, data) => {
     state.cartModal = data
+  },
+  changeMobileSidebar: (state, data) => {
+    state.mobileSidebar = data
   },
   changeCatalogModal: (state, data) => {
     state.catalogModal = data

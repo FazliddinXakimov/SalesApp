@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Banner :banners="banners" @handleClickBanner="handleClickBanner" />
+    <Banner
+      v-if="banners.length"
+      :banners="banners"
+      @handleClickBanner="handleClickBanner"
+    />
     <!-- <Brands :brands="brands" /> -->
     <Products
       :all-products="allProducts"

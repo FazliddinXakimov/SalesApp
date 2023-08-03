@@ -28,6 +28,11 @@ export const getters = {
       (total, product) => (total += product.sale_price * product.count),
       0
     ),
+  getTotalDiscountPrice: (state) =>
+    state.products.reduce(
+      (total, product) => (total += product.discount * product.count),
+      0
+    ),
   getDiscount: (state) => state.discount,
 }
 
@@ -77,6 +82,8 @@ export const actions = {
   },
 
   CALCULATE_DELIVERY_PRICE(_, queryParams) {
-    return this.$axios.$get(`/orders/orders/calculate_delivery_price/?${queryParams}`)
+    return this.$axios.$get(
+      `/orders/orders/calculate_delivery_price/?${queryParams}`
+    )
   },
 }

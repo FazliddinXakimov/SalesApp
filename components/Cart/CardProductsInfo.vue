@@ -28,6 +28,10 @@
         <span>{{ totalPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
       <h1 class="pt-2 pb-5 flex justify-between items-center">
+        <span> {{ $t('totalDiscountPrice') }}: </span>
+        <span>{{ getProductDiscount | numberFilter }} {{ $t('sum') }}</span>
+      </h1>
+      <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('deliveryPrice') }}: </span>
         <span>{{ deliveryPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
@@ -76,6 +80,10 @@ export default {
       get() {
         return this.$store.state.modal.orderModal
       },
+    },
+
+    getProductDiscount() {
+      return this.$store.getters['cart/getTotalDiscountPrice']
     },
     productIds() {
       return this.$store.getters['cart/getProductIds']

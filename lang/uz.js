@@ -44,7 +44,7 @@ export default {
   from: 'dan',
   to: 'gacha',
   brand: 'Brend',
-  logout: 'Chjqish',
+  logout: 'Chiqish',
   profil: 'Profile',
   characteristics: 'Xarakteristika',
   enterCoupon: 'Promokodni kiriting',
@@ -78,4 +78,5 @@ export default {
   successfullPassword: 'Parol muvaffaqiyatli almashtirildi',
   successfullRequest: 'Sizning so`rovingiz yuborildi',
   sum: 'so`m',
+  totalDiscountPrice: 'Tejovingiz',
 }

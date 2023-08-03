@@ -45,7 +45,11 @@ export const actions = {
   FETCH_REGIONS_LIST({ commit }) {
     return new Promise((resolve, reject) => {
       this.$axios
-        .get('/references/regions/')
+        .get('/references/regions/', {
+          params: {
+            page_size: 40,
+          },
+        })
         .then((response) => {
           commit(SET_REGIONS_LIST, response.data.results)
           resolve(state.regions_list)

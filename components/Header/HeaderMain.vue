@@ -20,13 +20,20 @@
           class="flex 768:justify-start justify-between items-center 768:basis-4/6 w-full"
         >
           <button
-            class="flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded-lg mr-2"
+            class="hidden justify-center items-center 1024:flex bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded-lg mr-2"
             @click="catalogModal = true"
           >
             <img src="@/assets/img/catalog.svg" class="w-4 h-5 ml-3 mr-2" />
             <span class="mr-3 hidden 1024:inline-block">
               {{ $t('catalog') }}
             </span>
+          </button>
+
+          <button
+            class="1024:hidden flex justify-center items-center bg-green-600 hover:bg-green-700 text-white font-bold catalog__btn px-4 border-none rounded-lg mr-2"
+            @click="mobileSidebar = true"
+          >
+            <img src="@/assets/img/catalog.svg" class="w-4 h-5 mx-3" />
           </button>
 
           <div class="relative w-full 1024:mr-10">
@@ -67,7 +74,9 @@
                 </div>
               </div>
               <div v-if="searchProductsOptions.length">
-                <div class="text-lg font-bold">{{ $t('products') }}</div>
+                <div class="768:text-lg text-base font-bold">
+                  {{ $t('products') }}
+                </div>
                 <div
                   v-for="(product, index) in searchProductsOptions"
                   :key="index"
@@ -77,7 +86,7 @@
                   <img
                     :src="product.image"
                     :alt="product.title"
-                    class="w-20 h-20 mr-2"
+                    class="768:h-20 768:w-20 h-10 w-10 mr-2"
                   />
                   <div>
                     {{ product.id }}
@@ -148,6 +157,7 @@
       </div>
     </nav>
     <Catalog v-if="catalogModal" />
+    <MobileSidebar v-if="mobileSidebar" />
     <LoginModal />
   </div>
 </template>
@@ -161,6 +171,7 @@ export default {
   components: {
     Catalog: () => import('@/components/Catalog/CatalogSidebar.vue'),
     LoginModal: () => import('@/components/Modal/LoginModal.vue'),
+    MobileSidebar: () => import('@/components/Catalog/MobileSidebar.vue'),
   },
   data() {
     return {
@@ -186,6 +197,14 @@ export default {
       },
       get() {
         return this.$store.state.modal.catalogModal
+      },
+    },
+    mobileSidebar: {
+      set(val) {
+        return this.$store.commit('modal/changeMobileSidebar', val)
+      },
+      get() {
+        return this.$store.state.modal.mobileSidebar
       },
     },
   },

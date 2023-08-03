@@ -12,7 +12,7 @@
           <img src="@/assets/img/home.svg" class="h-6 w-6" />
           <span
             class="text-gray-500 dark:text-gray-400 group-hover:text-blue-600 text-xs"
-            >{{ $t('homePage') }}</span
+            >{{ $t('home') }}</span
           >
         </button>
         <button
@@ -52,8 +52,8 @@
           <span class="relative">
             <img src="@/assets/img/shopping-cart.svg" class="h-6 w-6" />
 
-            <BadgeComp class-name="bg-green-600 absolute -top-2 -right-3">
-              {{ totalCartProductsCount }}
+            <BadgeComp class-name="bg-green-600 absolute -top-1 -right-3">
+              <span class="text-xs">{{ totalCartProductsCount }}</span>
             </BadgeComp>
           </span>
 

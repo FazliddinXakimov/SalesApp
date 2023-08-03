@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1 class="text-2xl mb-4">{{ $t('similarProducts') }}</h1>
+    <h1 class="960:text-2xl mb-4 768:text-xl font-bold text-lg">
+      {{ $t('similarProducts') }}
+    </h1>
     <div class="swiper-products">
       <div class="swiper">
         <swiper class="swiper-wrapper" :options="swiperOptions">
@@ -48,6 +50,10 @@ export default {
           0: {
             slidesPerView: 'auto',
             freeMode: true,
+          },
+          640: {
+            slidesPerView: 4,
+            freeMode: false,
           },
           1200: {
             slidesPerView: 4,

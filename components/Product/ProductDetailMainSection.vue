@@ -5,7 +5,7 @@
     </div>
 
     <div class="768:basis-4/12 pl-4 mt-10 960:mt-0">
-      <div class="text-xl mb-4 text-center 960:text-start">
+      <div class="960:text-2xl mb-4 768:text-xl font-bold text-lg">
         {{ product.title }}
       </div>
       <div v-if="product && product.brand" class="text-lg mb-4">
@@ -95,17 +95,20 @@
     </div>
 
     <BuyOneClickModal :product="product" />
+    <SuccessModal :text="$t('successfullOrder')" />
   </div>
 </template>
 
 <script>
 import BuyOneClickModal from '@/components/Product/BuyOneClickModal.vue'
 import ProductImages from '@/components/Product/ProductImages.vue'
+import SuccessModal from '@/components/SuccessModal.vue'
 
 export default {
   components: {
     BuyOneClickModal,
     ProductImages,
+    SuccessModal,
   },
 
   props: {
@@ -118,6 +121,14 @@ export default {
   computed: {
     isCart() {
       return this.$store.state.cart.product_ids.includes(this.product.id)
+    },
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
+      },
     },
 
     buyOneClickModal: {

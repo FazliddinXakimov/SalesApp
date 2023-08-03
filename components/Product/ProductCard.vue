@@ -1,24 +1,26 @@
 <template>
   <div
-    class="bg-white border border-gray-200 overflow-hidden rounded-xl mx-2 cursor-pointer shadow-md hover:-translate-y-1 duration-200"
+    class="bg-white border border-gray-200 overflow-hidden rounded-xl cursor-pointer shadow-md hover:-translate-y-1 duration-200"
     @click="toDetailPage(product)"
   >
-    <img :src="product.image" class="768:h-48 h-24 object-contain mx-auto" />
+    <img :src="product.image" class="768:h-48 h-28 object-contain mx-auto" />
 
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <p
-          class="text-center text-gray-800 mt-1 truncate text-ellipsis cursor-pointer"
-        >
+        <p class="text-gray-800 mt-1 cut-text">
           {{ product.title }}
         </p>
-        <p class="text-center text-gray-800 mt-1">
-          {{ product.sale_price | numberFilter }} {{ $t('sum') }}
+        <p class="text-red-500 line-through italic text-gray-800 mt-1">
+          <span class="font-bold">
+            {{ product.price | numberFilter }}
+          </span>
+          {{ $t('sum') }}
         </p>
-        <p
-          class="text-center text-red-500 line-through italic text-gray-800 mt-1"
-        >
-          {{ product.price | numberFilter }} {{ $t('sum') }}
+        <p class="text-gray-800 mt-1">
+          <span class="font-bold">
+            {{ product.sale_price | numberFilter }}
+          </span>
+          {{ $t('sum') }}
         </p>
       </div>
       <div class="inline-flex items-center mt-2"></div>
@@ -131,10 +133,11 @@ export default {
 
 <style scoped>
 .cut-text {
-  text-overflow: ellipsis;
+  height: 50px;
+  /* text-overflow: ellipsis;
   overflow: hidden;
   width: 160px;
   height: 1.2em;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 </style>

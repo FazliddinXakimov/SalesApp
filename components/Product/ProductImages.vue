@@ -14,11 +14,10 @@
           <div class="gallery-top__item">
             <img
               v-if="identifyImage(topImage)"
+              class="h-80 w-40"
               :src="topImage"
               :alt="name"
               :title="name"
-              width="598"
-              height="320"
             />
 
             <video v-else width="598" height="320" controls>

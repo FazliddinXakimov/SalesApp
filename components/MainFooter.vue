@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-black text-white pb-24 768:text-sm text-xs">
     <div class="mx-auto w-full max-w-screen-xl">
-      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3">
+      <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
         <div>
           <h2 class="mb-6 font-semibold uppercase">Social Media</h2>
           <ul class="font-medium">
@@ -63,47 +63,6 @@
             </li>
           </ul>
         </div>
-
-        <div>
-          <h2 class="mb-6 font-semibold uppercase">Legal</h2>
-          <ul class="font-medium">
-            <li class="mb-4">
-              <a :href="footerData.url" class="hover:underline">{{
-                footerData.for_advertisers.title
-              }}</a>
-            </li>
-            <li class="mb-4">
-              <nuxt-link
-                :to="
-                  localePath({
-                    name: 'about-id',
-                    params: { id: footerData.privacy_policy.slug },
-                  })
-                "
-                class="hover:underline"
-                >{{ footerData.privacy_policy.title }}</nuxt-link
-              >
-            </li>
-            <li class="mb-4">
-              <nuxt-link
-                :to="
-                  localePath({
-                    name: 'about-id',
-                    params: { id: footerData.public_offer.slug },
-                  })
-                "
-                >{{ footerData.public_offer.title }}</nuxt-link
-              >
-            </li>
-            <li class="mb-4">
-              <nuxt-link
-                :to="{ path: localePath('/sell-with-us') }"
-                class="hover:underline"
-                >{{ footerData.sell_with_us.title }}</nuxt-link
-              >
-            </li>
-          </ul>
-        </div>
         <div>
           <h2 class="mb-6 font-semibold uppercase">Download</h2>
 
@@ -135,6 +94,61 @@
                 />
                 <span>Google Play</span>
               </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="mb-6 font-semibold uppercase">Business</h2>
+          <ul class="font-medium">
+            <li class="mb-4">
+              <a
+                :href="footerData.for_advertisers.url"
+                target="_blank"
+                class="hover:underline"
+                >{{ footerData.for_advertisers.title }}</a
+              >
+            </li>
+
+            <li class="mb-4">
+              <nuxt-link
+                :to="{ path: localePath('/sell-with-us') }"
+                class="hover:underline"
+                >{{ footerData.sell_with_us.title }}</nuxt-link
+              >
+            </li>
+
+            <li class="mb-4">
+              <a href="tel:+998997293417"> +998 99 729 34 17</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="mb-6 font-semibold uppercase">Legal</h2>
+          <ul class="font-medium">
+            <li class="mb-4">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'about-id',
+                    params: { id: footerData.privacy_policy.slug },
+                  })
+                "
+                class="hover:underline"
+                >{{ footerData.privacy_policy.title }}</nuxt-link
+              >
+            </li>
+            <li class="mb-4">
+              <nuxt-link
+                :to="
+                  localePath({
+                    name: 'about-id',
+                    params: { id: footerData.public_offer.slug },
+                  })
+                "
+                >{{ footerData.public_offer.title }}</nuxt-link
+              >
             </li>
           </ul>
         </div>

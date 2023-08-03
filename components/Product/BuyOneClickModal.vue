@@ -119,6 +119,7 @@
 import { required, minLength } from 'vuelidate/lib/validators'
 
 export default {
+  components: {},
   props: {
     product: {
       type: Object,
@@ -152,6 +153,14 @@ export default {
         return this.$store.state.modal.buyOneClickModal
       },
     },
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
+      },
+    },
   },
 
   methods: {
@@ -173,6 +182,12 @@ export default {
           })
 
           this.buyOneClick = false
+          this.successModal = true
+
+          setTimeout(() => {
+            this.successModal = false
+            this.$router.push(this.localePath('/'))
+          }, 3000)
         } catch (error) {
           this.buyOneClick = true
         }

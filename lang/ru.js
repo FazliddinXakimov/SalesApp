@@ -78,4 +78,5 @@ export default {
   successfullPassword: 'Пароль успешно изменен',
   successfullRequest: 'Ваш запрос был отправлен',
   sum: 'сум',
+  totalDiscountPrice: 'Вы экономите',
 }
