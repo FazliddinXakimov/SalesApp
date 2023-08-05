@@ -4,7 +4,7 @@
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3 px-2"
       >
-        <div class="768:flex hidden 768:basis-1/6">
+        <div class="768:flex hidden :basis-1/6">
           <nuxt-link
             :to="{ path: localePath('/') }"
             class="flex items-center no-underline"
@@ -36,7 +36,7 @@
             <img src="@/assets/img/catalog.svg" class="w-4 h-5 mx-3" />
           </button>
 
-          <div class="relative w-full 1024:mr-10">
+          <div class="relative w-full 1024:mr-10 mr-5">
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">
@@ -105,7 +105,7 @@
           >
             <div class="flex flex-col justify-center items-center">
               <span class="relative">
-                <img src="@/assets/img/favorite.svg" class="h-8 w-8" />
+                <img src="@/assets/img/favorite.svg" class="960:h-8 960:w-8 h-7 w-7" />
 
                 <BadgeComp class-name="bg-green-600 absolute -top-2 -right-2">
                   {{ totalFavoritiesCount }}
@@ -121,13 +121,13 @@
               v-if="$auth.loggedIn"
               class="flex flex-col justify-center items-center"
             >
-              <img src="@/assets/img/user.svg" class="h-8 w-8" />
+              <img src="@/assets/img/user.svg" class="960:h-8 960:w-8 h-7 w-7" />
               <span class="text-sm">{{ $auth.user.phone }}</span>
             </div>
             <div v-else class="flex flex-col justify-center items-center">
               <img
                 src="@/assets/img/user.svg"
-                class="h-8 w-8"
+                class="960:h-8 960:w-8 h-7 w-7"
                 @click="openLoginModal"
               />
               <span class="text-sm"> {{ $t('login') }} </span>
@@ -144,7 +144,7 @@
           <button @click="$router.push(localePath(`/cart`))">
             <div class="flex flex-col justify-center items-center">
               <span class="relative">
-                <img src="@/assets/img/shopping-cart.svg" class="h-8 w-8" />
+                <img src="@/assets/img/shopping-cart.svg" class="960:h-8 960:w-8 h-7 w-7" />
 
                 <BadgeComp class-name="bg-green-600 absolute -top-2 -right-3">
                   {{ totalCartProductsCount }}

@@ -15,6 +15,7 @@
             v-model="sort"
             :options="filterOptions"
             :placeholder="$t('select')"
+            :searchable="false"
             :reduce="(value) => value.key"
             label="title"
           />

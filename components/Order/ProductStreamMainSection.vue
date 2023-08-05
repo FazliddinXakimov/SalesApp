@@ -59,6 +59,12 @@
               <span v-else class="font-bold"> {{ $t('free') }} </span>
             </div>
             <div>
+              <span> {{ $t('totalDiscountPrice') }}: </span>
+              <span class="font-bold"
+                >{{ getProductDiscount | numberFilter }} {{ $t('sum') }}</span
+              >
+            </div>
+            <div>
               <span> {{ $t('discount') }}: </span>
               <span class="font-bold"
                 >{{ discount | numberFilter }} {{ $t('sum') }}</span
@@ -121,6 +127,9 @@ export default {
   computed: {
     isCart() {
       return this.$store.state.cart.product_ids.includes(this.product.id)
+    },
+    getProductDiscount() {
+      return this.$store.getters['cart/getTotalDiscountPrice']
     },
 
     streamOrderModal: {

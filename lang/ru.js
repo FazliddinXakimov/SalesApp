@@ -79,4 +79,7 @@ export default {
   successfullRequest: 'Ваш запрос был отправлен',
   sum: 'сум',
   totalDiscountPrice: 'Вы экономите',
+  socialMedia: 'Социальные медиа',
+  download: 'Скачать',
+
 }

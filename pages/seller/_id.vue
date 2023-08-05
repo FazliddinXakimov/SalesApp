@@ -20,6 +20,7 @@
             :options="filterOptions"
             :placeholder="$t('select')"
             :reduce="(value) => value.key"
+            :searchable="false"
             label="title"
           />
         </span>

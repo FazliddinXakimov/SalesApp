@@ -14,7 +14,7 @@
                 query: { catalog: topItem.id },
               })
             "
-            class="-mb-px border-b p-2 hover:text-cyan-500 cursor-pointer"
+            class="border-b p-2 hover:text-cyan-500 cursor-pointer"
             :class="
               activeCategoryId == topItem.id
                 ? 'border-current'

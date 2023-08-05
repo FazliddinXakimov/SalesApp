@@ -88,6 +88,7 @@
         <v-select
           v-model="personalData.region"
           :options="regions"
+          :searchable="false"
           :placeholder="$t('select')"
           :reduce="(value) => value.id"
           label="name"
@@ -104,6 +105,7 @@
           :placeholder="$t('select')"
           label="name"
           :reduce="(value) => value.id"
+          :searchable="false"
           :disabled="isDistrictDisable"
         />
       </div>

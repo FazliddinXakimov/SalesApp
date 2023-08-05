@@ -79,4 +79,6 @@ export default {
   successfullRequest: 'Sizning so`rovingiz yuborildi',
   sum: 'so`m',
   totalDiscountPrice: 'Tejovingiz',
+  socialMedia: 'Ijtimoiy tarmoqlar',
 }
+

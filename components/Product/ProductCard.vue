@@ -7,7 +7,7 @@
 
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <p class="text-gray-800 mt-1 cut-text">
+        <p class="text-gray-800 mt-1 h-24 480:h-20 960:h-14">
           {{ product.title }}
         </p>
         <p class="text-red-500 line-through italic text-gray-800 mt-1">
@@ -130,14 +130,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.cut-text {
-  height: 50px;
-  /* text-overflow: ellipsis;
-  overflow: hidden;
-  width: 160px;
-  height: 1.2em;
-  white-space: nowrap; */
-}
-</style>

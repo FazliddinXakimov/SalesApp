@@ -71,6 +71,7 @@
         :placeholder="$t('select')"
         :reduce="(value) => value.id"
         label="name"
+        :searchable="false"
         @input="changeRegion"
       />
 
@@ -94,6 +95,7 @@
         v-model="order.district"
         :options="districts"
         :placeholder="$t('select')"
+        :searchable="false"
         label="name"
         :reduce="(value) => value.id"
         :disabled="isDistrictDisable"
