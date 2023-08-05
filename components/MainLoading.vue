@@ -1,8 +1,17 @@
 <template>
   <div v-show="isLoading" class="loading-site-full">
     <div class="half-circle-spinner">
-      <div class="spinner-border" role="status">
-        <span class="sr-only">Loading...</span>
+      <!-- <div class="circle circle-1"></div>
+        
+      <div class="circle circle-2"></div> -->
+      <div
+        class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        role="status"
+      >
+        <span
+          class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+          >Loading...</span
+        >
       </div>
     </div>
   </div>

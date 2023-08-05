@@ -3,7 +3,10 @@
     <div
       class="flex items-center justify-between mx-auto max-w-screen-xl text-white px-2 py-3 960:py-1"
     >
-      <div class="768:hidden block">SalesAPP</div>
+      <div class="768:hidden block cursor-pointer" @click="$router.push(localePath('/'))">
+        SalesAPP
+      </div>
+
       <div class="768:hidden flex items-center">
         <button class="dropdown__action flex items-center">
           <div class="flex justify-between items-center text-white">
@@ -22,7 +25,10 @@
           </div>
         </button>
         <button class="ml-2 dropdown__action 768:inline-block">
-          <div class="flex justify-between items-center text-white" @click="handleChangeLang(getNotCurrentLang.key)">
+          <div
+            class="flex justify-between items-center text-white"
+            @click="handleChangeLang(getNotCurrentLang.key)"
+          >
             <img :src="getCurrentLangIcon" class="h-5 w-5 inline-block mr-1" />
 
             {{ getCurrentLang?.title }}

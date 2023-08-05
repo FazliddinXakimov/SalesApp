@@ -86,7 +86,7 @@ export default {
     return {
       breadCrumb: [
         {
-          title: 'Catalog',
+          title: this.$t('catalog'),
         },
       ],
       sort: null,

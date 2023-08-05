@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
 
     <div v-if="products.length > 0">
       <div class="flex justify-center">

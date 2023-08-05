@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
     <div v-if="products.length > 0" class="swiper-products">
       <h1 class="text-2xl mb-4">{{ $t('favorities') }}</h1>
       <div

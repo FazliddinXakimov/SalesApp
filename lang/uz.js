@@ -45,7 +45,7 @@ export default {
   to: 'gacha',
   brand: 'Brend',
   logout: 'Chiqish',
-  profil: 'Profile',
+  profil: 'Profil',
   characteristics: 'Xarakteristika',
   enterCoupon: 'Promokodni kiriting',
   free: 'Tekin',

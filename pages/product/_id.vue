@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
     <ProductDetailMainSection :product="product" />
     <ProductDetailTabs :product="product" />
     <SimilarProducts :products="similarProducts" class="mt-5 mb-10" />
@@ -23,7 +23,7 @@ export default {
     return {
       breadCrumb: [
         {
-          title: 'Product',
+          title: this.$t('product'),
         },
       ],
     }

@@ -63,7 +63,6 @@ export default {
   async mounted() {
     this.$store.commit('SET_MAIN_LOADING', true)
 
-    console.log('this.auth', this.$auth)
     await Promise.allSettled([
       this.$store.dispatch('references/FETCH_TOP_CATEGORIES'),
       this.$store.dispatch('references/FETCH_ROOT_CATEGORIES'),

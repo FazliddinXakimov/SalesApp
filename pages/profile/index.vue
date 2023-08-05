@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
     <div>
       <div>
         <ProfileSideBar
@@ -36,7 +36,7 @@ export default {
       activeTab: 1,
       breadCrumb: [
         {
-          title: 'Profile',
+          title: this.$t('catalog'),
         },
       ],
     }

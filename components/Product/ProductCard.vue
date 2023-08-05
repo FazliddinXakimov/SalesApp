@@ -7,7 +7,7 @@
 
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <p class="text-gray-800 mt-1 h-24 480:h-20 960:h-14">
+        <p class="text-gray-800 mt-1 h-24 480:h-20 768:h-14">
           {{ product.title }}
         </p>
         <p class="text-red-500 line-through italic text-gray-800 mt-1">

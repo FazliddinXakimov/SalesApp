@@ -36,7 +36,7 @@
             <img src="@/assets/img/catalog.svg" class="w-4 h-5 mx-3" />
           </button>
 
-          <div class="relative w-full 1024:mr-10 mr-5">
+          <div class="relative w-full 1024:mr-10 768:mr-5 mr-0" >
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">

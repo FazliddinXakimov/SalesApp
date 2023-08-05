@@ -1,6 +1,6 @@
 <template>
   <div class="my-10">
-    <BreadCrumb :bread-crumb="breadCrumb" class="mb-10" />
+    <BreadCrumb :bread-crumb="breadCrumb" class="my-10" />
     <ProductStreamMainSection v-if="streamProduct" :product="streamProduct" />
     <ProductDetailTabs :product="streamProduct" class="" />
   </div>
@@ -31,7 +31,7 @@ export default {
       activeTab: 1,
       breadCrumb: [
         {
-          title: 'Product',
+            title: this.$t('product'),
         },
       ],
       swiperOptions: {
