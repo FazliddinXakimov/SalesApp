@@ -1,3 +1,4 @@
+const SET_PAGE = 'SET_PAGE'
 const SET_FILTER = 'SET_FILTER'
 const SET_PRODUCERS = 'SET_PRODUCERS'
 const SET_PRODUCTS = 'SET_PRODUCTS'
@@ -11,9 +12,11 @@ export const state = () => ({
     maxPrice: 10000000,
     sort: null,
     brands: [],
-    page: 1,
+    // page: 1,
     page_size: 8,
   },
+
+  page: 1,
   producers: [],
 
   products: {
@@ -27,6 +30,7 @@ export const getters = {
   GET_PRODUCERS: (state) => state.producers,
   GET_FILTER: (state) => state.filter,
   GET_PRODUCTS: (state) => state.products,
+  GET_PAGE: (state) => state.page,
   IS_INCLUDES_BRAND: (state) => (brand) => {
     return state.filter.brands.includes(brand)
   },
@@ -38,6 +42,9 @@ export const mutations = {
       title: p.title,
       checked: false,
     }))
+  },
+  [SET_PAGE]: (state, data) => {
+    state.page = data
   },
 
   [SET_FILTER]: (state, filterOptions) => {
@@ -82,7 +89,7 @@ export const actions = {
             max_price: state.filter.maxPrice,
             sort: state.filter.sort,
             brands: state.filter.brands.join(','),
-            page: state.filter.page,
+            page: state.page,
             page_size: state.filter.page_size,
           },
         })

@@ -20,6 +20,7 @@
                   v-model="minPrice"
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
+                  @input="() => (page = 1)"
                 />
               </div>
               <div class="form-item">
@@ -35,6 +36,7 @@
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   max="100000"
+                  @input="() => (page = 1)"
                 />
               </div>
             </div>
@@ -82,9 +84,9 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      producers: 'catalog/GET_PRODUCERS',
-      filter: 'catalog/GET_FILTER',
-      isIncludes: 'catalog/IS_INCLUDES_BRAND',
+      producers: 'seller/GET_PRODUCERS',
+      filter: 'seller/GET_FILTER',
+      isIncludes: 'seller/IS_INCLUDES_BRAND',
     }),
 
     minPrice: {
@@ -93,7 +95,7 @@ export default {
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           minPrice: val,
         })
         this.handleSetQuery({ minPrice: val })
@@ -105,11 +107,22 @@ export default {
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
+        this.$store.commit('seller/SET_FILTER_ITEM', {
           maxPrice: val,
         })
 
         this.handleSetQuery({ maxPrice: val })
+      },
+      page: {
+        get() {
+          return this.$store.getters['seller/GET_PAGE']
+        },
+
+        set(val) {
+          this.$store.commit('seller/SET_PAGE', val)
+
+          this.handleSetQuery({ page: val })
+        },
       },
     },
     sellerFilterSidebar: {
@@ -126,45 +139,16 @@ export default {
     filter: {
       deep: true,
       handler(val, oldVal) {
+        this.$store.commit('seller/SET_PAGE', 1)
+        this.handleSetQuery({ page: 1 })
         this.$store.dispatch(
-          'catalog/FETCH_CATALOG_PRODUCTS',
-          this.$route.query.catalog
+          'seller/FETCH_CATALOG_PRODUCTS',
+          this.$route.params.id
         )
       },
     },
   },
 
-  mounted() {
-    this.$store.dispatch('catalog/FETCH_PRODUCERS')
-
-    const routeQuery = this.$route.query
-
-    if (routeQuery.brands) {
-      const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
-
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        brands: integerBrands,
-      })
-    }
-
-    if (routeQuery.sort) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        sort: routeQuery.sort,
-      })
-    }
-
-    if (routeQuery.minPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        minPrice: routeQuery.minPrice,
-      })
-    }
-
-    if (routeQuery.maxPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        maxPrice: routeQuery.maxPrice,
-      })
-    }
-  },
   methods: {
     ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
@@ -180,8 +164,8 @@ export default {
     },
 
     handleCheckProducer(id) {
-      this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
-      this.handleSetQuery()
+      this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
+      // this.handleSetQuery()
     },
   },
 }

@@ -126,13 +126,11 @@ export default {
     },
     page: {
       get() {
-        return this.$store.getters['seller/GET_FILTER'].page
+        return this.$store.getters['seller/GET_PAGE']
       },
 
       set(val) {
-        this.$store.commit('seller/SET_FILTER_ITEM', {
-          page: val,
-        })
+        this.$store.commit('seller/SET_PAGE', val)
 
         this.handleSetQuery({ page: val })
       },
@@ -204,6 +202,11 @@ export default {
         maxPrice: routeQuery.maxPrice,
       })
     }
+
+    if (routeQuery.page) {
+      const pageNumber = routeQuery.page / 1
+      this.page = pageNumber
+    }
   },
   methods: {
     handleSetQuery(queryObject) {
@@ -219,6 +222,10 @@ export default {
 
     handlePageChange(page) {
       this.page = page
+      this.$store.dispatch(
+        'seller/FETCH_SELLER_PRODUCTS',
+        this.$route.params.id
+      )
       // this.handleSetQuery()
     },
   },

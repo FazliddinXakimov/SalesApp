@@ -20,6 +20,7 @@
                   v-model="minPrice"
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
+                  @input="() => (page = 1)"
                 />
               </div>
               <div class="form-item">
@@ -35,6 +36,7 @@
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   max="100000"
+                  @input="() => (page = 1)"
                 />
               </div>
             </div>
@@ -99,6 +101,17 @@ export default {
         this.handleSetQuery({ minPrice: val })
       },
     },
+    page: {
+      get() {
+        return this.$store.getters['catalog/GET_PAGE']
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_PAGE', val)
+
+        this.handleSetQuery({ page: val })
+      },
+    },
     maxPrice: {
       get() {
         return this.filter.maxPrice
@@ -126,6 +139,9 @@ export default {
     filter: {
       deep: true,
       handler(val, oldVal) {
+        this.$store.commit('catalog/SET_PAGE', 1)
+        this.handleSetQuery({ page: 1 })
+
         this.$store.dispatch(
           'catalog/FETCH_CATALOG_PRODUCTS',
           this.$route.query.catalog
@@ -168,7 +184,7 @@ export default {
   methods: {
     ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
-    handleSetQuery(queryObject) {
+    handleSetQuery(queryObject = {}) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -181,7 +197,6 @@ export default {
 
     handleCheckProducer(id) {
       this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
-      this.handleSetQuery()
     },
   },
 }

@@ -1,5 +1,8 @@
 <template>
-  <div class="ml-r border p-4 rounded">
+  <div class="ml-r border p-4 rounded-xl mr-5">
+    <div class="text-xl font-bold text-center mb-4">
+      {{ $t('filter') }}
+    </div>
     <div class="text-lg font-bold mb-2">{{ $t('price') }}</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
@@ -14,6 +17,7 @@
           v-model="minPrice"
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
+          @input="() => (page = 1)"
         />
       </div>
       <div class="form-item">
@@ -29,6 +33,7 @@
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           max="100000"
+          @input="() => (page = 1)"
         />
       </div>
     </div>
@@ -74,19 +79,6 @@ export default {
       filter: 'catalog/GET_FILTER',
       isIncludes: 'catalog/IS_INCLUDES_BRAND',
     }),
-    page: {
-      get() {
-        return this.$store.getters['catalog/GET_FILTER'].page
-      },
-
-      set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
-          page: val,
-        })
-
-        this.handleSetQuery({ page: val })
-      },
-    },
 
     minPrice: {
       get() {
@@ -98,6 +90,17 @@ export default {
           minPrice: val,
         })
         this.handleSetQuery({ minPrice: val })
+      },
+    },
+    page: {
+      get() {
+        return this.$store.getters['catalog/GET_PAGE']
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_PAGE', val)
+
+        this.handleSetQuery({ page: val })
       },
     },
     maxPrice: {
@@ -118,7 +121,9 @@ export default {
   watch: {
     filter: {
       deep: true,
-      handler(val, oldVal) {
+      handler() {
+        this.$store.commit('catalog/SET_PAGE', 1)
+        this.handleSetQuery({ page: 1 })
         this.$store.dispatch(
           'catalog/FETCH_CATALOG_PRODUCTS',
           this.$route.query.catalog
@@ -127,40 +132,8 @@ export default {
     },
   },
 
-  mounted() {
-    this.$store.dispatch('catalog/FETCH_PRODUCERS')
-
-    const routeQuery = this.$route.query
-
-    if (routeQuery.brands) {
-      const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
-
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        brands: integerBrands,
-      })
-    }
-
-    if (routeQuery.sort) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        sort: routeQuery.sort,
-      })
-    }
-
-    if (routeQuery.minPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        minPrice: routeQuery.minPrice,
-      })
-    }
-
-    if (routeQuery.maxPrice) {
-      this.$store.commit('catalog/SET_FILTER_ITEM', {
-        maxPrice: routeQuery.maxPrice,
-      })
-    }
-  },
-
   methods: {
-    handleSetQuery(queryObject) {
+    handleSetQuery(queryObject = {}) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -173,7 +146,6 @@ export default {
 
     handleCheckProducer(id) {
       this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
-      this.handleSetQuery()
     },
   },
 }

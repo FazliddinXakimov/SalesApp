@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-r border p-4 rounded">
+  <div class="ml-r border p-4 rounded-xl mr-5">
     <div class="text-lg font-bold mb-2">Цена</div>
     <div class="flex justify-between items-center">
       <div class="form-item mr-2">
@@ -14,6 +14,7 @@
           v-model="minPrice"
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
+          @input="() => (page = 1)"
         />
       </div>
       <div class="form-item">
@@ -29,12 +30,13 @@
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           max="100000"
+          @input="() => (page = 1)"
         />
       </div>
     </div>
 
     <div>
-      <div class="text-lg font-bold mt-3 mb-2">Производитель</div>
+      <div class="text-lg font-bold mt-3 mb-2">{{ $t('brands') }}</div>
     </div>
     <div>
       <div
@@ -59,7 +61,6 @@
 </template>
 
 <script>
-
 import { mapGetters } from 'vuex'
 
 export default {
@@ -103,50 +104,32 @@ export default {
         this.handleSetQuery({ maxPrice: val })
       },
     },
+    page: {
+      get() {
+        return this.$store.getters['seller/GET_PAGE']
+      },
+
+      set(val) {
+        this.$store.commit('seller/SET_PAGE', val)
+
+        this.handleSetQuery({ page: val })
+      },
+    },
   },
 
   watch: {
     filter: {
       deep: true,
       handler() {
+        this.$store.commit('seller/SET_PAGE', 1)
+        this.handleSetQuery({ page: 1 })
+
         this.$store.dispatch(
           'seller/FETCH_SELLER_PRODUCTS',
           this.$route.params.id
         )
       },
     },
-  },
-
-  mounted() {
-    this.$store.dispatch('seller/FETCH_PRODUCERS')
-
-    const routeQuery = this.$route.query
-
-    if (routeQuery.brands) {
-      const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
-
-      this.$store.commit('seller/SET_FILTER_ITEM', {
-        brands: integerBrands,
-      })
-    }
-
-    if (routeQuery.sort) {
-      this.$store.commit('seller/SET_FILTER_ITEM', {
-        sort: routeQuery.sort,
-      })
-    }
-
-    if (routeQuery.minPrice) {
-      this.$store.commit('seller/SET_FILTER_ITEM', {
-        minPrice: routeQuery.minPrice,
-      })
-    }
-
-    if (routeQuery.maxPrice) {
-      this.$store.commit('seller/SET_FILTER_ITEM', {
-        maxPrice: routeQuery.maxPrice,
-      })
-    }
   },
 
   methods: {
@@ -163,7 +146,7 @@ export default {
 
     handleCheckProducer(id) {
       this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
-      this.handleSetQuery()
+      // this.handleSetQuery()
     },
   },
 }

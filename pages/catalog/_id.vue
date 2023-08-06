@@ -83,7 +83,7 @@ export default {
     return {
       breadCrumb: [
         {
-          title: this.$t('catalog')
+          title: this.$t('catalog'),
         },
       ],
 
@@ -133,13 +133,11 @@ export default {
     },
     page: {
       get() {
-        return this.$store.getters['catalog/GET_FILTER'].page
+        return this.$store.getters['catalog/GET_PAGE']
       },
 
       set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
-          page: val,
-        })
+        this.$store.commit('catalog/SET_PAGE', val)
 
         this.handleSetQuery({ page: val })
       },
@@ -202,8 +200,7 @@ export default {
     }
     if (routeQuery.page) {
       const pageNumber = routeQuery.page / 1
-      console.log('pageNumber', typeof pageNumber)
-      // this.page = pageNumber
+      this.page = pageNumber
     }
   },
   methods: {
@@ -220,6 +217,12 @@ export default {
 
     handlePageChange(page) {
       this.page = page
+      this.$store.dispatch(
+        'catalog/FETCH_CATALOG_PRODUCTS',
+        this.$route.query.catalog
+      )
+
+      
       // this.handleSetQuery()
     },
   },
