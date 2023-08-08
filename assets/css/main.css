@@ -78,3 +78,9 @@ a:hover {
 }
 
 /* Handle on hover */
+.main-footer {
+  background: rgba(164, 149, 255, 1);
+}
+.catalog-top {
+  background: rgba(164, 149, 255, 1);
+}

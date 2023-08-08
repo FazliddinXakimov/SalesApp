@@ -1,4 +1,4 @@
-export default function ({ $axios, $auth, app }) {
+export default function ({ $axios, $auth, app, redirect }) {
   $axios.onRequest((config) => {
     // Set the language header here
     config.headers['Accept-Language'] = app.i18n.locale || 'uz' // Using i18n to get the current locale
@@ -10,6 +10,7 @@ export default function ({ $axios, $auth, app }) {
     // async (error) => {
 
     (error) => {
+      redirect('/')
       if (error.response && error.response.status === 401) {
         // Access token expired, try to refresh it
         try {

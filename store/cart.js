@@ -16,6 +16,7 @@ export const state = () => ({
 export const getters = {
   getProducts: (state) => state.products,
   getProductIds: (state) => state.product_ids,
+  getIsHaveCart: (state) => (id) => state.product_ids.includes(id),
   getTotalProductsCount: (state) =>
     state.products.reduce((total, product) => (total += product.count), 0),
   isAllProductsSelected: (state) =>

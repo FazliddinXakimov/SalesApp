@@ -1,0 +1,25 @@
+// @import '../variables';
+
+.product-card-wrapper {
+  background: white;
+  border: 1px solid $gray-200;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  :hover {
+    transform: translateY(-0.25rem);
+    transition-duration: 200ms;
+  }
+  .product-image {
+    object-fit: contain;
+    margin: 0 auto;
+    height: 112px;
+    @media (min-width: $md) {
+      height: 192px;
+    }
+  }
+  .product-content {
+    padding: 16px;
+  }
+}

@@ -1,9 +1,12 @@
 <template>
-  <nav class="bg-slate-700 w-full top-0 z-20">
+  <nav class="bg-slate-700 w-full top-0 z-20 main-footer">
     <div
       class="flex items-center justify-between mx-auto max-w-screen-xl text-white px-2 py-3 960:py-1"
     >
-      <div class="768:hidden block cursor-pointer" @click="$router.push(localePath('/'))">
+      <div
+        class="768:hidden block cursor-pointer"
+        @click="$router.push(localePath('/'))"
+      >
         SalesAPP
       </div>
 

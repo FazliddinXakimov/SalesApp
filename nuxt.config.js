@@ -51,6 +51,7 @@ export default {
     'swiper/css/swiper.css',
     'vue-select/dist/vue-select.css',
     '@/assets/css/main.css',
+    '@/assets/scss/main.scss',
     '@/assets/css/swiper.css',
   ],
   plugins: [
@@ -85,9 +86,15 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss', '@nuxtjs/svg'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/svg',
+    '@nuxtjs/style-resources',
+    '@nuxt/image',
+  ],
   styleResources: {
-    scss: ['@/assets/scss/_variables.scss'],
+    scss: ['@/assets/scss/variables.scss'],
   },
 
   i18n: {
