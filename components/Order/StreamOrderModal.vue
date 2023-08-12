@@ -240,7 +240,7 @@ export default {
               }
               this.$v.order.$reset()
               this.$router.push(this.localePath('/'))
-            }, 2000)
+            }, 2500)
           }
 
           console.log('response', response)

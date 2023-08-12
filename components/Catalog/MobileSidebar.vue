@@ -8,8 +8,13 @@
           class="flex flex h-full w-80 flex-col border-r border-secondary-light bg-white py-8 text-primary overflow-auto"
         >
           <div
+            class="flex justify-center items-center px-4 border-b pb-2 text-base"
+          >
+            <img src="@/assets/img/izlab.svg" class="w-10 h-8" />
+          </div>
+          <div
             v-if="$auth.loggedIn"
-            class="flex justify-start items-center px-4 border-b pb-2 text-base"
+            class="flex justify-start items-center px-4 border-b py-2 text-base"
           >
             <div class="mr-4 border rounded-full p-3">
               <img src="@/assets/img/user.svg" class="h5 w-5" />
@@ -18,9 +23,7 @@
               <div class="font-bold">
                 {{ $auth.user.name }}
               </div>
-              <div>
-                +-{{ $auth.user.phone }}
-              </div>
+              <div>+-{{ $auth.user.phone }}</div>
             </div>
           </div>
 
@@ -75,8 +78,6 @@
               <img src="@/assets/img/logout.svg" class="h-8 w-8 mr-4" />
               <span class="text-base font-bold">{{ $t('logout') }}</span>
             </div>
-
-            
           </div>
         </div>
 

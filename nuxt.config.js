@@ -17,7 +17,7 @@ export default {
   target: 'server',
   ssr: false,
   head: {
-    title: 'SalesApp',
+    title: 'Izlab market',
     htmlAttrs: {
       lang: 'en',
     },
@@ -38,12 +38,16 @@ export default {
         name: 'format-detection',
         content: 'telephone=no',
       },
+      {
+        property: 'og:image',
+        content: '@/assets/img/izlab.svg', // Replace with your image URL
+      },
     ],
     link: [
       {
         rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
+        type: 'image/svg+xml',
+        href: '@/assets/img/filter.svg',
       },
     ],
   },

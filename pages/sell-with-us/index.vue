@@ -182,7 +182,7 @@ export default {
             this.successModal = false
 
             this.$router.push(this.localePath('/'))
-          }, 1500)
+          }, 2500)
         }
         console.log('response', response)
       }

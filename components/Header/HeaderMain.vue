@@ -4,7 +4,6 @@
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3 px-2"
       >
-      
         <div class="768:flex hidden :basis-1/6">
           <nuxt-link
             :to="{ path: localePath('/') }"
@@ -13,8 +12,9 @@
             <span
               class="1024:text-2xl text-xl font-semibold whitespace-nowrap cursor-pointer"
               @click="$router.push(localePath('/'))"
-              >{{ $t('brand') }}</span
             >
+              <img src="@/assets/img/izlab.svg" class="w-16 h-16" />
+            </span>
           </nuxt-link>
         </div>
 

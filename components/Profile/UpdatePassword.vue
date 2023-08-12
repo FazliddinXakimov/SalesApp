@@ -203,7 +203,7 @@ export default {
         this.successModal = true
         setTimeout(() => {
           this.successModal = false
-        }, 1000)
+        }, 2500)
       }
     },
   },

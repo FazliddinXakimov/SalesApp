@@ -69,6 +69,7 @@ export default {
       this.$store.dispatch('header/FETCH_REGIONS_LIST'),
       this.$store.dispatch('home/FETCH_MAIN_PRODUCTS'),
       this.$store.dispatch('home/FETCH_BANNERS_LIST'),
+      this.$store.dispatch('references/FETCH_FOOTER'),
     ])
 
     this.$store.commit('SET_MAIN_LOADING', false)

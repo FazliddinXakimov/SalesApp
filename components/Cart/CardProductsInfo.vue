@@ -47,14 +47,17 @@
       </button>
     </div>
     <OrderModal :coupon-code="coupon_code" />
+    <SuccessModal :text="$t('successfullOrder')" />
   </div>
 </template>
 
 <script>
 import OrderModal from './OrderModal.vue'
+import SuccessModal from '@/components/SuccessModal.vue'
 
 export default {
   components: {
+    SuccessModal,
     OrderModal,
   },
 
@@ -79,6 +82,15 @@ export default {
       },
       get() {
         return this.$store.state.modal.orderModal
+      },
+    },
+
+    successModal: {
+      set(val) {
+        this.$store.commit('modal/changeSuccessModal', val)
+      },
+      get() {
+        return this.$store.state.modal.successModal
       },
     },
 

@@ -120,6 +120,15 @@ export default {
           })
 
           this.orderModal = false
+          this.successModal = true
+
+          setTimeout(() => {
+            this.successModal = false
+
+            this.$v.order.$reset()
+            this.$router.push(this.localePath('/'))
+            this.$store.commit('cart/SET_EMPTY_CART')
+          }, 2500)
         } catch (error) {}
       }
     },

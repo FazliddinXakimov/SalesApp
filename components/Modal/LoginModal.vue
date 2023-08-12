@@ -11,7 +11,7 @@
             class="inline-block p-4 rounded-t-lg"
             :class="getTabComponent('Login')"
             @click="currentComp = 'Login'"
-            >Login</span
+            >{{ $t('login') }}</span
           >
         </li>
         <li class="mr-2">
@@ -20,7 +20,7 @@
             class="inline-block p-4 rounded-t-lg"
             :class="getTabComponent('Register')"
             @click="currentComp = 'Register'"
-            >Register</span
+            >{{ $t('register') }}</span
           >
         </li>
       </ul>

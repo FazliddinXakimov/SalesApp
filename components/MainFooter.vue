@@ -119,7 +119,7 @@
             </li>
 
             <li class="mb-4">
-              <a href="tel:+998997293417"> +998 99 729 34 17</a>
+              <a href="#"> +{{ footerData.support_phone }}</a>
             </li>
           </ul>
         </div>
@@ -169,10 +169,6 @@ export default {
     ...mapGetters({
       footerData: 'references/GET_FOOTER',
     }),
-  },
-
-  mounted() {
-    this.$store.dispatch('references/FETCH_FOOTER')
   },
 }
 </script>

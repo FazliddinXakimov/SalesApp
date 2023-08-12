@@ -140,6 +140,19 @@
       </small>
     </div>
 
+    <div v-if="registerIndex == 2" class="text-center text-xs my-2">
+      <span
+        v-if="expiredSms === 0"
+        class="cursor-pointer text-sky-500"
+        @click="registerPhone"
+      >
+        {{ $t('resend') }}
+      </span>
+      <span v-else>
+        {{ $t('resendSms', [timeExpire]) }}
+      </span>
+    </div>
+
     <button
       v-if="registerIndex == 2"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
@@ -203,7 +216,7 @@
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded-full my-2"
       @click="registerVerify"
     >
-      {{ $t("register") }}
+      {{ $t('register') }}
     </button>
   </div>
 </template>
@@ -227,9 +240,23 @@ export default {
       phoneErrorCode: '',
       isSmsSuccess: true,
       smsErrorCode: '',
+      expiredSms: 59,
+      interval: null,
     }
   },
   computed: {
+    timeExpire() {
+      let minute = Math.floor(this.expiredSms / 60)
+      let second = this.expiredSms % 60
+
+      if (minute < 10) {
+        minute = `0${minute}`
+      }
+      if (second < 10) {
+        second = `0${second}`
+      }
+      return `${minute}:${second}`
+    },
     loginModal: {
       set(val) {
         this.$store.commit('modal/changeLoginModal', val)
@@ -243,6 +270,15 @@ export default {
   methods: {
     closeModal() {
       this.$store.commit('modal/changeLoginModal', false)
+    },
+    expiredStartDown() {
+      clearInterval(this.interval)
+
+      this.interval = setInterval(() => {
+        if (this.expiredSms > 0) {
+          this.expiredSms = this.expiredSms - 1
+        }
+      }, 1000)
     },
 
     keyUpRegisterPhone() {
@@ -261,7 +297,9 @@ export default {
           data: { phone: this.register.phone.replace(/\+| /g, '') },
         })
         if (res.data.status === 200) {
+          this.expiredSms = 60
           this.isPhoneSuccess = true
+          this.expiredStartDown()
           this.register.temp_user = res.data.id
           this.register.auto_created = res.data.auto_created
           this.registerIndex = 2

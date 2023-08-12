@@ -11,7 +11,7 @@ export default {
   home: 'Bosh sahifa',
   productsPrice: 'Mahsulotlar narxi',
   deliveryPrice: 'Yetkazib berish narxi',
-  discount: 'Chegirma',
+  discount: 'Promokod',
   checkoutOrder: 'Buyurtma berish',
   apply: "Jo'natish",
   couponInvalid: 'Kupon haqiqiy emas',
@@ -80,5 +80,6 @@ export default {
   sum: 'so`m',
   totalDiscountPrice: 'Tejovingiz',
   socialMedia: 'Ijtimoiy tarmoqlar',
+  resendSms: "Qayta yuborish ({0} soniyadan so'ng)",
+  resend: 'Qayta yuborish',
 }
-

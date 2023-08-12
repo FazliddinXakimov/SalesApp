@@ -21,6 +21,7 @@
   height: 50px;
   border-radius: 100%;
   position: relative;
+  text-align: center;
 }
 
 .half-circle-spinner .circle {
@@ -30,6 +31,10 @@
   height: 100%;
   border-radius: 100%;
   border: 8px solid transparent;
+}
+
+.spin__color {
+  color: #a495ff;
 }
 
 .half-circle-spinner .circle.circle-1 {

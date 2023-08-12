@@ -11,7 +11,7 @@ export default {
   home: 'Главная',
   productsPrice: 'Цена продукции',
   deliveryPrice: 'Цена доставки',
-  discount: 'Скидка',
+  discount: 'Промокод',
   checkoutOrder: 'Оформить заказ',
   apply: 'Применить',
   couponInvalid: 'Купон недействителен',
@@ -81,5 +81,6 @@ export default {
   totalDiscountPrice: 'Вы экономите',
   socialMedia: 'Социальные медиа',
   download: 'Скачать',
-
+  resendSms: 'Отправить повторно (через {0} секунд)',
+  resend: 'Отправить повторно',
 }

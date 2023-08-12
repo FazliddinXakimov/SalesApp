@@ -7,21 +7,27 @@
 
     <div class="p-4 flex flex-col">
       <div class="content-center">
-        <p class="text-gray-800 mt-1 h-24 480:h-20 768:h-14">
+        <p class="text-gray-800 mt-1 h-24 480:h-20 768:h-16 product-card-title">
           {{ product.title }}
         </p>
-        <p class="text-red-500 line-through italic text-gray-800 mt-1">
-          <span class="font-bold">
-            {{ product.price | numberFilter }}
-          </span>
-          {{ $t('sum') }}
-        </p>
+
         <p class="text-gray-800 mt-1">
           <span class="font-bold">
             {{ product.sale_price | numberFilter }}
           </span>
           {{ $t('sum') }}
         </p>
+        <div class="old_price">
+          <p
+            v-if="product.on_sale"
+            class="text-red-500 line-through italic text-gray-800 mt-1"
+          >
+            <span class="font-bold">
+              {{ product.price | numberFilter }}
+            </span>
+            {{ $t('sum') }}
+          </p>
+        </div>
       </div>
       <div class="inline-flex items-center mt-2"></div>
       <div
@@ -130,3 +136,16 @@ export default {
   },
 }
 </script>
+
+<style>
+.product-card-title {
+  overflow: hidden;
+  max-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+}
+.old_price {
+  min-height: 27px;
+}
+</style>

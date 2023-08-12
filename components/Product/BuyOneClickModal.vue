@@ -187,7 +187,7 @@ export default {
           setTimeout(() => {
             this.successModal = false
             this.$router.push(this.localePath('/'))
-          }, 3000)
+          }, 2500)
         } catch (error) {
           this.buyOneClick = true
         }
