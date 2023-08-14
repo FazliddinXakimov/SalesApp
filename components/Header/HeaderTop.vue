@@ -7,7 +7,7 @@
         class="768:hidden block cursor-pointer"
         @click="$router.push(localePath('/'))"
       >
-        <img src="@/assets/img/izlab.svg" class="w-10" />
+        <img src="@/assets/img/logo2.svg" class="w-10" />
       </div>
 
       <div class="768:hidden flex items-center">
@@ -73,13 +73,18 @@
         </button>
       </div>
       <div class="768:flex items-center hidden">
-        <div>
+        <!-- <div>
           <button class="mr-2">
             <img src="@/assets/img/header-phone.svg" class="h-5 w-5" />
           </button>
-          <a class="" href="#">+{{ footerData.support_phone }}</a>
-          <!-- <a class="" href="#">+998 99 729 34 17</a> -->
-        </div>
+
+          <a
+            :href="footerData.for_advertisers.url"
+            target="_blank"
+            class="hover:underline"
+            >{{ footerData.for_advertisers.title }}</a
+          >
+        </div> -->
         <button class="ml-2 dropdown__action 768:inline-block">
           <div
             class="flex justify-between items-center text-white"

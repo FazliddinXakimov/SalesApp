@@ -94,7 +94,6 @@ export const actions = {
         .get('/references/categories/', {
           params: {
             is_top: true,
-            page_size: 6
           },
         })
         .then((response) => {

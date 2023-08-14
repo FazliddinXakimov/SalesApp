@@ -33,7 +33,7 @@
           </span>
         </div>
         <div>
-          Product price:
+          {{ $t('price') }}:
           <span class="font-bold"
             >{{ product.sale_price | numberFilter }} {{ $t('sum') }}
           </span>

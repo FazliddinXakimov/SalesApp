@@ -46,7 +46,7 @@ export default {
   brand: 'Brend',
   logout: 'Chiqish',
   profil: 'Profil',
-  characteristics: 'Xarakteristika',
+  characteristics: 'Mahsulot haqida qisqacha',
   enterCoupon: 'Promokodni kiriting',
   free: 'Tekin',
   bonusType: 'Bonus turi',

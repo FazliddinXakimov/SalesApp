@@ -46,7 +46,7 @@ export default {
   brand: 'Бренд',
   logout: 'Выйти',
   profil: 'Профиль',
-  characteristics: 'Характеристика',
+  characteristics: 'Кратко о продукте',
   enterCoupon: 'Введите  промокод',
   free: 'Бесплатно',
   bonusType: 'Тип бонуса',

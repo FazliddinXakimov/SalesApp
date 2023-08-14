@@ -13,7 +13,7 @@
           >Loading...</span
         > -->
       </div>
-      <img src="@/assets/img/izlab.svg" class="w-16 h-10" />
+      <img src="@/assets/img/logo2.svg" class="w-16 h-10" />
     </div>
   </div>
 </template>

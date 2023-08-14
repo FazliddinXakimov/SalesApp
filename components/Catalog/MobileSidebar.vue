@@ -10,7 +10,7 @@
           <div
             class="flex justify-center items-center px-4 border-b pb-2 text-base"
           >
-            <img src="@/assets/img/izlab.svg" class="w-10 h-8" />
+            <img src="@/assets/img/logo2.svg" class="w-10 h-8" />
           </div>
           <div
             v-if="$auth.loggedIn"
@@ -61,15 +61,7 @@
               </span>
               <span class="text-base font-bold">{{ $t('favorities') }}</span>
             </div>
-            <div
-              class="flex items-center hover:bg-slate-200 group my-3 px-4 py-2 w-full"
-            >
-              <img src="@/assets/img/register-phone.svg" class="h-6 w-6 mr-4" />
 
-              <a class="text-base font-bold" href="tel:+998997293417"
-                >+998 99 729 34 17</a
-              >
-            </div>
             <div
               v-if="$auth.loggedIn"
               class="flex items-center hover:bg-slate-200 group my-3 px-4 py-2 w-full"

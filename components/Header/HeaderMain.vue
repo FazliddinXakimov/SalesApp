@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav id="header" class="bg-gray-300 w-full top-8 left-0 border-b z-20">
+    <nav id="header" class="w-full top-8 left-0 border-b z-20 bg-white">
       <div
         class="max-w-screen-xl flex items-center justify-between mx-auto py-3 px-2"
       >
@@ -13,7 +13,7 @@
               class="1024:text-2xl text-xl font-semibold whitespace-nowrap cursor-pointer"
               @click="$router.push(localePath('/'))"
             >
-              <img src="@/assets/img/izlab.svg" class="w-16 h-16" />
+              <img src="@/assets/img/logo2.svg" class="w-16 h-16" />
             </span>
           </nuxt-link>
         </div>
@@ -38,7 +38,9 @@
             <img src="@/assets/img/catalog.svg" class="w-4 h-5 mx-3" />
           </button>
 
-          <div class="relative w-full 1024:mr-10 768:mr-5 mr-0">
+          <div
+            class="relative w-full 1024:mr-10 768:mr-5 mr-0 border rounded-lg"
+          >
             <div class="rounded-lg">
               <div class="w-full">
                 <div class="relative search__input">

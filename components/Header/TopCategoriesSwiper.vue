@@ -5,7 +5,7 @@
         <swiper-slide
           v-for="(topItem, index) in categories"
           :key="index"
-          class="swiper-slide border rounded-full"
+          class="swiper-slide"
         >
           <nuxt-link
             :to="
@@ -15,7 +15,7 @@
                 query: { catalog: topItem.id },
               })
             "
-            class=" border-b p-2 hover:text-cyan-500 cursor-pointer"
+            class="border p-2 hover:text-cyan-500 cursor-pointer rounded-lg text-xs font-bold"
             :class="
               activeCategoryId == topItem.id
                 ? 'border-current'
@@ -38,8 +38,8 @@ export default {
     return {
       activeCategoryId: null,
       swiperOptions: {
+        autoplay: false,
         loop: false,
-        lazyLoading: true,
         navigation: {
           nextEl: '.button-next',
           prevEl: '.button-prev',
@@ -48,19 +48,31 @@ export default {
 
         breakpoints: {
           0: {
-            slidesPerView: 'auto',
-            freeMode: true,
+            slidesPerView: 2.5,
+            freeMode: false,
+          },
+          468: {
+            slidesPerView: 2.5,
+            freeMode: false,
           },
           640: {
-            slidesPerView: 4,
+            slidesPerView: 3.5,
             freeMode: false,
           },
-          1200: {
-            slidesPerView: 4,
+          768: {
+            slidesPerView: 5,
             freeMode: false,
           },
+          960: {
+            slidesPerView: 6,
+            freeMode: false,
+          },
+          // 1200: {
+          //   slidesPerView: 6,
+          //   freeMode: false,
+          // },
           1300: {
-            slidesPerView: 4,
+            slidesPerView: 8,
             freeMode: false,
           },
         },
@@ -79,3 +91,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.a {
+  border: 1px solid red !important;
+}
+</style>

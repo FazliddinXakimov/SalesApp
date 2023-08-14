@@ -40,7 +40,7 @@ export default {
       },
       {
         property: 'og:image',
-        content: '@/assets/img/izlab.svg', // Replace with your image URL
+        content: '@/assets/img/logo2.svg', // Replace with your image URL
       },
     ],
     link: [
