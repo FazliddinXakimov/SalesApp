@@ -12,7 +12,7 @@
         </div>
         <span class="960:w-64 w-48">
           <v-select
-            v-model="sort"
+            v-model="sortType"
             :options="filterOptions"
             :placeholder="$t('select')"
             :searchable="false"
@@ -86,9 +86,6 @@ export default {
           title: this.$t('catalog'),
         },
       ],
-
-      sort: null,
-
       filterOptions: [
         {
           title: 'Hammasi',
@@ -145,33 +142,20 @@ export default {
 
     sortType: {
       get() {
-        return this.$store.getters['catalog/GET_FILTER']
+        return this.$store.getters['catalog/GET_FILTER']?.sort
       },
 
       set(val) {
         this.$store.commit('catalog/SET_FILTER_ITEM', {
           sort: val,
         })
-        this.handleSetQuery({ sort: val })
+        this.page = 1
+        this.handleSetQuery({ sort: val, page: 1 })
       },
     },
   },
 
-  watch: {
-    sort(val) {
-      if (val) {
-        this.sortType = val
-      }
-    },
-  },
-
-  mounted() {
-    this.$store.dispatch(
-      'catalog/FETCH_CATALOG_PRODUCTS',
-      this.$route.query.catalog
-    )
-    this.$store.dispatch('catalog/FETCH_PRODUCERS')
-
+  async mounted() {
     const routeQuery = this.$route.query
     if (routeQuery.brands) {
       const integerBrands = routeQuery.brands.map((brand) => parseInt(brand))
@@ -202,6 +186,11 @@ export default {
       const pageNumber = routeQuery.page / 1
       this.page = pageNumber
     }
+    await this.$store.dispatch('catalog/FETCH_PRODUCERS')
+    this.$store.dispatch(
+      'catalog/FETCH_CATALOG_PRODUCTS',
+      this.$route.query.catalog
+    )
   },
   methods: {
     handleSetQuery(queryObject) {
@@ -213,6 +202,11 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
+
+      this.$store.dispatch(
+        'catalog/FETCH_CATALOG_PRODUCTS',
+        this.$route.query.catalog
+      )
     },
 
     handlePageChange(page) {
@@ -222,7 +216,6 @@ export default {
         this.$route.query.catalog
       )
 
-      
       // this.handleSetQuery()
     },
   },

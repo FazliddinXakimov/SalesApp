@@ -9,7 +9,7 @@
           <swiper-slide
             v-for="(product, index) in products.results"
             :key="index"
-            class="swiper-slide product-card-item"
+            class="swiper-slide product-card-item mr-4"
           >
             <ProductCard :product="product" />
           </swiper-slide>

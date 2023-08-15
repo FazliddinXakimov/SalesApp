@@ -7,14 +7,13 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="minPrice"
         >
-          от
+          {{ $t('from') }}
         </label>
         <input
           id="minPrice"
           v-model="minPrice"
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
-          @input="() => (page = 1)"
         />
       </div>
       <div class="form-item">
@@ -22,7 +21,7 @@
           class="block text-gray-700 text-sm font-bold mb-2"
           for="maxPrice"
         >
-          до
+          {{ $t('to') }}
         </label>
         <input
           id="maxPrice"
@@ -30,13 +29,12 @@
           class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="text"
           max="100000"
-          @input="() => (page = 1)"
         />
       </div>
     </div>
 
     <div>
-      <div class="text-lg font-bold mt-3 mb-2">{{ $t('brands') }}</div>
+      <div class="text-lg font-bold mt-3 mb-2">{{ $t('brand') }}</div>
     </div>
     <div>
       <div
@@ -68,9 +66,7 @@ export default {
     // VueSlider,
   },
   data() {
-    return {
-      initialPriceRange: [0, 10000000],
-    }
+    return {}
   },
   computed: {
     ...mapGetters({
@@ -88,7 +84,9 @@ export default {
         this.$store.commit('seller/SET_FILTER_ITEM', {
           minPrice: val,
         })
-        this.handleSetQuery({ minPrice: val })
+
+        this.page = 1
+        this.handleSetQuery({ minPrice: val, page: 1 })
       },
     },
     maxPrice: {
@@ -101,7 +99,8 @@ export default {
           maxPrice: val,
         })
 
-        this.handleSetQuery({ maxPrice: val })
+        this.page = 1
+        this.handleSetQuery({ maxPrice: val, page: 1 })
       },
     },
     page: {
@@ -117,23 +116,8 @@ export default {
     },
   },
 
-  watch: {
-    filter: {
-      deep: true,
-      handler() {
-        this.$store.commit('seller/SET_PAGE', 1)
-        this.handleSetQuery({ page: 1 })
-
-        this.$store.dispatch(
-          'seller/FETCH_SELLER_PRODUCTS',
-          this.$route.params.id
-        )
-      },
-    },
-  },
-
   methods: {
-    handleSetQuery(queryObject) {
+    async handleSetQuery(queryObject) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -142,11 +126,21 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
+      await this.$store.dispatch(
+        'catalog/FETCH_CATALOG_PRODUCTS',
+        this.$route.query.catalog
+      )
     },
 
     handleCheckProducer(id) {
+      console.log('id', id)
       this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
       // this.handleSetQuery()
+      this.page = 1
+      this.handleSetQuery({
+        brand: id,
+        page: 1,
+      })
     },
   },
 }

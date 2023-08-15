@@ -54,7 +54,7 @@ export default {
   goToBasket: 'Savatchaga o`tish',
   addToBasket: 'Savatchaga qo`shish',
   buyOneClick: 'Birgina klik orqali xarid qilish',
-  storePage: 'Do`kon sahifase',
+  storePage: 'Do`kon sahifasi',
   description: 'Tavsif',
   instruction: 'Ko`rsatma',
   similarProducts: 'O`xshash mahsulotlar',

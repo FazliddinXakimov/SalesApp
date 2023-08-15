@@ -50,6 +50,12 @@
                 >{{ product.sale_price | numberFilter }} {{ $t('sum') }}
               </span>
             </div>
+            <div v-if="product.bonus_exist">
+              {{ $t('bonusType') }}:
+              <span class="font-bold">
+                {{ product.bonus_type }}
+              </span>
+            </div>
 
             <div>
               <span> {{ $t('deliveryPrice') }}: </span>
@@ -61,7 +67,8 @@
             <div>
               <span> {{ $t('totalDiscountPrice') }}: </span>
               <span class="font-bold"
-                >{{ getProductDiscount | numberFilter }} {{ $t('sum') }}</span
+                >{{ (product.price - product.sale_price) | numberFilter }}
+                {{ $t('sum') }}</span
               >
             </div>
             <div>

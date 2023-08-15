@@ -12,13 +12,10 @@ export const state = () => ({
     maxPrice: 10000000,
     sort: null,
     brands: [],
-    // page: 1,
     page_size: 8,
   },
-
   page: 1,
   producers: [],
-
   products: {
     count: 0,
     next: 0,

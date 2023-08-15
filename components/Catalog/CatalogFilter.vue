@@ -69,9 +69,7 @@ export default {
     // VueSlider,
   },
   data() {
-    return {
-      initialPriceRange: [0, 10000000],
-    }
+    return {}
   },
   computed: {
     ...mapGetters({
@@ -89,9 +87,24 @@ export default {
         this.$store.commit('catalog/SET_FILTER_ITEM', {
           minPrice: val,
         })
-        this.handleSetQuery({ minPrice: val })
+        this.handleSetQuery({ minPrice: val, page: 1 })
       },
     },
+
+    maxPrice: {
+      get() {
+        return this.filter.maxPrice
+      },
+
+      set(val) {
+        this.$store.commit('catalog/SET_FILTER_ITEM', {
+          maxPrice: val,
+        })
+
+        this.handleSetQuery({ maxPrice: val, page: 1 })
+      },
+    },
+
     page: {
       get() {
         return this.$store.getters['catalog/GET_PAGE']
@@ -103,37 +116,10 @@ export default {
         this.handleSetQuery({ page: val })
       },
     },
-    maxPrice: {
-      get() {
-        return this.filter.maxPrice
-      },
-
-      set(val) {
-        this.$store.commit('catalog/SET_FILTER_ITEM', {
-          maxPrice: val,
-        })
-
-        this.handleSetQuery({ maxPrice: val })
-      },
-    },
-  },
-
-  watch: {
-    filter: {
-      deep: true,
-      handler() {
-        this.$store.commit('catalog/SET_PAGE', 1)
-        this.handleSetQuery({ page: 1 })
-        this.$store.dispatch(
-          'catalog/FETCH_CATALOG_PRODUCTS',
-          this.$route.query.catalog
-        )
-      },
-    },
   },
 
   methods: {
-    handleSetQuery(queryObject = {}) {
+    async handleSetQuery(queryObject = {}) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -142,10 +128,19 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
+      await this.$store.dispatch(
+        'catalog/FETCH_CATALOG_PRODUCTS',
+        this.$route.query.catalog
+      )
     },
 
     handleCheckProducer(id) {
-      this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
+      this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id) 
+      this.page = 1
+      this.handleSetQuery({
+        brand: id,
+        page: 1,
+      })
     },
   },
 }

@@ -16,7 +16,7 @@
         </div>
         <span class="960:w-64 w-48">
           <v-select
-            v-model="sort"
+            v-model="sortType"
             :options="filterOptions"
             :placeholder="$t('select')"
             :reduce="(value) => value.key"
@@ -86,10 +86,9 @@ export default {
     return {
       breadCrumb: [
         {
-          title: this.$t('catalog'),
+          title: this.$t('storePage'),
         },
       ],
-      sort: null,
 
       filterOptions: [
         {
@@ -147,30 +146,21 @@ export default {
 
     sortType: {
       get() {
-        return this.$store.getters['seller/GET_FILTER']
+        return this.$store.getters['seller/GET_FILTER'].sort
       },
 
       set(val) {
         this.$store.commit('seller/SET_FILTER_ITEM', {
           sort: val,
         })
-        this.handleSetQuery({ sort: val })
+        this.page = 1
+        this.handleSetQuery({ sort: val, page: 1 })
       },
-    },
-  },
-
-  watch: {
-    sort(val) {
-      if (val) {
-        this.sortType = val
-      }
     },
   },
 
   mounted() {
     // console.log('this.$route', this.$route)
-    this.$store.dispatch('seller/FETCH_SELLER_PRODUCTS', this.$route.params.id)
-    this.$store.dispatch('seller/FETCH_PRODUCERS')
 
     const routeQuery = this.$route.query
     if (routeQuery.brands) {
@@ -207,9 +197,12 @@ export default {
       const pageNumber = routeQuery.page / 1
       this.page = pageNumber
     }
+
+    this.$store.dispatch('seller/FETCH_SELLER_PRODUCTS', this.$route.params.id)
+    this.$store.dispatch('seller/FETCH_PRODUCERS')
   },
   methods: {
-    handleSetQuery(queryObject) {
+    async handleSetQuery(queryObject) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -218,6 +211,10 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
+      await this.$store.dispatch(
+        'seller/FETCH_SELLER_PRODUCTS',
+        this.$route.params.id
+      )
     },
 
     handlePageChange(page) {
