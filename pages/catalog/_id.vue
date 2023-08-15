@@ -151,6 +151,11 @@ export default {
         })
         this.page = 1
         this.handleSetQuery({ sort: val, page: 1 })
+
+        this.$store.dispatch(
+          'catalog/FETCH_CATALOG_PRODUCTS',
+          this.$route.query.catalog
+        )
       },
     },
   },
@@ -202,11 +207,6 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
-
-      this.$store.dispatch(
-        'catalog/FETCH_CATALOG_PRODUCTS',
-        this.$route.query.catalog
-      )
     },
 
     handlePageChange(page) {

@@ -87,6 +87,10 @@ export default {
 
         this.page = 1
         this.handleSetQuery({ minPrice: val, page: 1 })
+        this.$store.dispatch(
+          'seller/FETCH_SELLER_PRODUCTS',
+          this.$route.params.id
+        )
       },
     },
     maxPrice: {
@@ -101,6 +105,11 @@ export default {
 
         this.page = 1
         this.handleSetQuery({ maxPrice: val, page: 1 })
+
+        this.$store.dispatch(
+          'seller/FETCH_SELLER_PRODUCTS',
+          this.$route.params.id
+        )
       },
     },
     page: {
@@ -117,7 +126,7 @@ export default {
   },
 
   methods: {
-    async handleSetQuery(queryObject) {
+    handleSetQuery(queryObject) {
       const oldRouteQuery = { ...this.$route.query }
       const routerQuery = {
         ...oldRouteQuery,
@@ -126,21 +135,20 @@ export default {
       }
 
       this.$router.replace({ query: { ...routerQuery } })
-      await this.$store.dispatch(
-        'catalog/FETCH_CATALOG_PRODUCTS',
-        this.$route.query.catalog
-      )
     },
 
     handleCheckProducer(id) {
-      console.log('id', id)
       this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
-      // this.handleSetQuery()
       this.page = 1
       this.handleSetQuery({
         brand: id,
         page: 1,
       })
+
+      this.$store.dispatch(
+        'seller/FETCH_SELLER_PRODUCTS',
+        this.$route.params.id
+      )
     },
   },
 }

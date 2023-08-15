@@ -52,12 +52,14 @@ export const mutations = {
     state.products = products
   },
   [SET_FILTER_BRANDS_ITEM]: (state, brandId) => {
+    console.log('brandId', brandId)
     if (state.filter.brands.includes(brandId)) {
       state.filter.brands = state.filter.brands.filter((b) => b !== brandId)
     } else {
       state.filter.brands.push(brandId)
     }
   },
+
   [SET_FILTER_ITEM]: (state, { ...partialFilterOptions }) => {
     Object.keys(partialFilterOptions).forEach((key) => {
       state.filter[key] = partialFilterOptions[key]

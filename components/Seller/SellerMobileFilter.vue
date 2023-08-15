@@ -13,14 +13,13 @@
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="minPrice"
                 >
-                  от
+                  {{ $t('from') }}
                 </label>
                 <input
                   id="minPrice"
                   v-model="minPrice"
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
-                  @input="() => (page = 1)"
                 />
               </div>
               <div class="form-item">
@@ -28,7 +27,7 @@
                   class="block text-gray-700 text-sm font-bold mb-2"
                   for="maxPrice"
                 >
-                  до
+                  {{ $t('to') }}
                 </label>
                 <input
                   id="maxPrice"
@@ -36,7 +35,6 @@
                   class="appearance-none w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   type="text"
                   max="100000"
-                  @input="() => (page = 1)"
                 />
               </div>
             </div>
@@ -98,7 +96,13 @@ export default {
         this.$store.commit('seller/SET_FILTER_ITEM', {
           minPrice: val,
         })
-        this.handleSetQuery({ minPrice: val })
+        this.page = 1
+        console.log('sellMinPrice')
+        this.handleSetQuery({ minPrice: val, page: 1 })
+        this.$store.dispatch(
+          'seller/FETCH_SELLER_PRODUCTS',
+          this.$route.params.id
+        )
       },
     },
     maxPrice: {
@@ -110,8 +114,13 @@ export default {
         this.$store.commit('seller/SET_FILTER_ITEM', {
           maxPrice: val,
         })
+        this.page = 1
+        this.handleSetQuery({ maxPrice: val, page: 1 })
 
-        this.handleSetQuery({ maxPrice: val })
+        this.$store.dispatch(
+          'seller/FETCH_SELLER_PRODUCTS',
+          this.$route.params.id
+        )
       },
       page: {
         get() {
@@ -135,20 +144,6 @@ export default {
     },
   },
 
-  watch: {
-    filter: {
-      deep: true,
-      handler(val, oldVal) {
-        this.$store.commit('seller/SET_PAGE', 1)
-        this.handleSetQuery({ page: 1 })
-        this.$store.dispatch(
-          'seller/FETCH_CATALOG_PRODUCTS',
-          this.$route.params.id
-        )
-      },
-    },
-  },
-
   methods: {
     ...mapActions('references', ['FETCH_ROOT_CATEGORIES']),
     ...mapMutations('products', ['SET_NULL_PRODUCTS_LIST']),
@@ -165,7 +160,16 @@ export default {
 
     handleCheckProducer(id) {
       this.$store.commit('seller/SET_FILTER_BRANDS_ITEM', id)
-      // this.handleSetQuery()
+      this.page = 1
+      this.handleSetQuery({
+        brand: id,
+        page: 1,
+      })
+
+      this.$store.dispatch(
+        'seller/FETCH_SELLER_PRODUCTS',
+        this.$route.params.id
+      )
     },
   },
 }

@@ -98,7 +98,12 @@ export default {
         this.$store.commit('catalog/SET_FILTER_ITEM', {
           minPrice: val,
         })
-        this.handleSetQuery({ minPrice: val })
+        this.page = 1
+        this.handleSetQuery({ minPrice: val, page: 1 })
+        this.$store.dispatch(
+          'catalog/FETCH_CATALOG_PRODUCTS',
+          this.$route.query.catalog
+        )
       },
     },
     page: {
@@ -109,7 +114,7 @@ export default {
       set(val) {
         this.$store.commit('catalog/SET_PAGE', val)
 
-        this.handleSetQuery({ page: val })
+        // this.handleSetQuery({ page: val })
       },
     },
     maxPrice: {
@@ -122,7 +127,12 @@ export default {
           maxPrice: val,
         })
 
-        this.handleSetQuery({ maxPrice: val })
+        this.page = 1
+        this.handleSetQuery({ maxPrice: val, page: 1 })
+        this.$store.dispatch(
+          'catalog/FETCH_CATALOG_PRODUCTS',
+          this.$route.query.catalog
+        )
       },
     },
     catalogFilterSidebar: {
@@ -131,21 +141,6 @@ export default {
       },
       get() {
         return this.$store.state.modal.catalogFilterSidebar
-      },
-    },
-  },
-
-  watch: {
-    filter: {
-      deep: true,
-      handler(val, oldVal) {
-        this.$store.commit('catalog/SET_PAGE', 1)
-        this.handleSetQuery({ page: 1 })
-
-        this.$store.dispatch(
-          'catalog/FETCH_CATALOG_PRODUCTS',
-          this.$route.query.catalog
-        )
       },
     },
   },
@@ -197,6 +192,15 @@ export default {
 
     handleCheckProducer(id) {
       this.$store.commit('catalog/SET_FILTER_BRANDS_ITEM', id)
+      this.page = 1
+      this.handleSetQuery({
+        brand: id,
+        page: 1,
+      })
+      this.$store.dispatch(
+        'catalog/FETCH_CATALOG_PRODUCTS',
+        this.$route.query.catalog
+      )
     },
   },
 }
