@@ -43,13 +43,8 @@ export default {
         content: '@/assets/img/logo2.svg', // Replace with your image URL
       },
     ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        href: '@/assets/img/filter.svg',
-      },
-    ],
+
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo2.ico' }],
   },
   css: [
     'swiper/css/swiper.css',

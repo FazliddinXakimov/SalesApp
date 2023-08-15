@@ -118,9 +118,9 @@
               >
             </li>
 
-            <li class="mb-4">
+            <!-- <li class="mb-4">
               <a href="#"> +{{ footerData.support_phone }}</a>
-            </li>
+            </li> -->
           </ul>
         </div>
 

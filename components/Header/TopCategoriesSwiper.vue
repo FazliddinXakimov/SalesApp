@@ -5,7 +5,7 @@
         <swiper-slide
           v-for="(topItem, index) in categories"
           :key="index"
-          class="swiper-slide"
+          class="swiper-slide my-3"
         >
           <nuxt-link
             :to="
@@ -15,7 +15,7 @@
                 query: { catalog: topItem.id },
               })
             "
-            class="border p-2 hover:text-cyan-500 cursor-pointer rounded-lg text-xs font-bold"
+            class="border p-2 hover:text-cyan-500 cursor-pointer text-sm rounded-lg font-bold"
             :class="
               activeCategoryId == topItem.id
                 ? 'border-current'
@@ -72,7 +72,7 @@ export default {
           //   freeMode: false,
           // },
           1300: {
-            slidesPerView: 8,
+            slidesPerView: 7,
             freeMode: false,
           },
         },

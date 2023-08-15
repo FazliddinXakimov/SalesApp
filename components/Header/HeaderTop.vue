@@ -73,18 +73,12 @@
         </button>
       </div>
       <div class="768:flex items-center hidden">
-        <!-- <div>
-          <button class="mr-2">
-            <img src="@/assets/img/header-phone.svg" class="h-5 w-5" />
-          </button>
-
-          <a
-            :href="footerData.for_advertisers.url"
-            target="_blank"
-            class="hover:underline"
-            >{{ footerData.for_advertisers.title }}</a
-          >
-        </div> -->
+        <a
+          :href="footerData.for_advertisers.url"
+          target="_blank"
+          class="mr-1"
+          >{{ footerData.for_advertisers.title }}</a
+        >
         <button class="ml-2 dropdown__action 768:inline-block">
           <div
             class="flex justify-between items-center text-white"
