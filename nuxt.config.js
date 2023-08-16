@@ -44,7 +44,7 @@ export default {
       },
     ],
 
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo2.ico' }],
+    link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo2.svg' }],
   },
   css: [
     'swiper/css/swiper.css',
