@@ -11,7 +11,7 @@
       </div>
 
       <div class="768:hidden flex items-center">
-        <button class="dropdown__action flex items-center">
+        <!-- <button class="dropdown__action flex items-center">
           <div class="flex justify-between items-center text-white">
             <img src="@/assets/img/header-location.svg" class="h-5 w-5" />
             {{ selectedRegion?.name }}
@@ -26,7 +26,13 @@
               {{ region.name }}
             </button>
           </div>
-        </button>
+        </button> -->
+        <a
+          :href="footerData.for_advertisers.url"
+          target="_blank"
+          class="mr-1"
+          >{{ footerData.for_advertisers.title }}</a
+        >
         <button class="ml-2 dropdown__action 768:inline-block">
           <div
             class="flex justify-between items-center text-white"
