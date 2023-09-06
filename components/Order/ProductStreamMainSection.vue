@@ -23,7 +23,7 @@
 
       <div class="768:basis-4/12 mt-10 960:mt-0">
         <div class="border rounded p-4">
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <div class="relative flex justify-start items-stretch">
               <input
                 id="register_sms_code"
@@ -42,7 +42,7 @@
             <div v-if="!isCouponExist" class="text-red-600">
               {{ $t('couponInvalid') }}
             </div>
-          </div>
+          </div> -->
           <div class="mb-4">
             <div>
               {{ $t('productsPrice') }}:
@@ -71,12 +71,12 @@
                 {{ $t('sum') }}</span
               >
             </div>
-            <div>
+            <!-- <div>
               <span> {{ $t('discount') }}: </span>
               <span class="font-bold"
                 >{{ discount | numberFilter }} {{ $t('sum') }}</span
               >
-            </div>
+            </div> -->
           </div>
           <StreamOrderModal :coupon-code="coupon_code" :product="product" />
         </div>

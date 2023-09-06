@@ -6,7 +6,7 @@
         <span>{{ calculateTotalPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
 
-      <div class="relative mb-3 flex justify-start items-stretch mt-2">
+      <!-- <div class="relative mb-3 flex justify-start items-stretch mt-2">
         <input
           id="register_sms_code"
           v-model="coupon_code"
@@ -19,10 +19,10 @@
         >
           {{ $t('apply') }}
         </button>
-      </div>
+      </div> 
       <div v-if="!isCouponExist" class="text-red-600">
         {{ $t('couponInvalid') }}
-      </div>
+      </div> -->
       <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('productsPrice') }}: </span>
         <span>{{ totalPrice | numberFilter }} {{ $t('sum') }}</span>
@@ -35,10 +35,10 @@
         <span> {{ $t('deliveryPrice') }}: </span>
         <span>{{ deliveryPrice | numberFilter }} {{ $t('sum') }}</span>
       </h1>
-      <h1 class="pt-2 pb-5 flex justify-between items-center">
+      <!-- <h1 class="pt-2 pb-5 flex justify-between items-center">
         <span> {{ $t('discount') }}: </span>
         <span>{{ discount | numberFilter }} {{ $t('sum') }}</span>
-      </h1>
+      </h1> -->
       <button
         class="flex justify-center items-center w-full bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded ml-2"
         @click="orderModal = true"
