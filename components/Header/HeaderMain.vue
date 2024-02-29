@@ -13,7 +13,7 @@
               class="1024:text-2xl text-xl font-semibold whitespace-nowrap cursor-pointer"
               @click="$router.push(localePath('/'))"
             >
-              <img src="@/assets/img/logo2.svg" class="w-16 h-16" />
+              <img src="@/assets/img/logo.svg" class="w-16 h-16" />
             </span>
           </nuxt-link>
         </div>

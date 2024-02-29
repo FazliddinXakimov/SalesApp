@@ -10,7 +10,7 @@
           <div
             class="flex justify-center items-center px-4 border-b pb-2 text-base"
           >
-            <img src="@/assets/img/logo2.svg" class="w-10 h-8" />
+            <img src="@/assets/img/logo.svg" class="w-10 h-8" />
           </div>
           <div
             v-if="$auth.loggedIn"

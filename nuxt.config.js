@@ -40,11 +40,11 @@ export default {
       },
       {
         property: 'og:image',
-        content: '@/assets/img/logo2.svg', // Replace with your image URL
+        content: '@/assets/img/logo.svg', // Replace with your image URL
       },
     ],
 
-    link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo2.svg' }],
+    link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
   },
   css: [
     'swiper/css/swiper.css',

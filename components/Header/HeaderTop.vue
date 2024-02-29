@@ -7,7 +7,7 @@
         class="768:hidden block cursor-pointer"
         @click="$router.push(localePath('/'))"
       >
-        <img src="@/assets/img/logo2.svg" class="w-10" />
+        <img src="@/assets/img/logo.svg" class="w-10" />
       </div>
 
       <div class="768:hidden flex items-center">
