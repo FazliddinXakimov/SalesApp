@@ -17,7 +17,7 @@ export default {
   target: 'server',
   ssr: false,
   head: {
-    title: 'Izlab market',
+    title: 'Tezdaa market',
     htmlAttrs: {
       lang: 'en',
     },

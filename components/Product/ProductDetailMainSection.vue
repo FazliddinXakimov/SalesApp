@@ -25,13 +25,13 @@
     </div>
     <div class="768:basis-4/12 mt-10 960:mt-0">
       <div class="border rounded-md p-4">
-        <div>
+        <!-- <div>
           <span> {{ $t('totalPrice') }}: </span>
           <span class="font-bold">
             {{ (product.sale_price + product.delivery_price) | numberFilter }}
             {{ $t('sum') }}
           </span>
-        </div>
+        </div> -->
         <div>
           {{ $t('price') }}:
           <span class="font-bold"
