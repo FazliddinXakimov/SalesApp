@@ -1,5 +1,5 @@
 <template>
-  <div class="768:basis-1/3 my-10 1024:my-0">
+  <div class="768:basis-1/3 mt-10 mb-20 1024:my-0">
     <div class="1024:ml-5 border p-4 rounded">
       <h1 class="text-xl pt-2 pb-5 border-b flex justify-between items-center">
         <span> {{ $t('totalPrice') }}: </span>

@@ -46,13 +46,13 @@
           </span>
         </div>
 
-        <div>
+        <!-- <div>
           <span> {{ $t('deliveryPrice') }}: </span>
           <span v-if="!product.free_delivery" class="font-bold">
             {{ product.delivery_price | numberFilter }} {{ $t('sum') }}
           </span>
           <span v-else class="font-bold">{{ $t('free') }} </span>
-        </div>
+        </div> -->
 
         <div class="mt-5">
           <button
@@ -78,9 +78,7 @@
           </button>
         </div>
       </div>
-      <div
-        class="my-4 border flex justify-between items-center border rounded-md p-4"
-      >
+      <div class="my-4 flex justify-between items-center border rounded-md p-4">
         <div class="flex items-center">
           <img src="@/assets/img/seller.svg" class="w-10 h-10 mr-5" />
           <span class="font-bold"> {{ product.seller.title }}</span>

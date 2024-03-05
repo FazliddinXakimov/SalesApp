@@ -57,7 +57,7 @@
               </span>
             </div>
 
-            <div>
+            <!-- <div>
               <span> {{ $t('deliveryPrice') }}: </span>
               <span v-if="!product.free_delivery" class="font-bold">
                 {{ product.delivery_price | numberFilter }} {{ $t('sum') }}
@@ -70,7 +70,7 @@
                 >{{ (product.price - product.sale_price) | numberFilter }}
                 {{ $t('sum') }}</span
               >
-            </div>
+            </div> -->
             <!-- <div>
               <span> {{ $t('discount') }}: </span>
               <span class="font-bold"
