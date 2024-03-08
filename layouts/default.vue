@@ -9,7 +9,7 @@
     <div class="max-w-screen-xl mx-auto default_view__height px-3">
       <Nuxt />
     </div>
-    <MainFooter />
+    <!-- <MainFooter /> -->
     <MobileBottomNavbar />
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   components: {
     HeaderMain: () => import('@/components/Header/HeaderMain.vue'),
     HeaderTop: () => import('@/components/Header/HeaderTop.vue'),
-    MainFooter: () => import('@/components/MainFooter.vue'),
+    // MainFooter: () => import('@/components/MainFooter.vue'),
     MobileBottomNavbar,
     MainLoading,
     // CatalogTop,
@@ -49,6 +49,9 @@ export default {
    });`,
         type: 'text/javascript',
       },
+    ],
+
+    noscript: [
       {
         innerHTML: `
         <noscript><img height="1" width="1" style="display:none"
