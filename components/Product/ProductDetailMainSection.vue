@@ -12,7 +12,7 @@
         {{ product.brand.title }}
       </div>
 
-      <div class="text-lg mt-10 mb-5">{{ $t('characteristics') }}:</div>
+      <!-- <div class="text-lg mt-10 mb-5">{{ $t('characteristics') }}:</div>
       <ul class="list-disc">
         <li
           v-for="(item, index) in product.properties"
@@ -21,7 +21,7 @@
         >
           {{ item }}
         </li>
-      </ul>
+      </ul> -->
     </div>
     <div class="768:basis-4/12 mt-10 960:mt-0">
       <div class="border rounded-md p-4">
