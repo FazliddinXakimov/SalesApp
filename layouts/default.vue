@@ -63,6 +63,9 @@ src="https://www.facebook.com/tr?id=378122538438757&ev=PageView&noscript=1"
         <noscript><div><img src="https://mc.yandex.ru/watch/96687717" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZKDXB9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=781986203981553&ev=PageView&noscript=1"
+/></noscript>
         `,
         type: 'text/html',
       },
@@ -95,10 +98,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         'https://connect.facebook.net/en_US/fbevents.js'
       )
       // eslint-disable-next-line no-undef
-      fbq('init', '2140462536310884')
+      fbq('init', '781986203981553')
       // eslint-disable-next-line no-undef
       fbq('track', 'PageView')
-
       // eslint-disable-next-line no-unused-expressions
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return
