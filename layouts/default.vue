@@ -40,7 +40,7 @@ export default {
    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-   ym(96687717, "init", {
+   ym(96733567, "init", {
         clickmap:true,
         trackLinks:true,
         accurateTrackBounce:true,
@@ -60,7 +60,7 @@ src="https://www.facebook.com/tr?id=2140462536310884&ev=PageView&noscript=1"
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=378122538438757&ev=PageView&noscript=1"
 /></noscript>
-        <noscript><div><img src="https://mc.yandex.ru/watch/96687717" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <noscript><div><img src="https://mc.yandex.ru/watch/96733567" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PJZKDXB9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <noscript><img height="1" width="1" style="display:none"
